@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+#container {
+  margin: 8px auto; max-width: 576px; font-size: 0;
+}
+
+#container > div.profile {
+  position: relative; padding: 24px 16px 24px 92px; background-color: #fff;
+}
+#container > div.profile > img.picture {
+  position: absolute; left: 16px; top: 16px; width: 60px; height: 60px; border-radius: 3px;
+}
+#container > div.profile > span.nickname {
+  display: block; margin-bottom: 4px; line-height: 22px; color: #292929; font-size: 18px; font-weight: bold;
+}
+#container > div.profile > span.userid {
+  display: block; line-height: 18px; color: #a6a6a6; font-size: 14px;
+}
+#container > h2 {
+  padding: 16px 0 8px 8px; color: #737373; font-size: 12px; font-weight: bold;
+}
+#container > p.description {
+  padding: 12px 16px; line-height: 16px; border-bottom: 1px solid #f2f2f2; color: #737373; font-size: 12px; text-align: center; background-color: #fff;
+}
+#container > p.description > strong {
+  color: #c62917;
+}
+#container > ol.items > li > a {
+  display: block; padding: 0 16px; line-height: 48px; border-bottom: 1px solid #f2f2f2; color: #292929; font-size: 14px; background-color: #fff;
+}
+#container > ol.items > li > a:hover {
+  background-color: #f8f8f8; cursor: pointer;
+}
+#container > ol.items > li > a > span.badge {
+  float: right; display: inline-block; margin-top: 14px; padding: 0 4px; line-height: 20px; border-radius: 3px; color: #fff; font-size: 12px; font-weight: bold; background-color: #ffcc1c;
+}
+#container > form {
+  display: none;
+}

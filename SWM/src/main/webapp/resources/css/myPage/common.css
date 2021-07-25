@@ -1,0 +1,381 @@
+@charset "utf-8";
+
+* {
+  margin: 0; padding: 0; border: 0;
+}
+img {
+  display: block;
+}
+a {
+  color: inherit; text-decoration: none;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+input, textarea {
+  outline: none;
+}
+input::placeholder, textarea::placeholder {
+  color: #a6a6a6;
+}
+input[type="text"], input[type="password"], input[type="search"], input[type="number"], input[type="email"], input[type="button"], input[type="submit"], textarea {
+  -webkit-appearance: none;
+}
+textarea {
+  resize: none;
+}
+ol, ul {
+  list-style-type: none;
+}
+hr {
+  clear: both; width: 100%; height: 0; background-color: transparent;
+}
+body {
+  font-family: "맑은 고딕", sans-serif; letter-spacing: -0.5px; background-color: #f2f2f2; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+}
+
+header {
+  width: 100%; box-sizing: border-box; background-color: #1dcdff; font-size: 0;
+}
+header > div.wrap > a.logo {
+  background-repeat: no-repeat;
+}
+header > div.wrap > div.account > a {
+  display: inline-block; margin-left: 4px; padding: 0 8px; border: 1px solid #fff; border-radius: 3px; height: 28px; line-height: 28px; font-size: 12px; font-weight: bold;
+}
+header > div.wrap > div.account > a.white {
+  color: #0aafdf; background-color: #fff;
+}
+header > div.wrap > div.account > a.blue {
+  color: #fff;
+}
+section.community {
+  width: 100%; box-sizing: border-box; border-bottom: 1px solid #d6d6d6; background-color: #fff; font-size: 0;
+}
+section.community > div.wrap {
+  position: relative; box-sizing: border-box;
+}
+section.community > div.wrap > figure {
+  position: absolute; background-image: url('/images/community.picture.empty.png'); background-repeat: no-repeat; background-size: cover;
+}
+section.community > div.wrap > a.button {
+  float: right; margin-left: 8px; padding: 0 8px 0 22px; height: 30px; line-height: 30px; border-radius: 3px; font-size: 12px; font-weight: bold; background-repeat: no-repeat; background-position: left 8px center; cursor: pointer;
+}
+section.community > div.wrap > a.button.setting {
+  color: #a6a6a6; border: 1px solid #d6d6d6; background-image: url('/images/community.setting.png'); background-size: 10px 10px;
+}
+section.community > div.wrap > a.button.pick {
+  color: #fff; background-color: #1dcdff; background-image: url('/images/community.pick.white.png'); background-size: 10px 11.5px;
+}
+section.community > div.wrap > a.button.unpick {
+  color: #fff; background-color: #d6d6d6; background-image: url('/images/community.pick.white.png'); background-size: 10px 11.5px;
+}
+section.community > div.wrap > h1 > a {
+  display: block; color: #292929;
+}
+section.community > div.wrap > p.description {
+  color: #737373;
+}
+section.community > div.wrap > p.details > span {
+  display: inline-block; margin-right: 8px; line-height: 16px; font-size: 12px;
+}
+section.community > div.wrap > p.details > span.pick {
+  padding-left: 14px; color: #0aafdf; background: transparent url('/images/community.pick.blue.png') no-repeat left center; background-size: 10px 11.5px;
+}
+section.community > div.wrap > p.details > span.category {
+  color: #737373; font-weight: bold;
+}
+section.menu {
+  width: 100%; box-sizing: border-box; border-bottom: 1px solid #d6d6d6; font-size: 0; background-color: #f2f2f2; white-space: nowrap;
+}
+@media only screen and (max-width: 1199px) {
+  section.menu {
+    overflow-x: scroll; overflow-y: hidden;
+  }
+  section.menu::-webkit-scrollbar {
+    display: none;
+  }
+}
+section.menu.fixed {
+  position: fixed; top: 0; z-index: 5;
+}
+section.menu > div.wrap {
+  text-align: center;
+}
+section.menu > div.wrap > a {
+  display: inline-block; margin: 0 12px; border-bottom: 3px solid transparent; color: #737373; font-size: 14px; font-weight: bold;
+}
+section.menu > div.wrap > a.active {
+  border-bottom-color: #1dcdff; color: #0aafdf;
+}
+footer {
+  padding: 16px 0; width: 100%; box-sizing: border-box; border-top: 1px solid #d6d6d6; font-size: 0; text-align: center;
+}
+footer > a {
+  margin: 0 4px; color: #737373; font-size: 12px;
+}
+footer > a.copyright,
+footer > a.privacy {
+  font-weight: bold;
+}
+@media only screen and (min-width: 1200px) {
+  header {
+    height: 80px;
+  }
+  header > div.wrap {
+    position: relative; margin: 0 auto; width: 1200px; height: 100%; box-sizing: border-box;
+  }
+  header > div.wrap > a.logo {
+    position: absolute; left: 20px; top: 17px; width: 122px; height: 46px; background-image: url('/images/nav.logo.desktop.png'); background-size: 122px 46px;
+  }
+  header > div.wrap > nav {
+    margin: 0 auto; padding: 29px 0; width: 600px; text-align: center;
+  }
+  header > div.wrap > nav > a {
+    display: inline-block; margin: 0 8px; border-bottom: 2px solid transparent; line-height: 20px; color: #fff; font-size: 16px; font-weight: bold;
+  }
+  header > div.wrap > nav > a.active {
+    border-bottom-color: #fff83e; color: #fff83e;
+  }
+  header > div.wrap > div.account {
+    position: absolute; right: 20px; top: 25px;
+  }
+  section.community > div.wrap {
+    margin: 0 auto; padding: 24px 0; width: 576px; min-height: 128px;
+  }
+  section.community > div.wrap > figure {
+    left: 0; top: 24px; width: 80px; height: 80px; border-radius: 40px;
+  }
+  section.community > div.wrap > h1 > a {
+    padding: 0 0 4px 96px; line-height: 30px; font-size: 24px;
+  }
+  section.community > div.wrap > p.description {
+    padding: 0 0 4px 96px; font-size: 12px;
+  }
+  section.community > div.wrap > p.details {
+    padding: 0 0 0 96px;
+  }
+  section.menu > div.wrap > a {
+    height: 45px; line-height: 48px;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  header > div.wrap > a.logo {
+    display: inline-block; width: 102px; height: 56px; background-image: url('/images/nav.logo.mobile.png'); background-size: 70px 18px; background-position: center center; vertical-align: top;
+  }
+  header > div.wrap > nav {
+    overflow-x: auto; overflow-y: hidden; white-space: nowrap; -webkit-overflow-scrolling: touch;
+  }
+  header > div.wrap > nav::-webkit-scrollbar {
+    display: none;
+  }
+  header > div.wrap > nav > a {
+    display: inline-block; padding: 0 6px; min-width: 36px; box-sizing: border-box; border-bottom: 3px solid transparent; height: 48px; line-height: 45px; color: #B3EEFF; font-size: 14px; letter-spacing: -1px; text-align: center;
+  }
+  header > div.wrap > nav > a.active {
+    border-bottom-color: #fff; color: #fff; font-weight: bold;
+  }
+  header > div.wrap > div.account {
+    float: right; margin: 13px 16px 0 0;
+  }
+  header.root {
+    padding: 32px;
+  }
+  header.root > div.wrap > a.logo {
+    width: 122px; height: 46px; margin-bottom: 8px; background-image: url('/images/nav.logo.desktop.png'); background-size: 122px 46px;
+  }
+  header.root > div.wrap > nav {
+    display: none;
+  }
+  header.root > div.wrap > div.account {
+    margin: 0;
+  }
+  header.root > div.wrap > div.account > a:last-of-type {
+    display: none;
+  }
+  header.root > div.wrap > p.description {
+    margin-bottom: 16px; color: #ffffff; font-size: 12px; line-height: 18px;
+  }
+  header.root > div.wrap > div.buttons > a {
+    display: inline-block; height: 40px; box-sizing: border-box; border-radius: 6px; background-color: #0aafdf; background-repeat: no-repeat; background-position: center center;
+  }
+  header.root > div.wrap > div.buttons > a.playstore {
+    margin-right: 4px; width: 122px; background-image: url('/images/index.download.button.playstore.light.png'); background-size: 98px 23px;
+  }
+  header.root > div.wrap > div.buttons > a.appstore {
+    width: 113px; background-image: url('/images/index.download.button.appstore.light.png'); background-size: 89px 24px;
+  }
+  section.community > div.wrap {
+    margin: 0 auto; padding: 16px; max-width: 608px; min-height: 72px;
+  }
+  section.community > div.wrap > figure {
+    left: 16px; top: 16px; width: 40px; height: 40px; border-radius: 20px;
+  }
+  section.community > div.wrap > h1 > a {
+    padding: 0 0 4px 52px; font-size: 18px;
+  }
+  section.community > div.wrap > p.description {
+    padding: 0 0 0 52px; font-size: 12px;
+  }
+  section.community > div.wrap > p.details {
+    padding: 0 0 0 52px;
+  }
+  section.menu > div.wrap > a {
+    height: 37px; line-height: 40px;
+  }
+}
+
+#bottomsheet {
+  position: fixed; z-index: 10; left: 0; bottom: 0; width: 100%; height: 100%;
+}
+#bottomsheet > div.wrap {
+  position: absolute; z-index: 11; left: 0; bottom: 0; width: 100%; max-height: 90%; overflow: auto; background-color: #fff;
+}
+@media only screen and (min-width: 1200px) {
+  #bottomsheet > div.wrap {
+    left: 50%; bottom: 50%; width: 360px; border-radius: 3px; transform: translate(-50%, 50%);
+    animation: bottomsheet_desktop 0.2s;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  #bottomsheet > div.wrap {
+    animation: bottomsheet_mobile 0.2s;
+  }
+}
+#bottomsheet > div.wrap > ol {
+  padding: 8px 0;
+}
+#bottomsheet > div.wrap > ol > li {
+  padding: 0 16px; line-height: 48px; color: #292929; font-size: 14px;
+}
+#bottomsheet > div.wrap > ol > li:hover {
+  background-color: #f8f8f8; cursor: pointer;
+}
+#bottomsheet > div.wrap > ol > li.active {
+  color: #ffa81f; font-weight: bold;
+}
+#bottomsheet::before {
+  content: ''; position: absolute; z-index: 10; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
+}
+@keyframes bottomsheet_desktop {
+  0% { transform: translate(-50%, 35%); }
+  100% { transform: translate(-50%, 50%); }
+}
+@keyframes bottomsheet_mobile {
+  0% { transform: translateY(150px); }
+  100% { transform: translateY(0px); }
+}
+
+#dialog {
+  position: fixed; z-index: 12; left: 0; top: 0; padding: 0 16px; width: 100%; height: 100%; box-sizing: border-box;
+}
+#dialog::before {
+  content: ''; position: absolute; z-index: 12; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
+}
+#dialog > div.wrap {
+  position: relative; z-index: 13; left: 50%; top: 50%; padding: 24px; width: 100%; max-width: 576px; box-sizing: border-box; border-radius: 3px; transform: translate(-50%, -50%);
+  overflow: auto; background-color: #fff;
+}
+#dialog > div.wrap > h2 {
+  margin-bottom: 12px; color: #292929; font-size: 18px;
+}
+#dialog > div.wrap > textarea {
+  padding: 8px; border: 1px solid #f2f2f2; border-radius: 3px; width: 100%; height: 80px; box-sizing: border-box; color: #292929; font-size: 14px;
+}
+#dialog > div.wrap > input.text {
+  padding: 6px 8px; border: 1px solid #f2f2f2; border-radius: 3px; width: 100%; height: 32px; line-height: 20px; box-sizing: border-box; color: #292929; font-size: 14px;
+}
+#dialog > div.wrap > ol.buttons {
+  margin-top: 12px; text-align: right;
+}
+#dialog > div.wrap > ol.buttons > li {
+  display: inline-block; margin-left: 8px; line-height: 30px; border-radius: 3px; font-size: 12px; font-weight: bold; cursor: pointer;
+}
+#dialog > div.wrap > ol.buttons > li.cancel {
+  padding: 0 8px; border: 1px solid #d6d6d6; color: #a6a6a6;
+}
+#dialog > div.wrap > ol.buttons > li.submit {
+  padding: 0 16px; border: 1px solid #1dcdff; color: #fff; background-color: #1dcdff;
+}
+
+#fullpopup {
+  position: fixed; z-index: 11; left: 0; bottom: 0; width: 100%; height: 100%; box-sizing: border-box; background-color: rgba(0, 0, 0, 0.6);
+}
+#fullpopup > div.box {
+  position: absolute; left: 50%; top: 50%; margin-top: -83px; padding: 36px; height: 166px; box-sizing: border-box; border-radius: 6px; transform: translate(-50%, 0); background-color: #fff;
+}
+#fullpopup > div.box > img.logo {
+  position: absolute; width: 40px; height: 46px;
+}
+#fullpopup > div.box > p.title {
+  margin-left: 52px; line-height: 26px; color: #4c4c4c; font-size: 18px; white-space: nowrap;
+}
+#fullpopup > div.box > p.text {
+  margin-left: 52px; line-height: 20px; color: #a6a6a6; font-size: 13px; white-space: nowrap;
+}
+#fullpopup > div.box > p.title > strong {
+  color: #0aafdf;
+}
+#fullpopup > div.box > a.button {
+  display: block; margin: 12px auto 0 auto; width: 96px; line-height: 36px; border-radius: 3px; color: #fff; font-size: 16px; font-weight: bold; text-align: center; background-color: #1dcdff;
+}
+#fullpopup > a.skip {
+  position: absolute; display: inline-block; left: 50%; top: 50%; margin-left: -60px; margin-top: 100px; width: 120px; line-height: 24px; color: #fff; font-size: 14px; font-weight: bold; text-align: center; text-shadow: 1px 1px 1px #000;
+}
+
+#inflowpopup {
+  position: fixed; z-index: 10; left: 0; bottom: 0; width: 100%; box-sizing: border-box; border-top: 1px solid #d6d6d6; background-color: #f8f8f8;
+  animation: inflowpopup 2s;
+}
+#inflowpopup > span.close {
+  position: absolute; right: 0; top: 0; width: 42px; height: 48px; background: transparent url('/images/inflowpopup.close.png') no-repeat center center; background-size: 10px 10px;
+}
+#inflowpopup > p.title {
+  padding: 16px; line-height: 18px; color: #4c4c4c; font-size: 14px;
+}
+#inflowpopup > p.title > strong {
+  color: #0aafdf;
+}
+#inflowpopup > div.wrap {
+  padding: 0 12px 16px 16px; overflow-x: scroll; overflow-y: hidden; white-space: nowrap; font-size: 0;
+}
+#inflowpopup > div.wrap::-webkit-scrollbar {
+  display: none;
+}
+#inflowpopup > div.wrap > a.community {
+  display: inline-block; position: relative; margin-right: 4px; padding: 12px 16px 12px 72px; box-sizing: border-box; border: 1px solid #f2f2f2; border-radius: 3px; background-color: #fff;
+}
+#inflowpopup > div.wrap > a.community > figure {
+  position: absolute; left: 12px; top: 12px; width: 48px; height: 48px; border-radius: 24px; background-image: url('/images/community.picture.empty.png'); background-repeat: no-repeat; background-size: cover;
+}
+#inflowpopup > div.wrap > a.community > p.name {
+  line-height: 20px; color: #292929; font-size: 16px; font-weight: bold;
+}
+#inflowpopup > div.wrap > a.community > p.description {
+  margin-bottom: 4px; line-height: 16px; color: #737373; font-size: 12px;
+}
+#inflowpopup > div.wrap > a.community > span.button {
+  display: inline-block; padding: 0 12px; line-height: 28px; border-radius: 3px; color: #fff; font-size: 12px; font-weight: bold; background-color: #1dcdff;
+}
+@keyframes inflowpopup {
+  0% { transform: translateY(180px); }
+  85% { transform: translateY(180px); }
+  100% { transform: translateY(0px); }
+}
+
+#loading {
+  position: fixed; z-index: 14; left: 0; top: 0; padding: 0 16px; width: 100%; height: 100%; box-sizing: border-box;
+}
+#loading::before {
+  content: ''; position: absolute; z-index: 14; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
+}
+#loading > div.wrap {
+  display: inline-block; position: relative; z-index: 15; left: 50%; top: 50%; padding: 24px; box-sizing: border-box; border-radius: 3px; transform: translate(-50%, -50%);
+  overflow: auto; font-size: 0; background-color: #fff;
+}
+#loading > div.wrap > img {
+  display: inline-block; width: 24px; height: 24px; vertical-align: top;
+}
+#loading > div.wrap > p {
+  display: inline-block; margin-left: 8px; line-height: 24px; color: #292929; font-size: 14px;
+}

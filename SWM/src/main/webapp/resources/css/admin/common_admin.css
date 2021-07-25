@@ -1,0 +1,109 @@
+@CHARSET "UTF-8";
+
+.my-box {
+	padding:20px 0 20px 10px;
+	font-size:23px;
+	font-weight: bold;
+}
+
+
+a:link, a:visited {
+	text-decoration: none;
+	color: #656565;
+}
+
+.board_view {
+	width: 100%;
+	border-top : 2px solid #252525;
+	border-bottom: 1px solid #ccc;
+	font-family: "맑은 고딕";
+	border-top: 2px solid #252525;
+}
+
+.board_view tbody th {
+	background: #f7f7f7;
+	color: #3b3a3a;
+	text-align: center;
+}
+
+.board_view tbody.board_view {
+	border-bottom: none
+}
+
+.board_view tbody th {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+	font-size: 15px;
+}
+
+.board_view tbody td {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+	font-size: 12px;
+}
+
+.board_view tbody td.view_text {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 45px 18px 45px 18px;
+}
+
+.wdp_90 {
+	width: 90%
+}
+
+.btn {
+	border-radius: 5px;
+	padding: 5px 11px;
+	font-weight: bold;
+	color: #fff !important;
+	display: inline-block;
+	background-color: #0aafdf;
+	margin: 2px;
+	font-size: 15px;
+}
+
+.submit {
+	background-repeat: no-repeat;
+	cursor: pointer;
+	border: 0;
+	outline: 0;
+	border-radius: 5px;
+	padding: 5px 11px;
+	font-weight: bold;
+	color: #fff !important;
+	display: inline-block;
+	background-color: #0aafdf;
+	margin: 2px;
+	font-size: 15px;
+}
+
+.board_view caption {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 50px
+}
+
+form.container  input {
+	border: none;
+}
+
+form.container p.text textarea {
+	width: 100%;
+	height: 144px;
+	line-height: 24px;
+	color: #292929;
+	font-size: 16px;
+	resize: none;
+}
+
+div.container form.comment p.text textarea {
+	padding-left: 1%;
+	margin: 1px;
+	width: 95%;
+	height: 80px;
+	line-height: 24px;
+	color: #292929;
+	font-size: 13px;
+	resize: none;
+}

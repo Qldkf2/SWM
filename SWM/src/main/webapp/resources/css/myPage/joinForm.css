@@ -1,0 +1,150 @@
+@charset "UTF-8";
+p {
+            font-size: 11px;
+        }
+
+        body {
+            font-size: 11px;
+            font-family: 'Noto Sans KR';
+        }
+
+        .form-wrap {
+            width: 50%;
+            margin: 0 auto;
+            overflow: hidden;
+            border: #f1eded solid 1px;
+            padding: 20px;
+        }
+
+        #register {
+            padding: 30px;
+            color: #000000;
+            text-align: center;
+            border-bottom: #d8d1d1 solid 1px;
+        }
+
+        #menu1 {
+            float: left;
+            height: 160px;
+            width: 20%;
+        }
+
+        #form1 {
+            float: left;
+            height: 60%;
+            width: 79%;
+        }
+
+        #describe_iPin {
+            clear: both;
+        }
+
+        .firstmenu {
+            height: 150px;
+            border-bottom: #d8d1d1 solid 1px;
+            padding-bottom: 20px;
+        }
+
+        .secondmenu {
+            overflow: hidden;
+            padding-bottom: 20px;
+            border-bottom: #d8d1d1 solid 1px;
+            font-style: 'Noto Sans KR';
+        }
+
+        #menu2 {
+            width: 20%;
+            float: left;
+            line-height: 230%;
+        }
+
+        #form2 {
+            width: 79%;
+            float: left;
+            line-height: 230%;
+        }
+
+        #menu3 {
+            width: 20%;
+            float: left;
+            line-height: 230%;
+        }
+
+        #form3 {
+            width: 79%;
+            float: left;
+            line-height: 230%;
+        }
+
+        #menu4 {
+            float: left;
+            width: 20%;
+        }
+
+        #form4 {
+            float: left;
+            width: 79%;
+        }
+
+        #join {
+            font-size: 15px;
+            height: 30px;
+            padding: 0;
+        }
+
+        #additionalinfo {
+            font-size: 15px;
+            height: 30px;
+            padding: 0;
+        }
+        .essential{
+            font-size:15px;
+            color:red;
+            float:left;
+        }
+        div.input{
+            float:left;
+        }
+        <!-- -->
+        
+         .btn_wrap {
+
+        	text-align: center; 
+
+        }  
+        
+        .btn_wrap a{
+        	color: #fff; 
+        	background-color: #000000; 
+        	font-weight: bold; 
+        	padding: 10px;  
+        	height: 30px; 
+        	line-height: 30px; 
+        	width: 100px; 
+        	display: inline-block; 
+        	text-align: center; 
+        	margin: 0 auto;
+        }
+        
+        
+        .btn-wrap a {
+    	display: inline-block;
+    	padding: 0 12px;
+   	 	height: 36px;
+    	line-height: 36px;
+    	border-radius: 3px;
+    	background-color: #000000;
+    	color: #fff;
+    	font-size: 14px;
+    	font-weight: 600;
+}
+        .red_txt{
+        color:#ee7272;
+        }
+        
+        .explan_txt {
+        margin:3px 0 0 22px;
+        }
+        
+        
+

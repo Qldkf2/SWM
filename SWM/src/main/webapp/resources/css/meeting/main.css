@@ -1,0 +1,141 @@
+/* 스터디모집게시판 안의 헤더 */
+
+@charset "utf-8";
+
+section.tab {
+  position: static; width: 100%; box-sizing: border-box; font-size: 0; background-color: #fff;
+}
+section.tab.fixed {
+  position: fixed; z-index: 5;
+}
+body.app section.tab {
+  background-color: #1dcdff;
+}
+section.tab > div.wrap {
+  margin: 0 auto; max-width: 1200px; text-align: center;
+}
+section.tab > div.wrap > a {
+  display: inline; width: 100%; height: 48px; line-height: 48px; box-sizing: border-box; border-bottom: 3px solid transparent; text-align: center;
+}
+section.tab > div.wrap > a.active {
+  border-bottom-color: #1dcdff;
+
+}
+body.app section.tab > div.wrap > a.active {
+  border-bottom-color: #fff;
+}
+section.tab > div.wrap > a > span.text {
+  color: #292929; font-size: 14px;   padding:40px
+}
+body.app section.tab > div.wrap > a > span.text {
+  color: #b3eeff;
+  
+}
+section.tab > div.wrap > a.active > span.text {
+  color: #0aafdf; font-weight: bold;
+}
+body.app section.tab > div.wrap > a.active > span.text {
+  color: #fff;
+}
+
+#container {
+  margin: 0 auto 8px auto; font-size: 0;
+}
+@media only screen and (min-width: 896px) {
+  #container {
+    margin: 0 auto 16px auto; width: 896px;
+  }
+}
+
+#container p.info > span {
+  display: inline-block; margin-right: 8px; line-height: 18px; color: #a6a6a6; font-size: 12px; letter-spacing: 0;
+}
+#container p.info > span.highlight {
+  color: #0aafdf;
+}
+#container p.info > span.dday {
+  font-weight: bold;
+}
+#container p.info > span.viewcount {
+  padding-left: 14px; background: transparent url('/images/viewcount2.png') no-repeat left center; background-size: 12px 8px;
+}
+
+#container > div.search {
+  position: static; padding: 16px 0; width: 100%; max-width: 896px; box-sizing: border-box; background-color: #f2f2f2;
+}
+#container > div.search.fixed {
+  position: fixed; z-index: 4; transition: transform 0.5s;
+}
+#container > div.search > form {
+  position: relative; margin: 0 auto; padding: 0 16px; width: 100%; max-width: 440px; box-sizing: border-box;
+}
+#container > div.search > form > input.keyword {
+  padding: 10px 48px 10px 16px; width: 100%; height: 40px; line-height: 20px; border: 1px solid #d6d6d6; border-radius: 20px; color: #292929; font-size: 14px; background-color: #fff;
+}
+#container > div.search > form > input.submit {
+  position: absolute; right: 16px; top: 0; width: 40px; height: 40px; color: transparent; font-size: 0; background: transparent url('../../images/search.JPG') no-repeat center center; background-size: 24px 24px;
+}
+#container > div.search > div.result {
+  padding: 16px 16px 0 16px; width: 100%; box-sizing: border-box; text-align: center;
+}
+#container > div.search > div.result.hidden {
+  display: none;
+}
+#container > div.search > div.result > p {
+  display: inline-block; line-height: 32px; color: #4c4c4c; font-size: 14px;
+}
+#container > div.search > div.result > p > span {
+  display: inline-block; max-width: 160px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; vertical-align: top;
+}
+#container > div.search > div.result > a.reset {
+  display: inline-block; margin-left: 16px; padding: 0 12px; line-height: 30px; border: 1px solid #d6d6d6; border-radius: 16px; color: #a6a6a6; font-size: 14px; cursor: pointer;
+}
+#container > div.search > div.filter {
+  padding: 16px 14px 0 14px; width: 100%; height: 48px; box-sizing: border-box; text-align: center; white-space: nowrap; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;
+}
+#container > div.search > div.filter.hidden {
+  display: none;
+}
+#container > div.search > div.filter::-webkit-scrollbar {
+  display: none; background-color: transparent;
+}
+#container > div.search > div.filter > a {
+  display: inline-block; margin: 0 2px; padding: 0 12px; border: 1px solid #d6d6d6; border-radius: 16px; cursor: pointer;
+}
+#container > div.search > div.filter > a.active {
+  border-color: #737373;
+}
+#container > div.search > div.filter > a > span {
+  display: inline-block; line-height: 30px; color: #a6a6a6; font-size: 14px;
+}
+#container > div.search > div.filter > a.active > span {
+  color: #292929;
+}
+#container > div.search > div.filter > a > span.value {
+  margin-left: 4px; font-weight: bold;
+}
+@media only screen and (min-width: 896px) {
+  #container > div.search > form {
+    display: inline-block; width: 320px; vertical-align: top;
+  }
+  #container > div.search > div.result {
+    display: inline-block; padding: 4px 0; width: 576px; text-align: left;
+  }
+  #container > div.search > div.filter {
+    display: inline-block; padding: 4px 14px 4px 0; width: 576px; height: auto; text-align: right;
+  }
+}
+#container > div.form > div.wrap > input.write {
+      display: inline-block;
+    width: 150px;
+    height: 40px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: centet;
+    background-color: #0aafdf;
+        border-radius: 5px;
+    
+}
+
+

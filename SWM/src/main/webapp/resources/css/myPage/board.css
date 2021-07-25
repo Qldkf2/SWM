@@ -1,0 +1,497 @@
+@charset "utf-8";
+
+#container {
+  margin: 8px auto; max-width: 576px;
+}
+
+#container div.loading {
+  display: none; padding: 16px 0;
+}
+#container div.loading > img {
+  margin: 0 auto; width: 45px; height: 45px;
+}
+
+#container .article {
+  font-size: 0; background-color: #fff;
+}
+#container .article > p.profile > img.picture {
+  display: inline-block; margin-right: 6px; width: 20px; height: 20px; vertical-align: top;
+}
+#container .article > p.profile > span.nickname {
+  display: inline-block; max-width: 60%; line-height: 20px; color: #292929; font-size: 14px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#container .article > p.profile > span.nickname.disabled {
+  color: #a6a6a6;
+}
+#container .article > p.profile > span.nickname.writer {
+  color: #ffcc1c;
+}
+#container .article > p.profile > span.nickname.admin {
+  color: #1dcdff;
+}
+#container .article > p.profile > span.nickname.organization {
+  color: #0aafdf;
+}
+#container .article > p.profile > span.nickname.creator {
+  color: #0aafdf;
+}
+#container .article > p.profile > time {
+  float: right; display: inline-block; line-height: 20px; color: #a6a6a6; font-size: 12px;
+}
+#container .article > p.profile > span.more {
+  float: right; display: inline-block; margin: -12px -16px 0 0; width: 38px; height: 32px; background: transparent url('/images/community.board.more.png') no-repeat right 16px top 19px; background-size: 10px 6px; cursor: pointer;
+}
+#container .article > p.text {
+  margin-top: 8px; line-height: 18px; color: #292929; font-size: 14px; word-wrap: break-word;
+}
+#container .article > p.text.short {
+  max-height: 90px; overflow: hidden;
+}
+#container .article > p.text > a[href] {
+  color: #3b5a99;
+}
+#container .article > p.text > a[href]:hover {
+  text-decoration: underline;
+}
+#container .article > p.text > span.hashtag {
+  color: #ffa81f; cursor: pointer;
+}
+#container .article > p.text > span.hashtag:hover {
+  text-decoration: underline;
+}
+#container .article > p.status {
+  float: left; margin-top: 8px;
+}
+#container .article > p.status > span {
+  display: inline-block; margin-right: 8px; padding-left: 19px; line-height: 18px; color: #a6a6a6; font-size: 12px; background-repeat: no-repeat; background-size: 16px 16px;
+}
+#container .article > p.status > span.votecount {
+  background-image: url('https://www.campuspick.com/images/community.board.article.votecount.png');
+}
+#container .article > p.status > span.commentcount {
+  background-image: url('https://www.campuspick.com/images/community.board.article.commentcount.png');
+}
+#container .article > p.status > span.scrapcount {
+  background-image: url('/images/community.board.article.scrapcount.png');
+}
+#container .article > p.attach {
+  float: right; margin-top: 8px;
+}
+#container .article > p.attach > span.attachcount {
+  display: inline-block; padding-left: 19px; line-height: 18px; color: #ffa81f; font-size: 12px; background: transparent url('/images/community.board.article.attachcount.png') no-repeat; background-size: 16px 16px;
+}
+#container .article > div.links {
+  margin-top: 16px;
+}
+#container .article > div.links > a {
+  display: block; margin-bottom: 4px; border: 1px solid #f2f2f2;
+}
+#container .article > div.links > a:last-of-type {
+  margin-bottom: 0;
+}
+#container .article > div.links > a:hover {
+  background-color: #f8f8f8;
+}
+#container .article > div.links > a > figure.image {
+  position: relative; width: 100%; padding-top: 56.25%; background-size: cover;
+}
+#container .article > div.links > a > figure.image > iframe {
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+}
+#container .article > div.links > a > h3.title,
+#container .article > div.links > a > p.description,
+#container .article > div.links > a > p.host {
+  margin: 0 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#container .article > div.links > a > h3.title {
+  margin-top: 12px; color: #292929; font-size: 14px; font-weight: bold;
+}
+#container .article > div.links > a > p.description {
+  color: #292929; font-size: 12px;
+}
+#container .article > div.links > a > p.host {
+  margin-bottom: 12px; color: #a6a6a6; font-size: 12px;
+}
+#container .article > div.attaches {
+  margin: 16px -16px -16px -16px;
+}
+#container .article > div.attaches > figure.attach > a {
+  position: relative;
+}
+#container .article > div.attaches > figure.attach > a > p.gif {
+  position: absolute; z-index: 1; left: 8px; top: 8px; padding: 0 8px; border-radius: 3px; background-color: #0aafdf;
+}
+#container .article > div.attaches > figure.attach > a > p.gif > * {
+  line-height: 24px; color: #fff; font-size: 14px;
+}
+#container .article > div.attaches > figure.attach > a > p.gif > strong {
+  margin-right: 4px;
+}
+#container .article > div.attaches.full > figure.attach {
+  display: block; border-top: 4px solid #f2f2f2;
+}
+#container .article > div.attaches.full > figure.attach > a > img {
+  width: 100%; height: auto;
+}
+#container .article > div.attaches.full > figure.attach > figcaption {
+  padding: 16px; line-height: 18px; color: #292929; font-size: 14px; word-wrap: break-word;
+}
+#container .article > div.attaches.full > figure.attach > figcaption > a[href] {
+  color: #3b5a99;
+}
+#container .article > div.attaches.full > figure.attach > figcaption > a[href]:hover {
+  text-decoration: underline;
+}
+#container .article > div.attaches.multiple {
+  padding: 0 12px 12px 16px;
+}
+@media only screen and (max-width: 1199px) {
+  #container .article > div.attaches.multiple {
+    white-space: nowrap; overflow-x: scroll; overflow-y: hidden;
+  }
+  #container .article > div.attaches.multiple::-webkit-scrollbar {
+    display: none;
+  }
+}
+#container .article > div.attaches.multiple > figure.attach {
+  display: inline-block; margin: 0 4px 4px 0; width: 178px; height: 178px;
+}
+#container .article > div.attaches.multiple > figure.attach > a > img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+#container div.articlelist {
+  display: none;
+}
+#container div.articlelist > div.notice > a {
+  display: block; margin-bottom: 4px; padding: 0 16px; line-height: 48px; color: #292929; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background-color: #fff;
+}
+#container div.articlelist > div.notice > a:before {
+  content: '공지'; display: inline-block; margin-right: 8px; color: #0aafdf; font-weight: bold;
+}
+#container div.articlelist > div.notice > a:hover {
+  background-color: #f8f8f8;
+}
+#container div.articlelist > div.hashtags {
+  margin-bottom: 4px; padding: 14px 16px; font-size: 0; background-color: #fff;
+}
+#container div.articlelist > div.hashtags > span {
+  display: inline-block; line-height: 20px; font-size: 14px;
+} 
+#container div.articlelist > div.hashtags > span.title {
+  margin-right: 8px; color: #0aafdf; font-weight: bold;
+}
+#container div.articlelist > div.hashtags > span.hashtag {
+  margin-right: 4px; color: #292929; cursor: pointer;
+}
+#container div.articlelist > div.hashtags > span.hashtag:hover {
+  color: #ffa81f;
+}
+#container div.articlelist > ol.group > li.empty {
+  padding: 108px 0 36px 0; color: #737373; font-size: 16px; text-align: center; background: transparent url('/images/community.board.list.empty.png') no-repeat center top 36px; background-size: 48px 48px;
+}
+#container div.articlelist > ol.group > li > a.community {
+  display: block; margin-top: 4px; padding: 0 16px; line-height: 36px; border-bottom: 1px solid #f2f2f2; color: #0aafdf; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background-color: #fff;
+}
+#container div.articlelist > ol.group > li > a.community:hover {
+  background-color: #f8f8f8;
+}
+#container div.articlelist > ol.group > li > a.article {
+  display: block; padding: 12px 16px; border-bottom: 1px solid #f2f2f2;
+}
+#container div.articlelist > ol.group > li > a.article:hover {
+  background-color: #f8f8f8;
+}
+#container div.articlelist > ol.group > li.download {
+  padding: 36px 0; text-align: center; background-color: #f2f2f2;
+}
+#container div.articlelist > ol.group > li.download > p.text {
+  margin-bottom: 8px; line-height: 20px; color: #737373; font-size: 16px;
+}
+#container div.articlelist > ol.group > li.download > a.button {
+  display: inline-block; padding: 0 12px; line-height: 36px; border-radius: 3px; color: #fff; font-size: 14px; font-weight: bold; background-color: #1dcdff;
+}
+
+#container div.articleitem {
+  display: none;
+}
+#container div.articleitem > article {
+  margin-bottom: 4px; padding: 16px;
+}
+#container div.articleitem > div.comments > ol.group > li.child {
+  padding: 0 8px 8px 32px; background: #fff url('/images/community.board.comments.child.png') no-repeat left 16px top 8px; background-size: 11px 11px;
+}
+#container div.articleitem > div.comments > ol.group > li > a.article {
+  display: block;
+}
+#container div.articleitem > div.comments > ol.group > li.parent > a.article {
+  padding: 12px 16px; border-top: 1px solid #f2f2f2;
+}
+#container div.articleitem > div.comments > ol.group > li.child > a.article {
+  padding: 8px; background-color: #f8f8f8;
+}
+
+#container div.articleitem form.comment {
+  position: relative; border-top: 1px solid #f2f2f2; background-color: #fff;
+}
+#container div.articleitem form.comment > label.anonym {
+  position: absolute; display: inline-block; left: 0; top: 0; padding-left: 25px; width: 48px; line-height: 48px; box-sizing: border-box; font-size: 12px; font-weight: bold; background-repeat: no-repeat; background-position: left 12px center; background-size: 9px 9px; cursor: pointer;
+}
+#container div.articleitem form.comment > label.anonym.unchecked {
+  color: #a6a6a6; background-image: url('/images/community.board.anonym.unchecked.png');
+}
+#container div.articleitem form.comment > label.anonym.checked {
+  color: #ffcc1c; background-image: url('/images/community.board.anonym.checked.png');
+}
+#container div.articleitem form.comment > p.text {
+  padding: 8px 48px 8px 56px; width: 100%; height: 48px; box-sizing: border-box;
+}
+#container div.articleitem form.comment.withoutanonym > p.text {
+  padding: 8px 48px 8px 8px;
+}
+#container div.articleitem form.comment > p.text > input {
+  border-radius: 3px; padding: 6px 8px; width: 100%; height: 32px; line-height: 20px; box-sizing: border-box; color: #292929; font-size: 14px; background-color: #f2f2f2;
+}
+#container div.articleitem form.comment > span.submit {
+  position: absolute; display: inline-block; right: 0; top: 0; width: 48px; height: 48px; background: transparent url('/images/community.board.submit.png') no-repeat center center; background-size: 24px 24px; cursor: pointer;
+}
+#container div.articleitem > div.bottombar {
+  position: fixed; z-index: 4; left: 0; bottom: 0; width: 100%; border-top: 1px solid #d6d6d6; background-color: #fff;
+}
+#container div.articleitem > div.bottombar > div.wrap {
+  margin: 0 auto; max-width: 576px;
+}
+#container div.articleitem > div.bottombar > div.wrap > a {
+  display: inline-block; padding: 14px 0; width: 50%; font-size: 0; text-align: center; cursor: pointer;
+}
+#container div.articleitem > div.bottombar.threecols > div.wrap > a {
+  width: 33.3%;
+}
+#container div.articleitem > div.bottombar > div.wrap > a:hover {
+  background-color: #f8f8f8;
+}
+#container div.articleitem > div.bottombar > div.wrap > a > span.icon {
+  display: inline-block; margin-right: 4px; width: 16px; height: 20px; background-repeat: no-repeat; background-position: center center; background-size: 16px 16px; vertical-align: top;
+}
+#container div.articleitem > div.bottombar > div.wrap > a.vote.inactive > span.icon {
+  background-image: url('/images/community.board.bottombar.vote.inactive.png');
+}
+#container div.articleitem > div.bottombar > div.wrap > a.vote.active > span.icon {
+  background-image: url('/images/community.board.bottombar.vote.active.png');
+}
+#container div.articleitem > div.bottombar > div.wrap > a.comment > span.icon {
+  background-image: url('/images/community.board.bottombar.comment.png');
+}
+#container div.articleitem > div.bottombar > div.wrap > a.scrap.inactive > span.icon {
+  background-image: url('/images/community.board.bottombar.scrap.inactive.png');
+}
+#container div.articleitem > div.bottombar > div.wrap > a.scrap.active > span.icon {
+  background-image: url('/images/community.board.bottombar.scrap.active.png');
+}
+#container div.articleitem > div.bottombar > div.wrap > a > span.label {
+  display: inline-block; line-height: 20px; color: #a6a6a6; font-size: 14px;
+}
+#container div.articleitem > div.bottombar > div.wrap > a.vote.active > span.label {
+  color: #ff5d57;
+}
+#container div.articleitem > div.bottombar > div.wrap > a.scrap.active > span.label {
+  color: #ffa81f;
+}
+
+#container div.buttons {
+  display: none; width: 100%;
+}
+#container div.buttons > form.search {
+  display: none; position: absolute; width: 100%; box-sizing: border-box;
+}
+#container div.buttons > form.search > div {
+  margin-right: 48px; height: 100%; box-sizing: border-box; background-color: #fff;
+}
+#container div.buttons > form.search > div > input {
+  padding: 0 48px 0 12px; width: 100%; height: 100%; box-sizing: border-box; border: 0; color: #292929; font-size: 14px; background-color: transparent;
+}
+#container div.buttons > form.search > div > input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+#container div.buttons > form.search > div > span.button {
+  display: block; position: absolute; right: 48px; top: 0; width: 48px; height: 100%; background: transparent url('/images/community.board.buttons.search.png') no-repeat center center; background-size: 24px 24px; cursor: pointer;
+}
+#container div.buttons > form.search > span.cancel {
+  display: block; position: absolute; right: 0; top: 0; width: 48px; height: 100%; font-size: 14px; font-weight: bold; text-align: center; cursor: pointer;
+}
+@media only screen and (min-width: 1200px) {
+  #container div.buttons {
+    position: relative; margin-bottom: 4px; height: 48px;
+  }
+  #container div.buttons > form.search {
+    height: 48px; background-color: #f2f2f2;
+  }
+  #container div.buttons > form.search > div {
+    border: 1px solid #1dcdff;
+  }
+  #container div.buttons > form.search > span.cancel {
+    line-height: 46px; color: #a6a6a6;
+  }
+  #container div.buttons > div {
+    position: absolute; padding: 0 12px; line-height: 46px; box-sizing: border-box; border: 1px solid #d6d6d6; color: #a6a6a6; font-size: 0; background-color: #fff; background-repeat: no-repeat; background-position: right 12px center; background-size: 24px 24px; cursor: pointer;
+  }
+  #container div.buttons > div:hover {
+    border-color: #1dcdff;
+  }
+  #container div.buttons > div.write {
+    left: 0; right: 52px; font-size: 14px; background-image: url('/images/community.board.buttons.write.png');
+  }
+  #container div.buttons > div.write:last-of-type {
+    right: 0;
+  }
+  #container div.buttons > div.search {
+    right: 0; width: 48px; background-image: url('/images/community.board.buttons.search.png');
+  }
+  #container div.buttons > div.search:first-of-type {
+    left: 0; width: auto; font-size: 14px;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  #container div.buttons {
+    position: absolute; left: 0; top: 0;
+  }
+  #container div.buttons > form.search {
+    left: 0; top: 0; padding: 8px 0 8px 8px; height: 56px; background-color: #1dcdff;
+  }
+  #container div.buttons > form.search > div {
+    border-radius: 3px;
+  }
+  #container div.buttons > form.search > span.cancel {
+    line-height: 56px; color: #fff;
+  }
+  #container div.buttons > div {
+    position: fixed; z-index: 5; right: 16px; width: 56px; height: 56px; border-radius: 28px; color: transparent; font-size: 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); background-repeat: no-repeat; background-position: center center; background-size: 24px 24px; cursor: pointer;
+  }
+  #container div.buttons > div.write {
+    bottom: 16px; background-color: #1dcdff; background-image: url('/images/floating.write.png');
+  }
+  #container div.buttons > div.search {
+    bottom: 80px; background-color: #fff; background-image: url('/images/community.board.buttons.search.png');
+  }
+  #container div.buttons > div.search:first-of-type {
+    bottom: 16px;
+  }
+}
+
+#container form.write {
+  display: none; position: relative; border: 1px solid #1dcdff; font-size: 0; background-color: #fff;
+}
+@media only screen and (max-width: 1199px) {
+  #container form.write {
+    margin: 8px;
+  }
+}
+#container form.write.dragover:after {
+  content: '첨부할 이미지를 끌어다 놓으세요.'; position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  line-height: 200px; color: #fff; font-size: 16px; font-weight: bold; text-align: center; background-color: rgba(29, 205, 255, 0.8);
+}
+#container form.write > p.text {
+  padding: 16px; box-sizing: border-box;
+}
+#container form.write > p.text > textarea {
+  width: 100%; height: 120px; color: #292929; font-size: 14px;
+}
+#container form.write > div.links {
+  display: none; padding: 0 16px 12px 16px;
+}
+#container form.write > div.links > a {
+  position: relative; display: block; margin-bottom: 4px; border: 1px solid #f2f2f2;
+}
+#container form.write > div.links > a.image {
+  padding-left: 80px; height: 80px;
+}
+#container form.write > div.links > a:last-of-type {
+  margin-bottom: 0;
+}
+#container form.write > div.links > a:hover {
+  background-color: #f8f8f8;
+}
+#container form.write > div.links > a > figure.image {
+  position: absolute; left: 0; top: 0; width: 80px; height: 80px; background-size: cover; vertical-align: top;
+}
+#container form.write > div.links > a > figure.image > span.play {
+  position: absolute; left: 25px; top: 25px; width: 30px; height: 30px; background: transparent url('/images/community.board.write.links.play.png') no-repeat; background-size: 30px 30px;
+}
+#container form.write > div.links > a > h3.title,
+#container form.write > div.links > a > p.description,
+#container form.write > div.links > a > p.host {
+  margin: 0 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#container form.write > div.links > a > h3.title {
+  margin-top: 12px; color: #292929; font-size: 14px; font-weight: bold;
+}
+#container form.write > div.links > a > p.description {
+  color: #292929; font-size: 12px;
+}
+#container form.write > div.links > a > p.host {
+  margin-bottom: 12px; color: #a6a6a6; font-size: 12px;
+}
+#container form.write > ol.thumbnails {
+  display: none; padding: 0 12px 12px 16px;
+}
+@media only screen and (max-width: 1199px) {
+  #container form.write > ol.thumbnails {
+    white-space: nowrap; overflow-x: scroll; overflow-y: hidden;
+  }
+  #container form.write > ol.thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+}
+#container form.write > ol.thumbnails > li {
+  display: inline-block; margin: 0 4px 4px 0; width: 85px; height: 85px; border: 1px solid #d6d6d6; cursor: pointer;
+}
+#container form.write > ol.thumbnails > li.thumbnail.loading {
+  background: transparent url('/images/community.loading.svg') no-repeat center center; background-size: 24px 24px;
+}
+#container form.write > ol.thumbnails > li.thumbnail.attached {
+  background-size: cover;
+}
+#container form.write > ol.thumbnails > li.new {
+  background: transparent url('/images/community.board.write.thumbnails.new.png') no-repeat center center; background-size: 24px 24px;
+}
+#container form.write > hr.divider {
+  border-bottom: 1px solid #d6d6d6;
+}
+#container form.write > span.link {
+  float: left; display: inline-block; width: 48px; height: 48px; background: transparent url('/images/community.board.write.link.png') no-repeat center center; background-size: 24px 24px; cursor: pointer;
+}
+#container form.write > span.attach {
+  float: left; display: inline-block; width: 48px; height: 48px; background: transparent url('/images/community.board.write.attach.detached.png') no-repeat center center; background-size: 24px 24px; cursor: pointer;
+}
+#container form.write > label.anonym {
+  float: right; display: inline-block; padding-left: 13px; width: 48px; line-height: 48px; box-sizing: border-box; font-size: 12px; font-weight: bold; background-repeat: no-repeat; background-position: left 0 center; background-size: 9px 9px; cursor: pointer;
+}
+#container form.write > label.anonym.unchecked {
+  color: #a6a6a6; background-image: url('/images/community.board.anonym.unchecked.png');
+}
+#container form.write > label.anonym.checked {
+  color: #ffcc1c; background-image: url('/images/community.board.anonym.checked.png');
+}
+#container form.write > input.submit {
+  float: right; margin: 8px 0; padding: 0 16px; line-height: 30px; border: 1px solid #1dcdff; border-radius: 3px; color: #fff; font-size: 12px; font-weight: bold; background-color: #1dcdff; cursor: pointer;
+}
+#container form.write > input.button {
+  float: right; margin: 8px; padding: 0 8px; line-height: 30px; border: 1px solid #d6d6d6; border-radius: 3px; color: #a6a6a6; font-size: 12px; font-weight: bold; background-color: transparent; cursor: pointer;
+}
+#container form.write > input.file {
+  position: absolute; width: 0; height: 0; overflow: hidden; opacity: 0;
+}
+
+#container div.error {
+  padding: 108px 0 36px 0; text-align: center; background: transparent url('/images/community.board.error.png') no-repeat center top 36px; background-size: 48px 48px;
+}
+#container div.error > p {
+  color: #737373; font-size: 16px;
+}
+#container div.error > a.button {
+  display: inline-block; margin-top: 8px; padding: 0 8px; line-height: 36px; border-radius: 3px; color: #fff; font-size: 14px; font-weight: bold; background-color: #1dcdff; cursor: pointer;
+}
+
+#container h1.mypagearticlesname {
+  padding: 8px 0 4px 8px; color: #737373; font-size: 12px; font-weight: bold;
+}

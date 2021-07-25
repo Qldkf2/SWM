@@ -1,0 +1,24 @@
+@charset "EUC-KR";
+
+.wrap{
+    min-width:1300px;
+    max-width:1920px;
+}
+
+.content:after{
+    content:"";
+    display:block;
+    clear:both
+}
+
+.left-con{
+    width:250px;
+    float:left;
+}
+
+.right-con{
+    width:1000px;
+    padding:20px;
+    box-sizing:border-box;
+    float:left
+}
