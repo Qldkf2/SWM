@@ -1,5 +1,6 @@
 package com.ez.swm.meeting.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +19,34 @@ public class MeetingController {
 	MeetingService meetingService;
 	
 	@RequestMapping(value="/meeting")
-	public String meeting() {
+	public String meeting(HttpServletRequest request, Model model) {
+		/*
+		 * Member m = new Member(); HttpSession session = request.getSession();
+		 * 
+		 * m = (Member)session.getAttribute("member"); System.out.println("m : " +
+		 * m.getUserNo()); model.addAttribute("member", m);
+		 */
 	return "meeting/meeting";
 	}
 	
-	// 모임 만들기
+	
 	@RequestMapping(value="/meeting/meetingWrite")
-	public String meetingWrite(MeetingWrite meetingWrite, Model model) {
-		boolean result = meetingService.meetingWrite(meetingWrite);
-		
+	public String meetingWrtie() {
+		return "meeting/meetingWriteForm";
+	}
+	
+	// 모임 만들기
+	@RequestMapping(value="/meeting/meetingWriteForm")
+	public String meetingWriteForm(MeetingWrite meetingWrite, Model model, HttpServletRequest request) {
+		boolean result = meetingService.meetingWriteForm(meetingWrite);
+		Member m = new Member();
+		HttpSession session = request.getSession();
+		m = (Member)session.getAttribute("member");
 		if(!result) {
 			model.addAttribute("msg", "fail");
 			return "meeting/meetingWrite"; 
 		}
+		model.addAttribute("member" , m);
 		model.addAttribute("msg", "성공");
 		
 		return "meeting/meeting";

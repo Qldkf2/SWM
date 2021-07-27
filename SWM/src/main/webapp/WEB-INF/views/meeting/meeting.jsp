@@ -39,7 +39,7 @@
    <div data-v-70332c88>
    
    <div data-v-70332c88 class="container" style >
-      <a data-v-70332c88 href="/meeting/meetingWrite?userNo=${member.userNo }" class="floating write" >스터디모임 만들기</a>
+      <a data-v-70332c88 href="/meeting/meetingWrite" class="floating write" >스터디모임 만들기</a>
       <div data-v-70332c88 class="search">
          <div data-v-70332c88 class="local">
             <span data-v-70332c88>지역</span>

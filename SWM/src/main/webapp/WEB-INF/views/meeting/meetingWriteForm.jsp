@@ -27,8 +27,8 @@
 <div data-v-5ccf00ea>
 
 
-<form data-v-5ccf00ea class="container" name="container" action="/meeting/meetingWrite">
-	<input type="hidden" name="meeting_leader" value="${userNo}"/>
+<form data-v-5ccf00ea class="container" name="container" action="/meeting/meetingWriteForm">
+	<input type="hidden" name="meeting_leader" value="${member.userNo}"/>
 	<div data-v-5ccf00ea class="section" name="section">
 		<h2 data-v-5ccf00ea >모집 대상</h2>
 		<p data-v-5ccf00ea class="description">같은 또래의 사람들을 모을 수 있어욤 !</p>	

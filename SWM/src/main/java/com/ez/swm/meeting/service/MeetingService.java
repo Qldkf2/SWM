@@ -12,8 +12,8 @@ public class MeetingService {
 	@Autowired
 	MeetingDao meetingDao;
 
-	public boolean meetingWrite(MeetingWrite meetingWrite) {
-		return meetingDao.meetingWrite(meetingWrite) > 0;
+	public boolean meetingWriteForm(MeetingWrite meetingWrite) {
+		return meetingDao.meetingWriteForm(meetingWrite) > 0;
 	}
 
 }

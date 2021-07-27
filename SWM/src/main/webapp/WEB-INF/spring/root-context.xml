@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans 
+				https://www.springframework.org/schema/beans/spring-beans.xsd 
+				http://www.springframework.org/schema/util 
+				http://www.springframework.org/schema/util/spring-util-4.3.xsd" 
+				xmlns:util="http://www.springframework.org/schema/util" 
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+				xmlns="http://www.springframework.org/schema/beans">
+
+<!-- Root Context: defines shared resources visible to all other web components -->
+<!-- 읽어올 jdbc 관련 프로퍼티스 파일 위치 -->
+<util:properties location="classpath:config/jdbc.properties" id="jdbc"/>
+
+<import resource="jdbc-config.xml"/>
+
 </beans>

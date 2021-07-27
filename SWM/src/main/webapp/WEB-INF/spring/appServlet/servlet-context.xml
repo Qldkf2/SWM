@@ -23,7 +23,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.swm.sp" />
+	<context:component-scan base-package="com.ez.swm" />
 	
 	
 	
