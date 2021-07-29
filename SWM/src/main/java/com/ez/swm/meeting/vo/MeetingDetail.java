@@ -1,28 +1,32 @@
 package com.ez.swm.meeting.vo;
 
-public class MeetingWrite {
-	
+import java.sql.Date;
+
+public class MeetingDetail {
+
+	private String nickname;
 	private int meeting_leader;
-	private String meeting_age;
-	private String meeting_subject;
-	private String meeting_address;
-	private int meeting_limit;
 	private String meeting_title;
 	private String meeting_content;
-
+	private String meeting_address;
+	private String meeting_subject;
+	private int meeting_limit;
+	private int meeting_no;
+	private String meeting_age;
+	private Date meeting_date;
 	
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public int getMeeting_leader() {
 		return meeting_leader;
 	}
 	public void setMeeting_leader(int meeting_leader) {
 		this.meeting_leader = meeting_leader;
-	}
-	
-	public String getMeeting_age() {
-		return meeting_age;
-	}
-	public void setMeeting_age(String meeting_age) {
-		this.meeting_age = meeting_age;
 	}
 	public String getMeeting_title() {
 		return meeting_title;
@@ -54,11 +58,24 @@ public class MeetingWrite {
 	public void setMeeting_limit(int meeting_limit) {
 		this.meeting_limit = meeting_limit;
 	}
-
-	
-	
-	
-	
+	public int getMeeting_no() {
+		return meeting_no;
+	}
+	public void setMeeting_no(int meeting_no) {
+		this.meeting_no = meeting_no;
+	}
+	public String getMeeting_age() {
+		return meeting_age;
+	}
+	public void setMeeting_age(String meeting_age) {
+		this.meeting_age = meeting_age;
+	}
+	public Date getMeeting_date() {
+		return meeting_date;
+	}
+	public void setMeeting_date(Date meeting_date) {
+		this.meeting_date = meeting_date;
+	}
 	
 	
 }

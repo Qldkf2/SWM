@@ -4,12 +4,134 @@
 <mapper namespace="Meeting">
 
 	<insert id="meetingWrite" parameterType="com.ez.swm.meeting.vo.MeetingWrite">
-		INSERT INTO MEETING_BOARD VALUES(
-			SEQ_MEETING_BOARD.NEXTVAl, #{meeting_leader}, #{meeting_age}, #{meeting_title}, 
-			#{meeting_content}, #{meeting_address} , #{meeting_sugject}, #{meeting_limit} 
+		<![CDATA[
+		INSERT INTO MEETING VALUES(
+			SEQ_MEETING_BOARD.NEXTVAl, #{meeting_leader}, #{meeting_age,jdbcType=VARCHAR}, #{meeting_title}, 
+			#{meeting_content}, #{meeting_address} , #{meeting_subject}, #{meeting_limit} 
 			,  DEFAULT , DEFAULT
 		) 
+		]]>
 	</insert>
 	
+	<select id="getMeetingList" resultType="com.ez.swm.meeting.vo.MeetingList" >
+		<![CDATA[	
+			SELECT
+	                m.NICKNAME,
+					b.MEETING_NO,
+					b.MEETING_TITLE,
+					b.MEETING_AGE,
+					b.MEETING_SUBJECT,
+					b.MEETING_ADDRESS,
+					b.MEETING_LEADER,
+					b.MEETING_LIMIT,
+					b.MEETING_DATE
+				FROM
+					MEETING b, MEMBER m
+				WHERE
+					b.STATUS = 'N' and m.userno=b.meeting_leader
+				ORDER BY MEETING_NO DESC
+		]]>
+	</select>
+	<select id="getMeetingArticle" resultType="com.ez.swm.meeting.vo.MeetingDetail"  parameterType="int">
+		<![CDATA[	
+			SELECT
+	                m.NICKNAME,
+	                b.MEETING_NO,
+					b.MEETING_TITLE,
+					b.MEETING_SUBJECT,
+					b.MEETING_CONTENT,
+					b.MEETING_ADDRESS,
+					b.MEETING_LEADER,
+					b.MEETING_LIMIT					
+				FROM
+					MEETING b, MEMBER m
+				WHERE					
+					b.MEETING_NO=#{MEETING_NO} and m.userno=b.meeting_leader
 
+		]]>
+	</select>
+	
+	<select id="getMeetingBoardList" resultType="com.ez.swm.meeting.vo.MeetingBoard" parameterType="int">
+		<![CDATA[	
+					SELECT 
+						m.NICKNAME, 
+						p.MEETING_BOARD_NO,
+						p.MEETING_BOARD_WRITER,
+						p.MEETING_BOARD_TITLE,
+						p.MEETING_BOARD_DATE,
+						p.MEETING_BOARD_HIT
+					FROM 
+						MEETING_BOARD p, Member m
+					WHERE 
+						p.MEETING_NO=#{MEETING_NO} and m.userno=p.MEETING_BOARD_WRITER and p.STATUS = 'N'
+		]]>
+	</select>
+	
+	<select id="getPartyBoardArticle" resultType="com.ez.swm.meeting.vo.MeetingBoard" parameterType="hashmap">
+		<![CDATA[	
+					SELECT 
+						m.NICKNAME, 
+						p.MEETING_BOARD_NO,
+						p.MEETING_BOARD_WRITER,
+						p.MEETING_NO,
+						p.MEETING_BOARD_TITLE,
+						p.MEETING_BOARD_CONTENT,
+						p.MEETING_BOARD_DATE,
+						p.MEETING_BOARD_HIT
+					FROM 
+						MEETING_BOARD p, Member m
+					WHERE 
+						p.MEETING_NO=#{MEETING_NO} and p.MEETING_BOARD_NO=#{MEETING_BOARD_NO} and m.userno=p.MEETING_BOARD_WRITER
+		]]>
+	</select>	
+	
+	<select id="getParty_no" resultType="int" >
+		SELECT SEQ_MEETING_BOARD.CURRVAL FROM DUAL	
+	</select>
+	
+	<insert id="insertPartyBoardArticle"  parameterType="com.ez.swm.meeting.vo.MeetingBoard" >
+	  <![CDATA[
+				INSERT 
+					INTO MEETING_BOARD 
+					VALUES(
+						SEQ_MEETING_BOARD.NEXTVAL,
+						#{meeting_no},
+						#{meeting_board_writer},
+						#{meeting_board_title},
+						#{meeting_board_content},
+						SYSDATE, '0', 'N'					
+						)		
+			]]>
+		</insert>
+	
+		<select id="getPartyBoardComment" resultType="com.ez.swm.meeting.vo.MeetingBoardComment" parameterType="int">
+		<![CDATA[	
+				SELECT 
+				    m.NICKNAME,
+				    p.MEETING_BOARD_COMMENT_NO,
+				    p.MEETING_BOARD_NO,
+				    p.USERNO,
+				    p.MEETING_BOARD_COMMENT_CONTENT,
+				    p.MEETING_BOARD_COMMENT_DATE,
+				    p.MEETING_BOARD_COMMENT_LEVEL,
+				    p.MEETING_BOARD_COMMENT_REFNO
+				FROM MEETING_BOARD_COMMENT p, MEMBER m
+				WHERE p.MEETING_BOARD_NO=#{PARTY_NO} AND m.userno=p.USERNO AND p.STATUS='N'
+				ORDER BY p.MEETING_BOARD_COMMENT_REFNO ASC, p.MEETING_BOARD_COMMENT_LEVEL ASC
+		]]>
+	</select>
+	
+   <select id="getFileList" parameterType="int" resultType="com.ez.swm.meeting.vo.MeetingBoardFile" >
+      <![CDATA[
+         SELECT
+            IDX, ORIGINAL_FILE_NAME, ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+         FROM MEETING_BOARD_FILE
+         WHERE MEETING_BOARD_NO = #{meeting_board_no} and DEL_GB = 'N'
+      ]]>
+   
+   </select>
+	
+	
+	
+	
 </mapper>

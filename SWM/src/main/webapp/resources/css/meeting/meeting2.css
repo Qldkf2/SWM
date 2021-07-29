@@ -30,7 +30,7 @@ div.container article[data-v-7c8cb348]{padding:16px;background-color:#fff}
 div.container form.comment[data-v-7c8cb348]{padding-top:16px;background-color:#fff}
 
 
-@media only screen and (max-width: 719px){div.container article[data-v-7c8cb348]{margin-bottom:8px}}@media only screen and (min-width: 720px){div.container article[data-v-7c8cb348]{margin-bottom:16px}}div.container article p.profile[data-v-7c8cb348]{display:inline-block;margin-bottom:16px;padding-left:28px;line-height:20px;color:#4c4c4c;font-size:13px;font-weight:bold;background-repeat:no-repeat;background-position:left center;background-size:20px 20px}div.container article p.completed[data-v-7c8cb348]{float:right;padding:0 8px;border-radius:10px;line-height:20px;color:#fff;font-size:12px;font-weight:bold;background-color:#a6a6a6}div.container article p.completed.highlight[data-v-7c8cb348]{background-color:#1dcdff}
+@media only screen and (max-width: 719px){div.container article[data-v-7c8cb348]{margin-bottom:16px}}@media only screen and (min-width: 720px){div.container article[data-v-7c8cb348]{margin-bottom:16px}}div.container article p.profile[data-v-7c8cb348]{display:inline-block;margin-bottom:16px;padding-left:28px;line-height:20px;color:#4c4c4c;font-size:13px;font-weight:bold;background-repeat:no-repeat;background-position:left center;background-size:20px 20px}div.container article p.completed[data-v-7c8cb348]{float:right;padding:0 8px;border-radius:10px;line-height:20px;color:#fff;font-size:12px;font-weight:bold;background-color:#a6a6a6}div.container article p.completed.highlight[data-v-7c8cb348]{background-color:#1dcdff}
 
 
 div.container article h1[data-v-7c8cb348]{
@@ -40,7 +40,11 @@ div.container article h1[data-v-7c8cb348]{
 div.container article h2[data-v-7c8cb348]{
 	margin-bottom:4px;line-height:27px;word-wrap:break-word;
 	color:#292929;font-size:15px;font-weight:bold}
-div.container article p.info[data-v-7c8cb348]{margin-bottom:16px}div.container article p.info span[data-v-7c8cb348]{display:inline-block;margin-right:8px;line-height:18px;letter-spacing:0;color:#a6a6a6;font-size:12px}
+div.container article p.file[data-v-7c8cb348]{margin-bottom:50px}
+div.container article p.file a[data-v-7c8cb348]{display:inline-block;margin-right:8px;line-height:18px;letter-spacing:0;color:#a6a6a6;font-size:12px}	
+	
+div.container article p.info[data-v-7c8cb348]{margin-bottom:5px}
+div.container article p.info span[data-v-7c8cb348]{display:inline-block;margin-right:8px;line-height:18px;letter-spacing:0;color:#a6a6a6;font-size:12px}
 div.container article p.info span.viewcount[data-v-7c8cb348]{padding-left:14px;background:transparent url("../../images/viewcount.png")  no-repeat left center;background-size:12px 8px}
 div.container article p.info span.commentcount[data-v-7c8cb348]{padding-left:12px;background:transparent url("https://www.campuspick.com/images/common/info.commentcount.png") no-repeat left center;background-size:9px 9px}div.container article p.info span.secret[data-v-7c8cb348]{padding-left:14px;background:transparent url("/images/common/info.secret.png") no-repeat left center;background-size:12px 12px}div.container article p.info span.button[data-v-7c8cb348]{cursor:pointer}div.container article p.info span.button[data-v-7c8cb348]::before{content:"";display:inline-block;margin-right:8px;width:1px;height:10px;background-color:#d6d6d6}
 
@@ -214,13 +218,23 @@ form.container p.title[data-v-7c8cb348],form.container p.text, form.container p.
 
 	width:100%;height:144px;line-height:24px;color:#292929;font-size:16px; resize: none;}
 	
+
 	form.container p.file input[data-v-7c8cb348]{
 	
-	width:100%;color:#292929;font-size:16px}
+	width:60%;color:#292929;font-size:16px; margin-right:200px;}
 	
 	
-	form.container p.file label[data-v-7c8cb348]{
-	display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em;
+	form.container p.file a[data-v-7c8cb348]{
+	
+    width: 45px;
+    height: 20px;
+	color:#292929;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #d6d6d6;
+   	border-radius: 5px;
+
 	}
 	
 

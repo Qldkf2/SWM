@@ -8,12 +8,10 @@
 <meta charset="UTF-8">
 <title>스윗미</title>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contentType }/resources/css/main.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contentType }/resources/css/meeting/main.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contentType }/resources/css/meeting/meeting.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contentType }/resources/css/meeting/meeting2.css">
-
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}resources/css/meeting/meeting.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/meeting/meeting2.css">
 
 
 </head>
@@ -41,7 +39,7 @@
 	        모집중
 	     </p> 
 	     
-	     <h1 data-v-7c8cb348="">같이 독서습관 기르기</h1>     
+	     <h1 data-v-7c8cb348="">${article.meeting_title}</h1>     
 		     <p data-v-7c8cb348="" class="info">
 			     <span data-v-7c8cb348="">07/14 10:36</span> 
 			     <span data-v-7c8cb348="" class="viewcount">5</span> 
@@ -51,110 +49,90 @@
      
 			<section data-v-7c8cb348="" class="tab" style="top: 0px;">
 			    <div data-v-7c8cb348="" class="wrap">
-			      <a data-v-7c8cb348="" href="view.jsp" ><span class="text">모집 공고</span></a>
-			      <a data-v-7c8cb348="" href="/meeting/meetingBoard"  class="active"><span class="text">게시판</span></a>
+				      <a data-v-7c8cb348="" href="/meeting/meetingDetail?meeting_no=${article.meeting_no}" ><span class="text">모집 공고</span></a>
+			      <a data-v-7c8cb348="" href="/meeting/meetingBoard?meeting_no=${article.meeting_no}"  class="active"><span class="text">게시판</span></a>
 			    </div>
 			  </section>
-
 			
 					<article data-v-7c8cb348>			
 							<div data-v-7c8cb348="">
-							    <h2 data-v-7c8cb348="">다음주 월요일날 모임 어떠세용</h2>  
+							    <h2 data-v-7c8cb348="">${partyArticle.meeting_board_title}</h2>  
 							    		     <p data-v-7c8cb348="" class="info">
-											     <span data-v-7c8cb348="">07/15 10:36</span> 
-											     <span data-v-7c8cb348="" class="viewcount">2</span> 
+												<span data-v-7c8cb348="">${partyArticle.nickname}</span> 
+											     <span data-v-7c8cb348="">${partyArticle.meeting_board_date}</span> 
+											     <span data-v-7c8cb348="" class="viewcount">${partyArticle.meeting_board_hit}</span> 
 										     </p>
+							     		      <p data-v-7c8cb348="" class="file">
+												<c:forEach items="${fileList}" var="file">	 
+	     											<a data-v-7c8cb348=""  name="file" href="/meeting/downloadFile?idx=${file.idx}">[file] : ${file.original_file_name} (${file.file_size} kb)</a></br>	     		
+												</c:forEach>
+											</p>		
 							    			<p data-v-7c8cb348="" class="text">
-												시간되시는분들 댓글!!1<br>
-												1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>
+												${partyArticle.meeting_board_content}<br>
 											</p>
-					
 							</div>
-
-
 						</article>
-
-			
-
-
 	     		<form data-v-7c8cb348="" class="comment">
-					<input data-v-7c8cb348="" type="text"  value="첨부파일:&nbsp;" disabled>
+					
+
 					<div data-v-7c8cb348="" class="submit">			
 						<input data-v-7c8cb348="" type="submit" value="댓글쓰기">
 					</div>
 						<hr style="background:#d6d6d6; height:1px;">				
 					<p data-v-7c8cb348="" class="text"><textarea data-v-7c8cb348="" placeholder="댓글을 입력하세요. "></textarea></p> 
-	
+					<input data-v-7c8cb348="" type="hidden"  name="meeting_board_no"value="${meeting_board_no}">
 								
 				</form>
 
 	     	<hr style="background:#d6d6d6; height:1px;">
      	</article>
      	
-
-
-	
 		<div data-v-7c8cb348="" class="comments">
+
+   		<c:forEach items="${comment}" var="row">	       
 		
-		<!-- 부모댓글 class="comment parent" -->
-			<div data-v-7c8cb348="" class="comment parent" >			
-				<p data-v-7c8cb348="" class="profile" >
-					<span data-v-7c8cb348="" class="writer" > 닉네임을 몬정해써</span>
-					<span data-v-7c8cb348="" class="info">(07/16 10:25)</span> 
-					<span data-v-7c8cb348="" class="delete"><img src="../../images/delete.png" width="13px" height="13px"></span>
-				</p> 			
-				<p data-v-208a49f8="" data-v-7c8cb348="" class="text">저요저요!</p> 
-					
-			</div>
+
+			<c:choose>
+			<c:when test="${row.party_comment_level == 1}">
 				
+				<!-- 부모댓글 class="comment parent" -->
+					<div data-v-7c8cb348="" class="comment parent" >			
+						<p data-v-7c8cb348="" class="profile" >
+							<span data-v-7c8cb348="" class="writer" > ${row.nickname}</span>
+							<span data-v-7c8cb348="" class="info">${row.party_comment_date}</span> 
+							<span data-v-7c8cb348="" class="delete">
+							<img src="${pageContext.request.contextPath}/resources/images/delete.png" width="13px" height="13px">
+							<img src="${pageContext.request.contextPath}/resources/images/comment.png" width="15px" height="15px">
+							</span>
+						</p> 			
+						<p data-v-208a49f8="" data-v-7c8cb348="" class="text">${row.party_comment_content}</p> 
+		
+					</div>
+				</c:when>
+			<c:otherwise>				
 			<!-- 자식댓글 class="comment child" -->	
-			<div data-v-7c8cb348="" class="comment child">			
-				<p data-v-7c8cb348="" class="profile" >
-					<span data-v-7c8cb348="" class="writer">댓글답변</span>
-					<span data-v-7c8cb348="" class="info">(07/16 10:25)</span> 
-					<span data-v-7c8cb348="" class="delete"><img src="../../images/delete.png" width="13px" height="13px"></span>
-				</p> 			
-				<p data-v-208a49f8="" data-v-7c8cb348="" class="text">언제 시간되시나용</p> 
+				<div data-v-7c8cb348="" class="comment child">			
+					<p data-v-7c8cb348="" class="profile" >
+						<span data-v-7c8cb348="" class="writer">${row.nickname}</span>
+						<span data-v-7c8cb348="" class="info">${row.party_comment_date}</span> 
+								<img src="${pageContext.request.contextPath}/resources/images/delete.png" width="13px" height="13px">
+					</p> 			
+					<p data-v-208a49f8="" data-v-7c8cb348="" class="text">${row.party_comment_content}</p> 
+	
+				</div>
+			</c:otherwise>
+			</c:choose>
 
-			</div>
-			
-			
-		<div data-v-7c8cb348="" class="comment parent">			
-			<p data-v-7c8cb348="" class="profile" >
-				<span data-v-7c8cb348="" class="writer">흑흑</span>
-				<span data-v-7c8cb348="" class="info">(07/16 10:25)</span> 
-				<span data-v-7c8cb348="" class="delete"><img src="../../images/delete.png" width="13px" height="13px"></span>
-				
-			</p> 			
-			<p data-v-208a49f8="" data-v-7c8cb348="" class="text">내일은 안되나용?</p> 
-
+		</c:forEach>
 
 		</div>
 		
-		
-		<div data-v-7c8cb348="" class="comment parent">			
-			<p data-v-7c8cb348="" class="profile" >
-				<span data-v-7c8cb348="" class="writer">구뜨!</span>
-				<span data-v-7c8cb348="" class="info">(07/16 10:25)</span> 
-				<span data-v-7c8cb348="" class="delete"><img src="../../images/delete.png" width="13px" height="13px"></span>
-			</p> 			
-			<p data-v-208a49f8="" data-v-7c8cb348="" class="text">저도 가능!!</p> 
-
-
-		</div>	
-		
-		</div>
-		
-		
-		
-
      </div>
      	
 	
-	  	
 	<div data-v-7c8cb348="" class="container">    	
 
-		  <a data-v-7c8cb348="" href="/meeting/meetingBoard"  class="floating write">목록</a> <!---->      	
+		  <a data-v-7c8cb348="" href="/meeting/meetingBoard?meeting_no=${article.meeting_no}"  class="floating write">목록</a> <!---->      	
 		  <a data-v-7c8cb348="" href="/meeting/meetingBoardModify"  class="floating write">수정</a> <!---->      	
 		  <a data-v-7c8cb348="" href="/meeting/meetingBoardDelete"  class="floating write">삭제</a> <!---->      	
 	</div>

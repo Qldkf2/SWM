@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="File">
+	
+	<!-- 파일 불러오기  -->
+	<select id="selectFileInfo" parameterType="int" resultType="com.ez.swm.meeting.vo.MeetingBoardFile">
+		<![CDATA[
+			SELECT
+				STORED_FILE_NAME,
+				ORIGINAL_FILE_NAME
+			FROM
+				MEETING_BOARD_FILE
+			WHERE
+				IDX=#{idx}		
+		]]>	
+	</select>
+	
+	<!-- 파일 등록 -->
+	<insert id="insertFile" parameterType="hashmap">
+         <![CDATA[
+            INSERT INTO MEETING_BOARD_FILE
+               (IDX,MEETING_BOARD_NO,ORIGINAL_FILE_NAME,STORED_FILE_NAME,FILE_SIZE)
+            VALUES
+               (SEQ_MEETING_FILE_IDX.NEXTVAL,#{MEETING_BOARD_NO},#{ORIGINAL_FILE_NAME}, #{STORED_FILE_NAME}, #{FILE_SIZE})      
+         ]]>
+      </insert>
+	
+	   
+
+</mapper>

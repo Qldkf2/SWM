@@ -8,12 +8,14 @@
 <meta charset="UTF-8">
 <title>스윗미</title>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contentType }/resources/css/main.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contentType }/resources/css/meeting/main.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contentType }/resources/css/meeting/meeting.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contentType }/resources/css/meeting/meeting2.css">
 
 
+
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}resources/css/meeting/meeting.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/meeting/meeting2.css">
 
 </head>
 <body>
@@ -40,9 +42,9 @@
 	        모집중
 	     </p> 
 	     
-	     <h1 data-v-7c8cb348="">같이 독서습관 기르기</h1>     
+	     <h1 data-v-7c8cb348="">${article.meeting_title}</h1>     
 		     <p data-v-7c8cb348="" class="info">
-			     <span data-v-7c8cb348="">07/14 10:36</span> 
+			     <span data-v-7c8cb348="">${article.meeting_date }</span> 
 			     <span data-v-7c8cb348="" class="viewcount">5</span> 
 		     </p>
 
@@ -50,16 +52,12 @@
      
 			<section data-v-7c8cb348="" class="tab" style="top: 0px;">
 			    <div data-v-7c8cb348="" class="wrap">
-			      <a data-v-7c8cb348="" href="/" ><span class="text">모집 공고</span></a>
-			      <a data-v-7c8cb348="" href="/meeting/meetingBoard"  class="active"><span class="text">게시판</span></a>
+				      <a data-v-7c8cb348="" href="/meeting/meetingDetail?meeting_no=${article.meeting_no}" ><span class="text">모집 공고</span></a>
+			      <a data-v-7c8cb348="" href="/meeting/meetingBoard?meeting_no=${article.meeting_no}"  class="active"><span class="text">게시판</span></a>
 			    </div>
 			  </section>
 
-
-
-				   
-
-				      <a data-v-7c8cb348 href="/meeting/meetingBoardWrite" class="floating write" >글쓰기</a>
+				      <a data-v-7c8cb348 href="/meeting/meetingBoardWrite?meeting_no=${article.meeting_no}" class="floating write" >글쓰기</a>
 				      <div data-v-7c8cb348 class="search">
 				         <form data-v-7c8cb348 class>
 				            <input data-v-7c8cb348 type="search" name="keyword" class="keyword" placeholder="검색" value="" autocomplete="off" >
@@ -72,65 +70,37 @@
 		<hr style="background:#d6d6d6; height:1px;">
 				      <div data-v-7c8cb348 class="list">
 				      
-				      <!-- 리스트 -->
-							  <a data-v-7c8cb348 href="/meeting/meetingBoardDetail" class="item">
-					
-					         <h2 data-v-7c8cb348="">모임 장소 및 시간 공지요!</h2>
-					         <p data-v-7c8cb348 class="info" >
-					        	 <span data-v-7c8cb348="">끼야야야야</span>
-					         	<span data-v-7c8cb348="">오늘 09:12</span>
-					         	<span data-v-7c8cb348="" class="viewcount">2</span>
-					         	<span data-v-7c8cb348="" class="commentcount">17</span>
-					          </p>
-					         </a>
-					         
-					         
-					        <a data-v-7c8cb348 href="/meeting/board?id=113060" class="item">
-					
-					         <h2 data-v-7c8cb348="">가입 인사 드립니당</h2>
-					         <p data-v-7c8cb348 class="info" >
-					        	 <span data-v-7c8cb348="">하잇!</span>
-					         	<span data-v-7c8cb348="">오늘 09:12</span>
-					         	<span data-v-7c8cb348="" class="viewcount">2</span>
-					          </p>
-					         </a>
-	
-					        <a data-v-7c8cb348 href="/meeting/board?id=113060" class="item">
-					
-					         <h2 data-v-7c8cb348="">문의 드려요!</h2>
-					         <p data-v-7c8cb348 class="info" >
-					        	 <span data-v-7c8cb348="">하잇!</span>
-					         	<span data-v-7c8cb348="">오늘 09:12</span>
-					         	<span data-v-7c8cb348="" class="viewcount">2</span>
-					          </p>
-					         </a>
-					         
-					         
-					         
-					        <a data-v-7c8cb348 href="/meeting/board?id=113060" class="item">
-					
-					         <h2 data-v-7c8cb348="">질무니가 있어요!</h2>
-					         <p data-v-7c8cb348 class="info" >
-					        	 <span data-v-7c8cb348="">하잇!</span>
-					         	<span data-v-7c8cb348="">오늘 09:12</span>
-					         	<span data-v-7c8cb348="" class="viewcount">2</span>
-					          </p>
-					         </a>					         
-					         
-					         			         
+				           <c:choose>
 
-      				</div>
+    				  		<c:when test="${fn:length(list) > 0}">
+	      	
+	      	      				<c:forEach items="${list}" var="row">	       
+					      <!-- 리스트 -->
+								  <a data-v-7c8cb348 href="/meeting/meetingBoardDetail?meeting_no=${article.meeting_no}&party_no=${row.meeting_board_no}" class="item">
+						
+						         <h2 data-v-7c8cb348="">${row.meeting_board_title }</h2>
+						         <p data-v-7c8cb348 class="info" >
+						        	 <span data-v-7c8cb348="">${row.nickname}</span>
+						         	<span data-v-7c8cb348="">${row.meeting_board_date}</span>
+						         	<span data-v-7c8cb348="" class="viewcount">${row.meeting_board_hit}</span>
+						         	<span data-v-7c8cb348="" class="commentcount">17</span>
+						          </p>
+						         </a>
+						         
+					
+						        </c:forEach>
+					        </c:when>
+							<c:otherwise>
+						<a data-v-7c8cb348 class="item" >
+      	 		        <h2 data-v-7c8cb348 >조회된 결과가 없습니다.</h2>
+     			 	 </a>
 
-
-	     	
-	     	
+					</c:otherwise>
+      </c:choose> 			         
+      	</div>
      	</article>
-     	
-     	
-     </div>
-     	
 
- 
+     </div>
 	<div data-v-7c8cb348="" class="container">    		
 
 	      <a data-v-7c8cb348=""  class="floating comment" id="modal">가입신청</a>

@@ -8,10 +8,10 @@
 <meta charset="UTF-8">
 <title>스윗미</title>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contentType }/resources/css/main.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contentType }/resources/css/meeting/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/meeting/main.css">
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contentType }/resources/css/meeting/meeting.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/meeting/meeting.css">
 
 
 
@@ -52,35 +52,37 @@
       </div>
       <hr data-v-70332c88>
       <div data-v-70332c88 class="list">
-         <a data-v-70332c88 href="/meeting/meetingDetail" class="item">....
+	 <c:choose>
+      	<c:when test="${fn:length(list) > 0}">
+      	      	<c:forEach items="${list}" var="row">	         	       	 
+      	<a data-v-70332c88 href="<c:url value='/meeting/meetingDetail'/>?meeting_no=${row.meeting_no}"  id="article" class="item" >
+		
+			<input type="hidden" id="idx" value="${row.meeting_no}">
 	         <p data-v-70332c88 class="completed highlight">
 	         	<span data-v-70332c88="">모집중</span>
 	         </p>
 	         <p data-v-70332c88 class="badges">
-	         	<span data-v-70332c88="">과목</span>
-	         	<span data-v-70332c88="">지역</span>
+	         	<span data-v-70332c88="">${row.meeting_subject}</span>
+	         	 <span data-v-70332c88="">${row.meeting_address}</span>
+
 	         </p>
-	         <h2 data-v-70332c88>부평, 부부평평 스터디</h2>
+	         <h2 data-v-70332c88>${row.meeting_title}</h2>
 	         <p data-v-70332c88 class="info" >
-	         	<span data-v-70332c88="">오늘 09:12</span>
-	         	<span data-v-70332c88="" class="viewcount">2</span>
-          </p>
+	         	 <span data-v-70332c88="">${row.nickname}</span>
+	         	<span data-v-70332c88="">${row.meeting_date}</span>
+
+          	</p>
+
          </a>
-         
-                  <a data-v-70332c88 href="/meeting/view?id=113060" class="item">....
-	         <p data-v-70332c88 class="completed highlight">
-	         	<span data-v-70332c88="">모집중</span>
-	         </p>
-	         <p data-v-70332c88 class="badges">
-	         	<span data-v-70332c88="">과목</span>
-	         	<span data-v-70332c88="">지역</span>
-	         </p>
-	         <h2 data-v-70332c88>부평, 부부평평 스터디</h2>
-	         <p data-v-70332c88 class="info" >
-	         	<span data-v-70332c88="">오늘 09:12</span>
-	         	<span data-v-70332c88="" class="viewcount">2</span>
-          </p>
-         </a>
+                  </c:forEach>
+      	 </c:when>
+      
+		<c:otherwise>
+					<a data-v-70332c88 class="item" >
+      	 		        <h2 data-v-70332c88 >조회된 결과가 없습니다.</h2>
+     			 	 </a>
+		</c:otherwise>
+      </c:choose>
       </div>
    </div>
    </div>

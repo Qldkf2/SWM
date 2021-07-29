@@ -35,7 +35,6 @@ public class MemberController {
 			return "login/joinForm"; 
 		}
 		model.addAttribute("msg", "¼º°ø");
-		
 		return "redirect:/";
 	}
 

@@ -1,81 +1,81 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting.css"> --%>
 <%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/header.css"> --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/main.css">
+<link rel="stylesheet" type="text/css" href="../../../resources/css/meeting/meeting.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/bccbe8508a4ff8396565.css" as="style">
 
 <link data-vue-meta="ssr" rel="preload" href="${pageContext.request.contextPath}/resources/js/meeting/348d9764bf4bb1ed9da9.js" as="script">
 </head>
 <body>
-
+1
 <c:import url="../common/header.jsp" />
 
+
+<form data-v-5ccf00ea class="container" name="container" action="/meeting/meetingWriteForm" method="post"> 
 <div id="app">
-
-
 <div data-v-5ccf00ea>
 
-
-<form data-v-5ccf00ea class="container" name="container" action="/meeting/meetingWriteForm">
 	<input type="hidden" name="meeting_leader" value="${member.userNo}"/>
 	<div data-v-5ccf00ea class="section" name="section">
-		<h2 data-v-5ccf00ea >¸ðÁý ´ë»ó</h2>
-		<p data-v-5ccf00ea class="description">°°Àº ¶Ç·¡ÀÇ »ç¶÷µéÀ» ¸ðÀ» ¼ö ÀÖ¾î¿è !</p>	
+		<h2 data-v-5ccf00ea >ëª¨ì§‘ ëŒ€ìƒ</h2>
+		<p data-v-5ccf00ea class="description">ê°™ì€ ë˜ëž˜ì˜ ì‚¬ëžŒë“¤ì„ ëª¨ì„ ìˆ˜ ìžˆì–´ìš¤ !</p>	
 	    <label data-v-5ccf00ea class="radio" name="meeting_age">
-	    	<input type="radio" class="radio" id="teen" name="age" value="10´ë" checked>10´ë
+	    	<input type="radio" class="radio" id="teen" name="meeting_age" value="10ëŒ€" checked>10ëŒ€
 	    </label>
 		<label data-v-5ccf00ea class="radio" name="meeting_age">
-			<input type="radio" class="radio" id="twenty" name="age" value="20´ë">20´ë
+			<input type="radio" class="radio" id="twenty" name="meeting_age" value="20ëŒ€">20ëŒ€
 		</label>
 		<label data-v-5ccf00ea class="radio" name="meeting_age">
-			<input type="radio" class="radio" id="thirty" name="age" value="30´ë">30´ë
+			<input type="radio" class="radio" id="thirty" name="meeting_age" value="30ëŒ€">30ëŒ€
 		</label>
 		<label data-v-5ccf00ea class="radio" name="meeting_age">
-			<input type="radio" class="radio" id="nothing" name="age" value="»ó°ü¾øÀ½">»ó°ü¾øÀ½
+			<input type="radio" class="radio" id="nothing" name="meeting_age" value="ìƒê´€ì—†ìŒ">ìƒê´€ì—†ìŒ
 		</label>
 	</div>
 	
 	<div data-v-5ccf00ea class="section" >
-		<h2 data-v-5ccf00ea>ºÐ¾ß</h2>
-		<p data-v-5ccf00ea class="select unselected">ºÐ¾ß ¼±ÅÃ : 
+		<h2 data-v-5ccf00ea>ë¶„ì•¼</h2>
+		<p data-v-5ccf00ea class="select unselected">ë¶„ì•¼ ì„ íƒ : 
 		 <select id="subject" data-v-5ccf00ea class="select unselected" name="meeting_subject" > 
-			<option value="Ãë¾÷">Ãë¾÷</option>
-			<option value="ÄÚµù">ÄÚµù</option>
-			<option value="ÅäÀÍ">ÅäÀÍ</option>
+			<option value="ì·¨ì—…">ì·¨ì—…</option>
+			<option value="ì½”ë”©">ì½”ë”©</option>
+			<option value="í† ìµ">í† ìµ</option>
 		 </select>
 		</p>
 	</div>
 	
 	<div data-v-5ccf00ea class="section">
-		<h2 data-v-5ccf00ea>Áö¿ª</h2>
-		<p data-v-5ccf00ea class="select selected">¼­¿ï : 
+		<h2 data-v-5ccf00ea>ì§€ì—­</h2>
+		<p data-v-5ccf00ea class="select selected">ì„œìš¸ : 
 		 <select id="location" data-v-5ccf00ea class="select unselected" name="meeting_address" > 
-			<option value="°­³²±¸">°­³²±¸</option>
-			<option value="°­¼­±¸">°­¼­±¸</option>
-			<option value="°­µ¿±¸">°­µ¿±¸</option>
+			<option value="ê°•ë‚¨êµ¬">ê°•ë‚¨êµ¬</option>
+			<option value="ê°•ì„œêµ¬">ê°•ì„œêµ¬</option>
+			<option value="ê°•ë™êµ¬">ê°•ë™êµ¬</option>
 		 </select>
 		</p>
 	</div>
 	
 	<div data-v-5ccf00ea class="section">
-		<h2 data-v-5ccf00ea>¸ðÁý ÀÎ¿ø</h2>
-		<!-- <label  data-v-5ccf00ea class="checkbox unchecked">Á¦ÇÑ ¾øÀ½</label> -->
+		<h2 data-v-5ccf00ea>ëª¨ì§‘ ì¸ì›</h2>
+		<!-- <label  data-v-5ccf00ea class="checkbox unchecked">ì œí•œ ì—†ìŒ</label> -->
 		<div data-v-5ccf00ea class="number"  >
-		<span data-v-5ccf00ea class="value min">2¸í</span>
+		<span data-v-5ccf00ea class="value min">2ëª…</span>
 		<%-- <canvas data-v-5ccf00ea class="slider" id="slider" width="405" height="60" style="width: 324px; height: 48px; margin: 0px -7px;"></canvas> --%>
 
-		<input data-v-5ccf00ea type="range" class="slider" id="myRange"
+		<input data-v-5ccf00ea type="range" class="slider" id="myRange" name="meeting_limit"
 				min="0" max="10" step="1" value="2" style="width : 300px;"/>
 
 		<span data-v-5ccf00ea class="value max" id="limit" name="meeting_limit"></span>
@@ -83,27 +83,26 @@
 	</div>
 	
 	<p data-v-5ccf00ea class="title" >
-		<input data-v-5ccf00ea type="text" id="meetingTitle" placeholder="Á¦¸ñ" name="meeting_title">
+		<input data-v-5ccf00ea type="text" id="meetingTitle" placeholder="ì œëª©" name="meeting_title">
 	</p>
 	
 	<p data-v-5ccf00ea class="text">
-		<textarea data-v-5ccf00ea id="meetingContent" name="meeting_content" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ë. (½Ã°£, Àå¼Ò ,ÁøÇà ¹æ½Ä µîµî)"></textarea>
+		<textarea data-v-5ccf00ea id="meetingContent" name="meeting_content" placeholder="ë‚´ìš©ì„ ìž…ë ¥í•˜ì„¸ìš©. (ì‹œê°„, ìž¥ì†Œ ,ì§„í–‰ ë°©ì‹ ë“±ë“±)"></textarea>
 	</p>	
 	
 	<div data-v-5ccf00ea class="submit">
-		<input data-v-5ccf00ea type="submit" value="±Û¾²±â">
+		<input data-v-5ccf00ea type="submit" value="ê¸€ì“°ê¸°">
 	</div>
+
+</div>
+</div>
 </form>
-</div>
-
-</div>
-
 <script>
 
 $(document).ready(function () {
 	$('#myRange').on('change', function () {
 		var value = $(this).val();
-		$('#limit').text(value + '¸í');
+		$('#limit').text(value + 'ëª…');
 	});
 
 });

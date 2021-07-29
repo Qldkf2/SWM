@@ -8,21 +8,37 @@
 <meta charset="UTF-8">
 <title>스윗미</title>
 
-<link rel="stylesheet" type="text/css" href="../../css/main.css">
-<link rel="stylesheet" type="text/css" href="../../css/header.css">
-<link rel="stylesheet" type="text/css" href="../../css/meeting/main.css">
-
-<link rel="stylesheet" type="text/css" href="../../css/meeting/9b1ec3ca087eb97f815a.css">
-<link rel="stylesheet" type="text/css" href="../../css/meeting/293ea01f8752947ab0a4.css">
 
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/meeting.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/meeting/meeting2.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>		
+		<script type="text/javascript">
 
+				function fn_insertBoard(){
+					if($("#party_title").val() == null || $("#party_title").val() == ""){
+						alert("제목을 입력해 주세요!");
+						$("#party_title").focus();
+						return false;
+					}
+					
+					if($("#party_content").val() == null || $("#party_content").val() == ""){
+						alert("내용을 입력해 주세요!");
+						$("#party_content").focus();
+						return false;
+					}		
+					return true;
+				}
+					
+				
+		</script>		
 
 </head>
 <body>
-<c:import url="/common/header.jsp" />
-   
-   
+<c:import url="../common/header.jsp" />
+
 	<section class="tab">
 	<div class="wrap">
      <a href="/subject/list" class="active"><span class="text">전체</span></a>
@@ -43,53 +59,42 @@
 	        모집중
 	     </p> 
 	     
-	     <h1 data-v-7c8cb348="">같이 독서습관 기르기</h1>     
+	     <h1 data-v-7c8cb348="">${article.meeting_title}</h1>     
 		     <p data-v-7c8cb348="" class="info">
-			     <span data-v-7c8cb348="">07/14 10:36</span> 
+			     <span data-v-7c8cb348="">${article.meeting_date }</span> 
 			     <span data-v-7c8cb348="" class="viewcount">5</span> 
 		     </p>
 
 	
-     
 			<section data-v-7c8cb348="" class="tab" style="top: 0px;">
 			    <div data-v-7c8cb348="" class="wrap">
-			      <a data-v-7c8cb348="" href="view.jsp" ><span class="text">모집 공고</span></a>
-			      <a data-v-7c8cb348="" href="board.jsp"  class="active"><span class="text">게시판</span></a>
+				      <a data-v-7c8cb348="" href="/meeting/meetingDetail?meeting_no=${article.meeting_no}" ><span class="text">모집 공고</span></a>
+			      <a data-v-7c8cb348="" href="/meeting/meetingBoard?meeting_no=${article.meeting_no}"  class="active"><span class="text">게시판</span></a>
 			    </div>
 			  </section>
 
 			
 			
 			<div data-v-7c8cb348="">
-			<form data-v-7c8cb348="" class="container">
+			<form data-v-7c8cb348=""class="container"  action="/meeting/meetingBoardInsert" method="post" enctype="multipart/form-data" onsubmit="return fn_insertBoard()">
 			
-			              
- 
-			<p data-v-7c8cb348="" class="title"><input data-v-7c8cb348="" type="text" placeholder="제목"></p> 
-			<p data-v-7c8cb348="" class="text"><textarea data-v-7c8cb348="" placeholder="내용을 입력하세요. "></textarea></p> 
-			<p data-v-7c8cb348="" class="file"><input data-v-7c8cb348="" type="file" ><label for="file">파일업로드</label> </p> 
+			<input data-v-7c8cb348="" type="hidden" name="meeting_board_writer" id="party_writer" value="${member.userNo }">	
+ 			<input data-v-7c8cb348="" type="hidden" name="meeting_no" id="meeting_no" value="${article.meeting_no}">	
+			<p data-v-7c8cb348="" class="title"><input data-v-7c8cb348="" type="text" name="meeting_board_title" id="party_title" placeholder="제목"></p> 
+			<p data-v-7c8cb348="" class="text"><textarea data-v-7c8cb348="" name="meeting_board_content" id="party_content" placeholder="내용을 입력하세요. "></textarea></p> 
+			<p data-v-7c8cb348="" class="file"><input data-v-7c8cb348="" type="file" name="file1" > </p>  
 			
 			<div data-v-7c8cb348="" class="submit">			
 				<input data-v-7c8cb348="" type="submit" value="글쓰기">
 			</div>
 			</form>
-						
+			
 			</div>
-	
-
-	     	
-	     	
-     	</article>
-     	
-     	
+	   	</article>
      </div>
-     	
 
- 
 	<div data-v-7c8cb348="" class="container">    		
-
-		  <a data-v-7c8cb348="" href="board.jsp"  class="floating write"> 목록</a> <!---->      	
+		  <a data-v-7c8cb348="" href="/meeting/meetingBoard=${article.meeting_no}"  class="floating write"> 목록</a> <!---->      	
 	</div>
-
 </body>
 </html>

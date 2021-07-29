@@ -314,7 +314,7 @@
 				</div>
 			</section>
 			<section class="leftside">
-			<%-- <c:if test="#{member} != null"></c:if> --%>
+			
 				<div class="loggedout">
 					<p class="introduction">
 						관심있는 스터디를 pick 하고<br> 다른 학생들과 교류해보세요!

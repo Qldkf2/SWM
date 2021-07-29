@@ -1,7 +1,7 @@
 package com.ez.swm.login.vo;
 
 public class SignUpForm {
-
+	
 	private String userId;
 	private String password;
 	private String re_password;
