@@ -1,19 +1,25 @@
 package com.ez.swm.login.vo;
 
 public class SignUpForm {
-	
+
+	private int userNo;
 	private String userId;
 	private String password;
-	private String re_password;
+	private String re_password; //-> 스크립트에서 판별할 예정
 	private String userName;
-	private String nickname;
-	private String jumin1;
-	private String jumin2;
+	private String nickName;
+	private String email;
 	private String phone1;
 	private String phone2;
 	private String phone3;
 	
-
+	
+	public int getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -32,29 +38,24 @@ public class SignUpForm {
 	public void setRe_password(String re_password) {
 		this.re_password = re_password;
 	}
+	
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getNickName() {
+		return nickName;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
-	public String getJumin1() {
-		return jumin1;
+	public String getEmail() {
+		return email;
 	}
-	public void setJumin1(String jumin1) {
-		this.jumin1 = jumin1;
-	}
-	public String getJumin2() {
-		return jumin2;
-	}
-	public void setJumin2(String jumin2) {
-		this.jumin2 = jumin2;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getPhone1() {
 		return phone1;
@@ -74,17 +75,6 @@ public class SignUpForm {
 	public void setPhone3(String phone3) {
 		this.phone3 = phone3;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "JoinForm [userId=" + userId + ", password=" + password + ", re_password=" + re_password + ", userName="
-				+ userName + ", nickname=" + nickname + ", jumin1=" + jumin1 + ", jumin2=" + jumin2 + ", phone1="
-				+ phone1 + ", phone2=" + phone2 + ", phone3=" + phone3 + "]";
-	}
-	
-	
-	
 	
 	
 	

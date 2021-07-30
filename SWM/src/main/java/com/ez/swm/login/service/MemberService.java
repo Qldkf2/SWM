@@ -1,7 +1,5 @@
 package com.ez.swm.login.service;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +15,39 @@ public class MemberService {
 	@Autowired
 	MemberDao memberDao;
 	
-	public boolean signUpMember(SignUpForm member) {
-		return memberDao.signUpMember(member) > 0; 
+	public Member memberLogin(LoginForm member) throws Exception {
+		return memberDao.memberLogin(member);
 	}
 
-	public Member loginMember(LoginForm member) {
-		return memberDao.loginMember(member);
+
+	public int insertMember(SignUpForm member) throws Exception {
+		return memberDao.insertMember(member);
 	}
+
+    public Member findId(Member member) throws Exception { 
+    	return memberDao.findId(member); }
+    
+  	 
+    public Member findPw(Member member) throws Exception {
+    	return memberDao.findPw(member); 
+    	}
+    
+    
+    public void updateMemberByUser(Member member) throws Exception {
+    	memberDao.updateMemberByUser(member);
+    
+    }
+    
+    public void updateMemberByAdmin(Member member) throws Exception {
+    	memberDao.updateMemberByAdmin(member); 
+    	}
+	  
+	public void deleteMember(Member member) throws Exception {
+		 memberDao.deleteMember(member);
+	  
+	  }
+	 
+	
+	
+	
 }

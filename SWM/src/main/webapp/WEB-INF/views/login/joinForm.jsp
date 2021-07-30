@@ -12,77 +12,92 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/login/joinForm.css">
 <%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css"> --%>
     
+    <script type="text/javascript">
+
+    
+    </script> 
 </head>
 <body>
 	 <c:import url="../common/header.jsp"/> 
-   <!--  <header>
-        <div class="header_logo" style="width:15%;margin-top:50px;">
-        </div>
-    </header> -->
-    <form action="/signUpMember" method="POST"> 
-    <div class="form-wrap">
-        <div id="register">
-            <p style="font-size:35px;">Register</p>
-        </div> 
-        <div class="secondmenu">
-            <div><p id="join">회원가입 
-            <font size="0.2" color="#818181"> &nbsp;* 모든 항목을 입력해주셔야 가입이 가능합니다</font></p></div>
-            
-            <div id="menu2">
-                <p>아이디</p>
-                <p>비밀번호</p>
-                <p>비밀번호 확인</p>
-                <p>이름</p>
-                <p>닉네임</p>
-                <p>주민등록번호</p>
-                <p>휴대전화</p>
-            </div>
-            <div id="form2"> 
-                <form> 
-                    <p><input type="text" name="userId"> &nbsp; <input type="button" value="중복확인" /> &nbsp; (나중에 유효성 검사 규칙 적기)</p>
-                    <p><input type="password" name="password" /> &nbsp; (유효성 검사 규칙 적기)</p>
-                    <p> <input type="password" name="re_password" /></p>
-                    <p><input type="text" name="userName" /> </p>
-                    <p><input type="text" name="nickname" /> &nbsp; <input type="button" value="중복확인"/> </p>
-                    <p><input type="text" name="jumin1" size="6" />  -  <input type="text" name="jumin2" size="6"/> </p> 
-                    <p>
-                    <input type="text" name="Phone1" size="2" placeholder="010">
-                    - 
-                    <input type="text" name="Phone2" size="3" />
-                    -
-                    <input type="text" name="Phone3" size="3" />
-                	</p>
-                </form>
-            </div>
-        </div>
-        
-        <br/><br/>
-        <!-- 마케팅 동의 그냥 했다는것만 보여줄려면, 나중에 컬럼 추가해야함 -->
-        <div class="checkbox_wrap mar27">
-			        <input type="checkbox" id="marketing" name="marketing" class="agree_chk">
-			        <label for="marketing">[선택]마케팅 목적 개인정보 수집 및 이용에 대한 동의</label>
-							<ul class="explan_txt">
-								<li><span class="red_txt">항목 : 성별, 생년월일</span></li>
-								<li>고객님께서는 위의 개인정보 및 회원정보 수정 등을 통해 추가로 수집하는 개인정보에<br/>
-									대해 동의하지 않거나 개인정보를 기재하지 않음으로써 거부하실 수 있습니다.<br/>
-									다만 이때 회원 대상 서비스가 제한될 수 있습니다.
-								</li>
-							</ul>
-			      </div>
-        	<br/><br/><br/><br/>
-        	<div class="btn_wrap">
-				<button type="reset">취소</button> <!-- 나중에 넘어갈 로그인 화면 페이지 a태그로 연결! -->
-				<button type="submit">다음</button> <!-- 나중에 넘어갈 로그인 화면 페이지 a태그로 연결! -->
-			</div>
-        <br />
-        <br />
-    </div>
-    </form>
-    <script>
-		var result = '${error}';
-		if(result != ''){
-			alert(result);
-		}
-	</script>
+	 
+	<form data-v-08798b35="" class="container" action="/joinForm" method="POST">
+		<section data-v-08798b35="">
+			<h1 data-v-08798b35="">회원가입</h1>
+			 <p data-v-08798b35="" class="description">
+        에브리타임과 캠퍼스픽은<br data-v-08798b35="">
+        전국 396개 캠퍼스, 520만 명의 가입자를 보유한<br data-v-08798b35=""> <strong data-v-08798b35="">국내 1위 대학생 서비스</strong>입니다.
+      </p> <p data-v-08798b35="" class="description">
+        대학생의 대학 생활에 가치를 더하고자 하는<br data-v-08798b35="">
+        다양한 제휴 문의를 환영합니다.
+      </p> <p data-v-08798b35="" class="rules">
+        * 표시는 필수 기입 항목입니다. </p> 
+    	 <div data-v-08798b35="" class="input">
+    	 	<div data-v-08798b35="" class="label">
+    	 		<label data-v-08798b35="">아이디 *</label>
+    	 	</div>
+    	 		 <input data-v-08798b35="" type="text" name="userId" maxlength="255" autocomplete="off" class="medium">
+    	 </div> 
+    	 <div data-v-08798b35="" class="input">
+    	 	<div data-v-08798b35="" class="label">
+    	 		<label data-v-08798b35="">비밀번호 *</label>
+    	 	</div> 
+    	 		<input data-v-08798b35="" type="password" name="password" maxlength="45" autocomplete="off" class="medium">
+    	 	</div> 
+    	 <div data-v-08798b35="" class="input">
+    	 	<div data-v-08798b35="" class="label">
+    	 		<label data-v-08798b35="">비밀번호 재확인 *</label>
+    	 	</div> 
+    	 		<input data-v-08798b35="" type="password" name="re_password" maxlength="45" autocomplete="off" class="medium">
+    	 	</div> 
+    	 		<div data-v-08798b35="" class="input">
+    	 			<div data-v-08798b35="" class="label">
+    	 				<label data-v-08798b35="">이름</label>
+    	 			</div> 
+    	 				<input data-v-08798b35="" type="text" name="userName" maxlength="45" autocomplete="off" class="medium">
+    	 			</div>
+    	 			<div data-v-08798b35="" class="input">
+    	 			<div data-v-08798b35="" class="label">
+    	 				<label data-v-08798b35="">닉네임</label>
+    	 			</div> 
+    	 				<input data-v-08798b35="" type="text" name="nickName" maxlength="45" autocomplete="off" class="medium">
+    	 			</div> 
+    	 			<div data-v-08798b35="" class="input">
+    	 				<div data-v-08798b35="" class="label">
+    	 					<label data-v-08798b35="">전화번호 *</label>
+    	 				</div> 
+    	 					<input data-v-08798b35="" type="text" name="phone1" maxlength="4" autocomplete="off" class="small" value="010" readonly> 
+    	 					<span data-v-08798b35="" class="delimiter">-</span> 
+    	 					<input data-v-08798b35="" type="text" name="phone2" maxlength="4" autocomplete="off" class="small"> 
+    	 					<span data-v-08798b35="" class="delimiter">-</span> 
+    	 					<input data-v-08798b35="" type="text" name="phone3" maxlength="4" autocomplete="off" class="small">
+    	 			</div> 
+    	 			<div data-v-08798b35="" class="input">
+    	 				<div data-v-08798b35="" class="label">
+    	 					<label data-v-08798b35="">이메일 *</label>
+    	 				</div> 
+    	 					<input data-v-08798b35="" type="email" name="email" maxlength="255" autocomplete="off" class="large">
+    	 				</div> 
+    	 				 
+    	 					
+    					
+           <h2 data-v-08798b35="">개인정보 수집 및 이용</h2> 	
+           		<div data-v-08798b35="" class="agreement">
+           			<label data-v-08798b35="">
+           				<input data-v-08798b35="" type="checkbox"> 
+           					<figure data-v-08798b35="" class="checkbox"></figure> 
+           						<span data-v-08798b35="">개인정보 수집 및 이용 동의 (필수)</span>
+           			</label> 
+           			<div data-v-08798b35="" class="text">
+           				<ul data-v-08798b35="">
+           					<li data-v-08798b35="">문의하신 내용에 대한 원활한 상담을 위해, 업체 정보(이름, 홈페이지, 사업자등록증), 담당자 정보(이름, 직책, 전화번호, 이메일)를 수집합니다.</li> 
+           					<li data-v-08798b35="">수집된 개인정보는 3개월간 보관되며, 이후 즉시 파기됩니다.</li> 
+           					<li data-v-08798b35="">수집된 개인정보는 업무 처리를 위해, 파트너사에 전달될 수 있습니다.</li> 
+           					<li data-v-08798b35="">자세한 내용은 개인정보처리방침을 참고하시기 바랍니다.</li>
+           				</ul>
+           			</div>
+           		</div> 
+           			<input data-v-08798b35="" type="submit" value="다음">
+           		</section>
+           	</form>
 </body>
 </html>

@@ -20,7 +20,7 @@
             <div><p id="join"><font size="2px">고객님의 정보와 일치하는 비밀번호 입니다.</font></div>
             
             <div id="menu2">
-                <p>&nbsp;비밀번호 : <b>가져올 비밀번호</b> </p>
+                <p>&nbsp;비밀번호 : <b>${findPw.password }</b> </p>
             </div>
         </div>
         <div id="notice">

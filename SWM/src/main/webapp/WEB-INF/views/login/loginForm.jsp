@@ -14,7 +14,7 @@
 
   <c:import url="../common/header.jsp"></c:import>
 
-  <form action="/login" id="container" method="post" data-redirect="">
+  <form action="/loginForm" id="container" method="post" data-redirect="">
     <div class="introduction">
       <div class="wrap">
         <h1>로그인</h1>
@@ -27,7 +27,7 @@
         <input type="password" name="password" maxlength="20" class="text" placeholder="비밀번호">
         <input type="submit" value="로그인" class="submit">
         <hr>
-        <a href="https://everytime.kr/find" class="find">아이디/비밀번호 찾기</a>
+        <a href="/findId" class="find">아이디/비밀번호 찾기</a>
         <hr>
         <a href="https://everytime.kr/register" class="register">
           <span>스윗미 계정이 없으신가요?</span>

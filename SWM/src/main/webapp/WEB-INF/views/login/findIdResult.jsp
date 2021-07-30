@@ -20,7 +20,7 @@
             <div><p id="join"><font size="2px">고객님의 정보와 일치하는 아이디 입니다.</font></div>
             
             <div id="menu2">
-                <p>&nbsp;아이디 : <b>가져올 아이디</b> </p>
+                <p>&nbsp;아이디 : <b>${findId.userId}</b> </p>
             </div>
         </div>
         <div id="notice">

@@ -85,6 +85,11 @@ public class MeetingService {
 		return meetingDao.getPartyBoardComment(party_no);
 	}
 
+	public int meetingUpdate(int meeting_no) {
+		
+		return meetingDao.meetingUpdate(meeting_no);
+	}
+
 
 
 

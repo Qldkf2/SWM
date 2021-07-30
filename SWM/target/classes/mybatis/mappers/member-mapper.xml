@@ -1,19 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Member">
+<mapper namespace="member">
 
-	<insert id="signUpMember" parameterType="com.ez.swm.login.vo.SignUpForm" >
-		INSERT INTO MEMBER VALUES(
-			SEQ_MEM.NEXTVAl, #{userId}, #{userName}, #{nickname}, 
-			#{password}, #{jumin1} || '-' || #{jumin2}, #{phone1} || '-' || #{phone2} || '-' || #{phone3} , DEFAULT
-		) 
-	</insert>
-	
-	<select id="loginMember" parameterType="com.ez.swm.login.vo.SignUpForm" resultType="com.ez.swm.login.vo.Member" >
+
+	<!-- 회원 정보 가져오기 / 관리자 페이지에서 쓸, 회원 멤버 리스트에 띄울 항목 값도 여기서 가져와 
+										 상세 보기 데이터도 여기서 가져와-->
+	<select id="selectOneMember" parameterType="com.ez.swm.login.vo.Member" resultType="com.ez.swm.login.vo.Member">
 		SELECT * 
 		FROM MEMBER 
-		WHERE USERID = #{userId} AND PASSWORD = #{password}
+		WHERE USERNID = #{USERID}
 	</select>
-
+	
+	<!-- 회원 정보 리스트 가져오기 --> <!-- 얘 일단 필요한지 모르겠음 -->
+	<select id="selectMemberList" parameterType="com.ez.swm.login.vo.Member" resultType="com.ez.swm.login.vo.Member">
+		SELECT USRENO, USERID, USERNAME, NICKNAME, PASSWORD, JUMIN, PHONE
+		FROM MEMBER
+		ORDER BY USERNO DESC
+	</select>
+	
+	<!-- 회원 가입 -->
+	<insert id="insertMember" parameterType="com.ez.swm.login.vo.SignUpForm" >
+		insert into member(userNo, userId, userName, nickName, password, email, phone1, phone2, phone3)
+		values(seq_mem.nextval, #{userId}, #{userName}, #{nickName}, #{password}, #{email}, #{phone1}, #{phone2}, #{phone3} )
+	</insert>       
+	
+	<!-- 로그인 확인 -->
+	<select id="memberLogin" parameterType="com.ez.swm.login.vo.LoginForm" resultType="com.ez.swm.login.vo.Member">
+		select * 
+		from member
+		where userId = #{userId} and password = #{password}
+	</select>
+	
+	<!-- 아이디 찾기 (이름, 이메일 사용) -->
+	<select id="findId" parameterType="com.ez.swm.login.vo.Member" resultType="com.ez.swm.login.vo.Member">
+		select userId
+		from member
+		where userName = #{userName} and email = #{email}
+	</select>
+	
+	<!-- 비밀번호 찾기 (이름, 아이디, 이메일 사용) -->
+	<select id="findPw" parameterType="com.ez.swm.login.vo.Member" resultType="com.ez.swm.login.vo.Member">
+		select password
+		from member
+		where userName = #{userName} and userId = #{userId} and email = #{email}
+	</select>
+	
+	<!-- 회원 정보 수정 (사용자) -->
+	<update id="updateMemberByUser" parameterType="com.ez.swm.login.vo.Member">
+		UPDATE MEMBER 
+		SET NICKNAME = #{nickName}, PASSWORD = #{password}, PHONE2 = #{phone2}, PHONE3 = #{phone3}
+		WHERE USERNO = #{userNo}
+	</update>
+	
+	<!-- 회원 정보 수정 (관리자) -->
+	<update id="updateMemberByAdmin" parameterType="com.ez.swm.login.vo.Member">
+		UPDATE MEMBER
+		SET USERID = #{userId}, USERNAME = #{userName}, NICKNAME= #{nickName}, PASSWORD = #{password}, PHONE2 = #{phone2}, 	PHONE3 = #{phone3}
+		WHERE USERNO = #{userNo}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<update id="deleteMember" parameterType="com.ez.swm.login.vo.Member">
+		UPDATE MEMBER 
+		SET STATUS = 'Y'
+		WHERE USERID = #{userId} and PASSWORD = #{password}
+	</update>	
 </mapper>

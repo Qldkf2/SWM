@@ -314,15 +314,26 @@
 				</div>
 			</section>
 			<section class="leftside">
-			
+				<c:choose>
+				<c:when test="${member==null}">
 				<div class="loggedout">
 					<p class="introduction">
 						관심있는 스터디를 pick 하고<br> 다른 학생들과 교류해보세요!
 					</p>
 					<a href="/loginForm" class="button login"> 로그인 </a>
-					<a href="/sign_up" class="button register"> 회원가입 </a>
+					<a href="/joinForm" class="button register"> 회원가입 </a>
 					<hr>
 				</div>
+				</c:when>
+				<c:otherwise>
+					<div data-v-f077870a="" class="logged"><img data-v-f077870a="" src="https://cf-epi.campuspick.com/0.png" class="picture">
+					 	<span data-v-f077870a="" class="nickname">${member.nickName}</span> 
+					 		<a data-v-f077870a="" href="/myPage" class="button"> 마이페이지 </a> 
+					 		<a data-v-f077870a="" href="/logout" class="button"> 로그아웃 </a> 
+					 	<hr data-v-f077870a="">
+					 </div>
+				</c:otherwise>
+				</c:choose>
 				<!---->
 				<h2>인기 급상승 글</h2>
 				<ol class="communities">

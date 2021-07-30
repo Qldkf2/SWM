@@ -68,11 +68,23 @@
      
      
     <!-- 	      <a data-v-7c8cb348=""  href="/" class="floating comment" target='_blank'>가입하기</a>  	  --> 	
- 
-	<div data-v-7c8cb348="" class="container">    		
-		  <a data-v-7c8cb348="" href="/meeting"  class="floating comment">목록</a> <!---->      	
-	      <a data-v-7c8cb348=""  class="floating comment" id="modal">가입신청</a> <!---->  	 
-	</div >
+ 	
+ 	<c:choose>
+				<c:when test="${member.userNo == article.meeting_leader }">
+					<div data-v-7c8cb348="" class="container">    		
+		 				 <a data-v-7c8cb348="" href="/meeting"  class="floating comment">목록</a> <!---->      	
+					     <a data-v-7c8cb348=""  class="floating comment" id="modal">신청확인</a> <!---->
+					     <a data-v-7c8cb348="" href="/meeting/meetingUpdateForm?meeting_no=${article.meeting_no}"  class="floating comment" id="modal">수정하기</a>
+					     <a data-v-7c8cb348=""  class="floating comment" id="modal">삭제하기</a>
+	                </div >
+				</c:when>
+				<c:otherwise>
+				<div data-v-7c8cb348="" class="container">    		
+		 			 <a data-v-7c8cb348="" href="/meeting"  class="floating comment">목록</a> <!---->      	
+	     			 <a data-v-7c8cb348=""  class="floating comment" id="modal">가입신청</a> <!---->
+				</div >
+				</c:otherwise>
+				</c:choose>
 <div class="modal hidden">
   <div class="bg"></div>
 

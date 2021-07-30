@@ -70,12 +70,31 @@ public class MeetingController {
 		@RequestMapping(value="/meeting/meetingDetail")
 		public ModelAndView meetingDetail(@RequestParam("meeting_no") int meeting_no) throws Exception {
 			ModelAndView mv=  new ModelAndView("meeting/meetingDetail");
-			
 
 			MeetingDetail meetingDetail = meetingService.getMeetingArticle(meeting_no);
 			mv.addObject("article",meetingDetail);
 			return mv;
 	}
+	
+	// 모임 수정폼으로 이동s
+	/*
+	 * @RequestMapping(value="/meeting/meetingUpdateForm") public ModelAndView
+	 * meetingUpdateForm(@RequestParam("meeting_no") int meeting_no) throws
+	 * Exception { ModelAndView mav = new ModelAndView(); MeetingList m =
+	 * meetingService.
+	 * 
+	 * 
+	 * return mav; }
+	 */
+	// 모임 수정하기
+		@RequestMapping(value="/meeting/meetingUpdate")
+		public ModelAndView meetingUpdate(@RequestParam("meeting_no") int meeting_no) throws Exception {
+			ModelAndView mav=  new ModelAndView();
+			
+			int result = meetingService.meetingUpdate(meeting_no);
+			
+			return mav;
+		}
 	
 	// 모임 내 게시판
 		@RequestMapping(value="/meeting/meetingBoard")

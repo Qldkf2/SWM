@@ -70,4 +70,9 @@ public class MeetingDao {
 	public MeetingBoard getPartyBoardArticle(HashMap<String, Object> valueMap) {
 		return sqlSession.selectOne("Meeting.getPartyBoardArticle", valueMap);
 	}
+
+	public int meetingUpdate(int meeting_no) {
+		
+		return sqlSession.update("Meeting.meetingUpdate", meeting_no);
+	}
 }

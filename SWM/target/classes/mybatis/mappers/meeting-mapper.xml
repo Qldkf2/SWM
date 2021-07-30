@@ -130,8 +130,14 @@
       ]]>
    
    </select>
-	
-	
-	
+   
+   	<update id="meetingUpdate" parameterType="com.ez.swm.meeting.vo.MeetingList">
+		UPDATE MEETING 
+		SET MEETING_AGE = #{meeting_age}, MEETING_TITLE = #{meeting_title}, MEETING_CONTENT = #{meeting_content},
+			MEETING_ADDRESS = #{meeting_address}, MEETING_SUBJECT = #{meeting_subject}, MEETING_LIMIT = #{meeting_limit}
+		WHERE MEETING_NO = #{meeting_no}
+	</update>
+
+
 	
 </mapper>
