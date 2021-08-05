@@ -54,7 +54,15 @@ public class MeetingWrite {
 	public void setMeeting_limit(int meeting_limit) {
 		this.meeting_limit = meeting_limit;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "MeetingWrite [meeting_leader=" + meeting_leader + ", meeting_age=" + meeting_age + ", meeting_subject="
+				+ meeting_subject + ", meeting_address=" + meeting_address + ", meeting_limit=" + meeting_limit
+				+ ", meeting_title=" + meeting_title + ", meeting_content=" + meeting_content + "]";
+	}
+	
+	
 	
 	
 	

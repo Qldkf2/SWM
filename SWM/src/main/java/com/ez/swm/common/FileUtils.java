@@ -11,7 +11,9 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.ez.swm.meeting.vo.MeetingBoard;
+import com.ez.swm.meeting.vo.MeetingBoardModify;
 
 
 @Component("fileUtils")
@@ -58,7 +60,51 @@ public class FileUtils {
 				
 			}
 		}
-		System.out.println("유틸즈 : " + list);
+		// System.out.println("유틸즈 : " + list);
+		
+		return list;
+	}
+	
+public List<Map<String, Object>> parseUpdateFileInfo(MeetingBoardModify meetingBoardModify, MultipartHttpServletRequest request) throws Exception{
+		
+		
+		Iterator<String> iterator = request.getFileNames();
+	
+		MultipartFile multipartFile=null;
+		String originalFileName = null; 
+		String originalFileExtension = null;
+		String storedFileName = null;
+
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>()	;
+		Map<String,Object> listMap = null;
+		
+		int  party_no = meetingBoardModify.getMeeting_board_no();
+
+		File file = new File(filePath);
+		
+		while(iterator.hasNext()) {
+			multipartFile=request.getFile(iterator.next());
+
+			if(multipartFile.isEmpty()==false) {
+
+				originalFileName = multipartFile.getOriginalFilename();
+
+				originalFileExtension=originalFileName.substring(originalFileName.lastIndexOf(".")); 
+				storedFileName = getRandomString() + originalFileExtension;
+
+				file=new File(filePath+storedFileName);
+				multipartFile.transferTo(file);
+				
+				listMap = new HashMap<String,Object>(); 
+				listMap.put("MEETING_BOARD_NO", party_no); 
+				listMap.put("ORIGINAL_FILE_NAME", originalFileName); 
+				listMap.put("STORED_FILE_NAME", storedFileName); 
+				listMap.put("FILE_SIZE", multipartFile.getSize()); 
+				list.add(listMap);
+				
+			}
+		}
+		// System.out.println("유틸즈 : " + list);
 		
 		return list;
 	}

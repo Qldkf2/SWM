@@ -80,10 +80,11 @@
 					</div>
 						<hr style="background:#d6d6d6; height:1px;">				
 					<p data-v-7c8cb348="" class="text"><textarea data-v-7c8cb348="" placeholder="댓글을 입력하세요. "></textarea></p> 
-					<input data-v-7c8cb348="" type="hidden"  name="meeting_board_no"value="${meeting_board_no}">
+					<input data-v-7c8cb348="" type="hidden" class="meeting_board_no" name="meeting_board_no"value="${partyArticle.meeting_board_no}">
 								
 				</form>
-
+			<input type="hidden" class="meeting_no" value="${article.meeting_no}">
+			
 	     	<hr style="background:#d6d6d6; height:1px;">
      	</article>
      	
@@ -91,7 +92,6 @@
 
    		<c:forEach items="${comment}" var="row">	       
 		
-
 			<c:choose>
 			<c:when test="${row.party_comment_level == 1}">
 				
@@ -128,14 +128,46 @@
 		</div>
 		
      </div>
-     	
-	
-	<div data-v-7c8cb348="" class="container">    	
+     	<c:choose>
+			<c:when test="${member.userNo == partyArticle.meeting_board_writer}">
+			<div data-v-7c8cb348="" class="container">    	
+				  <a data-v-7c8cb348="" href="/meeting/meetingBoard?meeting_no=${article.meeting_no}"  class="floating write">목록</a> <!---->      	
+				  <a data-v-7c8cb348="" href="/meeting/meetingBoardModifyForm?meeting_board_no=${partyArticle.meeting_board_no}&meeting_no=${article.meeting_no}"  class="floating write">수정하기</a> <!---->      	
+				  <a data-v-7c8cb348="" id="meetingBoardDelete"  class="floating write">삭제하기</a> <!---->      	
+		    </div>
+			</c:when>
+			<c:otherwise>
+			
+			<div data-v-7c8cb348="" class="container">    	
+				  <a data-v-7c8cb348="" href="/meeting/meetingBoard?meeting_no=${article.meeting_no}"  class="floating write">목록</a> <!---->
+			</div>
+			</c:otherwise>
+			</c:choose>
+			
 
-		  <a data-v-7c8cb348="" href="/meeting/meetingBoard?meeting_no=${article.meeting_no}"  class="floating write">목록</a> <!---->      	
-		  <a data-v-7c8cb348="" href="/meeting/meetingBoardModify"  class="floating write">수정</a> <!---->      	
-		  <a data-v-7c8cb348="" href="/meeting/meetingBoardDelete"  class="floating write">삭제</a> <!---->      	
-	</div>
+<script>
+window.onload = function() {
+	var meeting_no = ${article.meeting_no};
+	var meeting_board_no = ${partyArticle.meeting_board_no};
+	var meetingDelete = document.getElementById('meetingBoardDelete');
+		meetingDelete.addEventListener('click', function(){
+			if(confirm("삭제하시겠습니까 ?.?")) {
+				$.ajax({
+					url :"/meeting/meetingBoardDelete" ,
+					type : "POST" ,
+					data : {					
+						meeting_board_no : meeting_board_no
+					},
+					success :function() {
+						alert("삭제되었습니당");
+						location.href="/meeting/meetingBoardDetail?meeting_no="+meeting_no;
+					}
+				})
+			}
+		});
+};	
+
+</script>
 
 </body>
 </html>

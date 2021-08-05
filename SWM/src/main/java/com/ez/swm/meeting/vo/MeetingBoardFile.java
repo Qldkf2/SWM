@@ -47,6 +47,13 @@ public class MeetingBoardFile {
 	public void setDel_gb(String del_gb) {
 		this.del_gb = del_gb;
 	}
+
+	@Override
+	public String toString() {
+		return "MeetingBoardFile [idx=" + idx + ", meeting_board_no=" + meeting_board_no + ", original_file_name="
+				+ original_file_name + ", stored_file_name=" + stored_file_name + ", file_size=" + file_size
+				+ ", del_gb=" + del_gb + "]";
+	}
 	
 	
 	

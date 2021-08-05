@@ -101,19 +101,21 @@
      	</article>
 
      </div>
-	<div data-v-7c8cb348="" class="container">    		
-
-	      <a data-v-7c8cb348=""  class="floating comment" id="modal">가입신청</a>
-	</div>
-	
-
+     <c:choose>
+				<c:when test="${partyArticle.meeting_board_writer == article.meeting_leader }">
+			
+				</c:when>
+				<c:otherwise>
+				<div data-v-7c8cb348="" class="container">    		
+				      <a data-v-7c8cb348=""  class="floating comment" id="modal">가입신청</a>
+				</div>
+				</c:otherwise>
+				</c:choose>
+				
 <div class="modal hidden">
   <div class="bg"></div>
 
   <div class="modalBox">
-
-  
-
 	     		<form class="join_meeting">
 					<p class="text"><textarea placeholder="가입신청 글을 간단하게 써주세요! "></textarea></p> 
 					<div class="submit">			

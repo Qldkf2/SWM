@@ -20,7 +20,7 @@
 <link data-vue-meta="ssr" rel="preload" href="${pageContext.request.contextPath}/resources/js/meeting/348d9764bf4bb1ed9da9.js" as="script">
 </head>
 <body>
-1
+
 <c:import url="../common/header.jsp" />
 
 

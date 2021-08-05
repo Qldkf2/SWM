@@ -100,6 +100,9 @@ section.tab > div.wrap > a.active[data-v-7c8cb348] {
 	
 	
 	div.container div.comments div.comment[data-v-7c8cb348]{display:block;background-color:#fff}
+	div.container div.comments div.comment a[data-v-7c8cb348]{	cursor:pointer; display:inline-block;background-color:#fff }
+	
+	
 	
 	div.container div.comments div.comment.parent[data-v-7c8cb348]{margin-top:1px;padding:16px}div.container div.comments div.comment.child[data-v-7c8cb348]{padding:0 16px 16px 48px;background-image:url("/images/pages/study/comment.child.png");background-repeat:no-repeat;background-position:left 24px top;background-size:11px 11px}
 
@@ -257,7 +260,37 @@ form.container p.title[data-v-7c8cb348],form.container p.text, form.container p.
 	
 	
 
+	/*  ´ñ±Û*/
 	
+	
+div.container div.comments div.comment form.childForm[data-v-7c8cb348]{
+	padding-top:16px;background-color:#fff
+}
+ div.container div.comments div.comment form.childForm.hidden{
+          display: none;
+}
+
+ div.container div.comments div.comment form.childForm p.text textarea[data-v-7c8cb348]{
+padding-left:1%;	
+	margin:1px;width:95%;height:50px;line-height:24px;color:#292929;font-size:13px; resize: none;}
+
+ div.container div.comments div.comment form.childForm div.submit[data-v-7c8cb348]{
+ 	 text-align: right;
+ 	 margin-bottom: 10px;
+}
+
+ div.container div.comments div.comment form.childForm div.submit input[data-v-7c8cb348] {
+ 	display: inline;
+    width: 100px;
+    height: 40px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #0aafdf;
+   	border-radius: 5px;
+ }
+
 	div.container form.comment p.text textarea[data-v-7c8cb348]{
 	padding-left:1%;	
 	margin:1px;width:95%;height:80px;line-height:24px;color:#292929;font-size:13px; resize: none;}
@@ -280,7 +313,8 @@ form.container p.title[data-v-7c8cb348],form.container p.text, form.container p.
     font-weight: bold;
     text-align: center;
     background-color: #0aafdf;
-   	border-radius: 5px;}
+   	border-radius: 5px;
+   	}
    	
    	
    		
@@ -321,7 +355,6 @@ div.container div.comments div.comment p.profile span.delete[data-v-7c8cb348]{
 }
 
 
-
         div.modal {
           position: fixed;
           top: 0;
@@ -345,14 +378,24 @@ div.container div.comments div.comment p.profile span.delete[data-v-7c8cb348]{
           width: 500px;
           height: 180px;
           padding: 15px;
-             	border-radius: 5px;
+          border-radius: 5px;
         }
+
 
  div.modal div.modalBox p.text {
 	line-height:20px;word-wrap:break-word;color:#4c4c4c;font-size:14px;
 }
+ div.modal div.modalBox p.text textarea {
+    width: 100%;
+    height: 100px;
+ }
+ div.modal div.modalBox p.text span {
+	 font-size: 16px;
+    color: aqua;
 
-        div.modal.hidden {
+}
+   
+    div.modal.hidden {
           display: none;
         }
         
@@ -362,7 +405,7 @@ div.container div.comments div.comment p.profile span.delete[data-v-7c8cb348]{
   	
   	}      
         
-        	div.modal form.join_meeting p.text textarea{
+    div.modal form.join_meeting div.permitList{
 	
 	margin:1px;width:100%;height:100px;color:#292929;font-size:15px; resize: none;}
 	
@@ -386,3 +429,95 @@ div.container div.comments div.comment p.profile span.delete[data-v-7c8cb348]{
     background-color: #0aafdf;
    	border-radius: 5px;
    	}
+   	
+   	.modal-container {
+   	position : absolute;
+   	background : rgba(0,0,0,0.5);
+   	left: 0; right :0; top: 0; bottom:0;
+   	display : flex;
+   	justify-content : center;
+   	align-items : center;
+   	}
+/*    	    div.modal-container.hidden {
+          display: none;
+        }
+         */
+   	
+   	.modal-container div.bg2 {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+   	
+   	
+   	.my_modal {
+   		position:absolute;
+   		width : 600px;
+   		height: 500px;
+   		background:#fff
+   	}
+
+   	.list-table{
+    width:100%;
+    border-top: 1px solid #656565
+}
+	
+	.list-table th,
+	.list-table td{
+	    border-bottom:1px solid #d6d6d6
+	}
+
+.list-table th{
+    padding: 15px 0;
+    background:#f6f6f6;
+    font-size: 15px;
+    font-weight:600;
+    color: #292929;
+    text-align: center;
+}
+
+.list-table td{
+    padding:10px;
+    font-size:14px;
+    color: #4c4c4c;
+    text-align:center
+}
+
+.list-table .intro-td{
+    text-align:left;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap
+}
+
+.btn-wrap{
+    display:inline-block;
+    padding:0 12px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 3px;
+    background-color: #1dcdff;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 535px;
+    margin-top: 20px;
+}
+.basic-btn{
+    display:inline-block;
+    padding:0 12px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor:pointer; 
+}
+.basic-btn.add{
+    background-color: #ffcc1c;
+}
+
+.basic-btn.del{
+    background-color: #c62917;
+}

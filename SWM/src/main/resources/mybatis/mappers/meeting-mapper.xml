@@ -51,6 +51,14 @@
 		]]>
 	</select>
 	
+	<!-- 모임 가입하기 -->
+	<insert id="meetingPermit" parameterType="com.ez.swm.meeting.vo.MeetingPermit">
+		INSERT INTO MEETING_PERMIT VALUES(
+			#{meeting_no}, #{userNo}, #{aboutMe} , #{permit}
+		)
+		
+	</insert>
+	
 	<select id="getMeetingBoardList" resultType="com.ez.swm.meeting.vo.MeetingBoard" parameterType="int">
 		<![CDATA[	
 					SELECT 
@@ -103,7 +111,14 @@
 						)		
 			]]>
 		</insert>
-	
+	<!-- 모임 내 게시글 하나 불러오기 -->
+	<select id="getMeetingBoard" resultType="com.ez.swm.meeting.vo.MeetingBoardModify">
+		SELECT MEETING_BOARD_NO,  MEETING_NO, MEETING_BOARD_WRITER, MEETING_BOARD_TITLE, MEETING_BOARD_CONTENT , 
+			   MEETING_BOARD_DATE, MEETING_BOARD_HIT
+		FROM MEETING_BOARD
+		WHERE MEETING_BOARD_NO = #{meeting_board_no}
+
+	</select>
 		<select id="getPartyBoardComment" resultType="com.ez.swm.meeting.vo.MeetingBoardComment" parameterType="int">
 		<![CDATA[	
 				SELECT 
@@ -124,20 +139,51 @@
    <select id="getFileList" parameterType="int" resultType="com.ez.swm.meeting.vo.MeetingBoardFile" >
       <![CDATA[
          SELECT
-            IDX, ORIGINAL_FILE_NAME, ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+            IDX,MEETING_BOARD_NO, STORED_FILE_NAME, ORIGINAL_FILE_NAME, ROUND(FILE_SIZE/1024,1) AS FILE_SIZE , DEL_GB
          FROM MEETING_BOARD_FILE
          WHERE MEETING_BOARD_NO = #{meeting_board_no} and DEL_GB = 'N'
       ]]>
    
    </select>
    
-   	<update id="meetingUpdate" parameterType="com.ez.swm.meeting.vo.MeetingList">
+   <select id="getMeetingOne" resultType="com.ez.swm.meeting.vo.Meeting"  parameterType="int">
+		<![CDATA[	
+			SELECT *
+			FROM MEETING
+			WHERE MEETING_NO = #{meeting_no}
+			
+		]]>
+	</select>
+   
+   	<update id="meetingUpdate" parameterType="com.ez.swm.meeting.vo.MeetingUpdate">
 		UPDATE MEETING 
 		SET MEETING_AGE = #{meeting_age}, MEETING_TITLE = #{meeting_title}, MEETING_CONTENT = #{meeting_content},
 			MEETING_ADDRESS = #{meeting_address}, MEETING_SUBJECT = #{meeting_subject}, MEETING_LIMIT = #{meeting_limit}
 		WHERE MEETING_NO = #{meeting_no}
 	</update>
-
-
 	
+	<delete id="meetingDelete" parameterType="int" >
+		DELETE FROM MEETING
+		WHERE MEETING_NO = #{meeting_no}
+	</delete>
+
+	<!-- 모임 내 게시글 수정하기 -->
+	<update id="meetingBoardModify" parameterType="com.ez.swm.meeting.vo.MeetingBoardModify">
+		UPDATE MEETING_BOARD 
+		SET MEETING_BOARD_TITLE = #{meeting_board_title}, MEETING_BOARD_CONTENT = #{meeting_board_content}
+		WHERE MEETING_BOARD_NO = #{meeting_board_no}
+	</update>
+	
+	<!-- 모임 내 게시글 삭제하기 -->
+	<delete id="meetingBoardDelete" parameterType="int">
+		DELETE FROM MEETING_BOARD
+		WHERE MEETING_BOARD_NO = #{meeting_board_no}
+	</delete>
+	<!-- 신청한 사람들 리스트 불러오긴 -->
+	<select id="meetingPermitList" resultType="com.ez.swm.meeting.vo.MeetingPermitList">
+		SELECT P.MEETING_NO,P.USERNO, M.NICKNAME ,P.ABOUTME 
+		FROM MEETING_PERMIT P JOIN MEMBER M
+		ON P.USERNO = M.USERNO
+		WHERE MEETING_NO = #{meeting_no} AND PERMIT ='N'
+	</select>
 </mapper>

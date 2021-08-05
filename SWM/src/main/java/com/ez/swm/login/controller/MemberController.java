@@ -67,7 +67,7 @@ public class MemberController {
 			msg = "로그인 성공";
 			httpSession.setAttribute("member", m);
 			mav.addObject("member", m); 
-			System.out.println("회원 정보 : " + m.getNickName());
+			System.out.println("회원 정보 : " + m);
 				
 		} else {
 			msg = "로그인 실패";
@@ -111,7 +111,7 @@ public class MemberController {
 	  
 	  // 아이디, 이메일 일치하는 회원이 x -> 아이디 찾기 실패 
 	  if(idResult == null) {
-		 
+		
 		  return "/login/findID2"; 
 	  } else {
 		  model.addAttribute("findId", idResult); 

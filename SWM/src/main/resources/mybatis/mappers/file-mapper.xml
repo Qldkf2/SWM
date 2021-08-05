@@ -26,6 +26,25 @@
          ]]>
       </insert>
 	
-	   
+	<!-- 파일 수정 -->
+	 <update id="modifyFile" parameterType="hashmap">
+	 	UPDATE MEETING_BOARD_FILE 
+	 	INTO ORIGINAL_FILE_NAME = #{original_file_name}, STORED_FILE_NAME = #{stored_file_name},
+	 		 FILE_SIZE = #{file_size}
+	 	WHERE MEETING_BOARD_NO = #{meeting_board_no}
+	 </update>
+	 <!-- 파일 있는지 체크하기 -->
+	 <select id="fileCheck" parameterType="int" resultType="int">
+	 	 SELECT COUNT(*) 
+	 	 FROM MEETING_BOARD_FILE 
+	 	 WHERE IDX = #{idx}
+	 </select>
+	 
+	 <!-- 파일 수정 시 기존 파일 삭제 -->
+	 <delete id="deleteFile">
+		DELETE FROM MEETING_BOARD_FILE
+		WHERE IDX = #{idx}	 
+	 </delete>
+
 
 </mapper>
