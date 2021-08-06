@@ -186,4 +186,39 @@
 		ON P.USERNO = M.USERNO
 		WHERE MEETING_NO = #{meeting_no} AND PERMIT ='N'
 	</select>
+	
+	<!-- 신청한 사람 수락하기 -->
+	<update id="meetingPermitYes">
+		UPDATE MEETING_PERMIT
+		SET PERMIT = 'Y'
+		WHERE MEETING_NO = #{meeting_no} AND USERNO = #{userNo}
+	</update>
+	
+	<!-- 신청한 사람 거절하기 -->
+	<delete id="meetingPermitNo">
+		DELETE FROM MEETING_PERMIT
+		WHERE MEETING_NO = #{meeting_no} AND USERNO = #{userNo}
+	</delete>
+	
+	<!-- 모임 상세보기 시 가입상태 확인 -->
+	<select id="permitCheck" resultType="String">
+		SELECT PERMIT 
+		FROM MEETING_PERMIT
+		WHERE MEETING_NO =#{meeting_no}AND USERNO = #{userNo}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

@@ -19,6 +19,7 @@ import com.ez.swm.meeting.vo.MeetingDetail;
 import com.ez.swm.meeting.vo.MeetingList;
 import com.ez.swm.meeting.vo.MeetingPermit;
 import com.ez.swm.meeting.vo.MeetingPermitList;
+import com.ez.swm.meeting.vo.MeetingPermitYes;
 import com.ez.swm.meeting.vo.MeetingUpdate;
 import com.ez.swm.meeting.vo.MeetingWrite;
 
@@ -158,8 +159,17 @@ public class MeetingService {
 		return meetingDao.meetingPermitList(meeting_no);
 	}
 
-	public void meetingPermitYes(int meeting_no, int userNo) {
-		return meetingDao.meetingPermitYes(meeting_no,userNo);
+	public int meetingPermitYes(MeetingPermitYes mp) {
+		return meetingDao.meetingPermitYes(mp);
+	}
+
+	public int meetingPermitNo(MeetingPermitYes mp) {
+		return meetingDao.meetingPermitNo(mp);
+		
+	}
+
+	public String permitCheck(MeetingPermitYes mp) {
+		return meetingDao.permitCheck(mp);
 	}
 
 }

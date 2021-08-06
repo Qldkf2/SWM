@@ -6,8 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/header.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/header.css">
+
 </head>
 <body>
 		<header class="root">

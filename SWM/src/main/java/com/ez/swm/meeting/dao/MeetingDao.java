@@ -18,6 +18,7 @@ import com.ez.swm.meeting.vo.MeetingDetail;
 import com.ez.swm.meeting.vo.MeetingList;
 import com.ez.swm.meeting.vo.MeetingPermit;
 import com.ez.swm.meeting.vo.MeetingPermitList;
+import com.ez.swm.meeting.vo.MeetingPermitYes;
 import com.ez.swm.meeting.vo.MeetingUpdate;
 import com.ez.swm.meeting.vo.MeetingWrite;
 
@@ -134,7 +135,15 @@ public class MeetingDao {
 		return sqlSession.selectList("Meeting.meetingPermitList", meeting_no);
 	}
 
-	public int meetingPermitYes(int meeting_no, int userNo) {
-		return sqlSession.update("Meeting.meetingPermitYes",meeting_no );
+	public int meetingPermitYes(MeetingPermitYes mp) {
+		return sqlSession.update("Meeting.meetingPermitYes",mp );
+	}
+
+	public int meetingPermitNo(MeetingPermitYes mp) {
+		return sqlSession.delete("Meeting.meetingPermitNo",mp );
+	}
+
+	public String permitCheck(MeetingPermitYes mp) {
+		return sqlSession.selectOne("Meeting.permitCheck",mp);
 	}
 }

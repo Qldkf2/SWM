@@ -26,6 +26,7 @@ import com.ez.swm.meeting.vo.MeetingDetail;
 import com.ez.swm.meeting.vo.MeetingList;
 import com.ez.swm.meeting.vo.MeetingPermit;
 import com.ez.swm.meeting.vo.MeetingPermitList;
+import com.ez.swm.meeting.vo.MeetingPermitYes;
 import com.ez.swm.meeting.vo.MeetingUpdate;
 import com.ez.swm.meeting.vo.MeetingWrite;
 
@@ -80,12 +81,20 @@ public class MeetingController {
 			Member m = new Member();
 			HttpSession session = request.getSession();
 			m = (Member)session.getAttribute("member");
+			int userNo = m.getUserNo();
 			MeetingDetail meetingDetail = meetingService.getMeetingArticle(meeting_no);
 			List<MeetingPermitList> meetingPermitList = meetingService.meetingPermitList(meeting_no);
-			System.out.println("신청리스트 오냐 ? : " + meetingPermitList);
+			MeetingPermitYes mp = new MeetingPermitYes();
+			mp.setMeeting_no(meeting_no);
+			mp.setUserNo(userNo);
+			String permitCheck = meetingService.permitCheck(mp);
+			System.out.println("N아 왔냐 :" + permitCheck);
+
+			
 			mv.addObject("article",meetingDetail);
 			mv.addObject("member",m);
 			mv.addObject("mpList",meetingPermitList);
+			mv.addObject("permitCheck",permitCheck);
 			return mv;
 	}
 	
@@ -129,14 +138,8 @@ public class MeetingController {
 	// 모임 삭제하기 		
 		@RequestMapping(value="/meeting/meetingDelete")
 		@ResponseBody
-		public ModelAndView meetingDelete(@RequestParam("meeting_no") int meeting_no) {
-			ModelAndView mav=  new ModelAndView();
-			int result = meetingService.meetingDelete(meeting_no);
-			if(result > 0) {
-				mav.setViewName("meeting/meeting");
-			}
-			
-			return mav;
+		public void meetingDelete(@RequestParam("meeting_no") int meeting_no) {
+			meetingService.meetingDelete(meeting_no);
 		}
 		
 	// 모임 가입하기
@@ -288,8 +291,27 @@ public class MeetingController {
 	@ResponseBody
 	@RequestMapping(value="/meeting/meetingPermitYes")
 	public void meetingPermitYes(@RequestParam("meeting_no") int meeting_no, @RequestParam("userNo") int userNo) {
-		 meetingService.meetingPermitYes(meeting_no ,userNo);
+		MeetingPermitYes mp = new MeetingPermitYes();
+		mp.setMeeting_no(meeting_no);
+		mp.setUserNo(userNo);
+		System.out.println("mp : " + mp);
+		 meetingService.meetingPermitYes(mp);
 	}
 
+	// 모임 신청 거절하기
+	@ResponseBody
+	@RequestMapping(value="/meeting/meetingPermitNo")
+	public void meetingPermitNo(@RequestParam("meeting_no") int meeting_no, @RequestParam("userNo") int userNo) {
+		MeetingPermitYes mp = new MeetingPermitYes();
+		mp.setMeeting_no(meeting_no);
+		mp.setUserNo(userNo);
+		System.out.println("mp : " + mp);
+		 meetingService.meetingPermitNo(mp);
+	}
+	
+
+	
+	
+	
 	
 }
