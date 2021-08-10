@@ -8,14 +8,51 @@
 		INSERT INTO MEETING VALUES(
 			SEQ_MEETING_BOARD.NEXTVAl, #{meeting_leader}, #{meeting_age,jdbcType=VARCHAR}, #{meeting_title}, 
 			#{meeting_content}, #{meeting_address} , #{meeting_subject}, #{meeting_limit} 
-			,  DEFAULT , DEFAULT
+			,  DEFAULT , DEFAULT, DEFAULT
 		) 
 		]]>
 	</insert>
 	
-	<select id="getMeetingList" resultType="com.ez.swm.meeting.vo.MeetingList" >
-		<![CDATA[	
-			SELECT
+	<!-- 모집게시판 총게시글(분야)  -->
+	<select id="countMeetingSubject" resultType="int" parameterType="hashmap">
+		SELECT COUNT(*) FROM MEETING
+		WHERE STATUS = 'N' 
+		 <if test="keyword != null">	    
+			  AND MEETING_SUBJECT =#{keyword}  
+		 </if>
+	</select>
+	
+<!-- 모임 총게시글(검색) / 닉네임 검색도 포함되어있어 조인해야함  -->
+	<select id="countMeetingSearch" resultType="int" parameterType="hashmap">
+
+	 		SELECT COUNT(*)			
+			FROM MEETING b, MEMBER m 
+			WHERE b.MEETING_LEADER=m.USERNO AND b.STATUS='N'
+				AND (b.MEETING_ADDRESS LIKE '%'||#{keyword}||'%'  
+							OR b.MEETING_TITLE LIKE '%'||#{keyword}||'%' 
+							OR m.NICKNAME LIKE '%'||#{keyword}||'%' 
+							OR b.MEETING_SUBJECT LIKE '%'||#{keyword}||'%' 
+				)
+
+	</select>
+		<!-- 모임 내 게시판 총게시글(검색) / 닉네임 검색도 포함되어있어 조인해야함  -->
+	<select id="countMeetingBoardSearch" resultType="int" parameterType="hashmap">
+			SELECT COUNT(*)
+			FROM MEETING_BOARD b, MEMBER m 
+			WHERE b.MEETING_BOARD_WRITER=m.USERNO 
+				AND b.MEETING_NO=#{meeting_no}
+				AND (b.MEETING_BOARD_TITLE LIKE '%'||#{keyword}||'%' OR m.NICKNAME LIKE '%'||#{keyword}||'%')
+	
+	</select>
+	
+	<!-- 페이징 추가 -->
+	<select id="getMeetingList" parameterType="com.ez.swm.common.paging.PagingVO" resultType="com.ez.swm.meeting.vo.MeetingList" >
+		<![CDATA[
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+			FROM (	
+				SELECT
 	                m.NICKNAME,
 					b.MEETING_NO,
 					b.MEETING_TITLE,
@@ -24,12 +61,16 @@
 					b.MEETING_ADDRESS,
 					b.MEETING_LEADER,
 					b.MEETING_LIMIT,
-					b.MEETING_DATE
+					b.MEETING_DATE,
+					b.MEETING_HIT
 				FROM
 					MEETING b, MEMBER m
 				WHERE
 					b.STATUS = 'N' and m.userno=b.meeting_leader
 				ORDER BY MEETING_NO DESC
+				) A
+						)
+				WHERE RN BETWEEN #{start} AND #{end}
 		]]>
 	</select>
 	<select id="getMeetingArticle" resultType="com.ez.swm.meeting.vo.MeetingDetail"  parameterType="int">
@@ -51,6 +92,12 @@
 		]]>
 	</select>
 	
+	<!-- 모임게시판 총게시글(분야)  -->
+	<select id="countMeetingBoard" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM MEETING_BOARD
+			 WHERE MEETING_NO=#{meeting_no} AND STATUS = 'N' 		 
+	</select>
+	
 	<!-- 모임 가입하기 -->
 	<insert id="meetingPermit" parameterType="com.ez.swm.meeting.vo.MeetingPermit">
 		INSERT INTO MEETING_PERMIT VALUES(
@@ -59,19 +106,27 @@
 		
 	</insert>
 	
-	<select id="getMeetingBoardList" resultType="com.ez.swm.meeting.vo.MeetingBoard" parameterType="int">
+	<select id="getMeetingBoardList" resultType="com.ez.swm.meeting.vo.MeetingBoard" parameterType="hashmap">
 		<![CDATA[	
-					SELECT 
-						m.NICKNAME, 
-						p.MEETING_BOARD_NO,
-						p.MEETING_BOARD_WRITER,
-						p.MEETING_BOARD_TITLE,
-						p.MEETING_BOARD_DATE,
-						p.MEETING_BOARD_HIT
-					FROM 
-						MEETING_BOARD p, Member m
-					WHERE 
-						p.MEETING_NO=#{MEETING_NO} and m.userno=p.MEETING_BOARD_WRITER and p.STATUS = 'N'
+				SELECT * 
+				FROM (
+					SELECT ROWNUM RN, A.* 
+						FROM (
+							SELECT 
+								m.NICKNAME, 
+								p.MEETING_BOARD_NO,
+								p.MEETING_BOARD_WRITER,
+								p.MEETING_BOARD_TITLE,
+								p.MEETING_BOARD_DATE,
+								p.MEETING_BOARD_HIT
+							FROM 
+								MEETING_BOARD p, Member m
+							WHERE 
+								p.MEETING_NO=#{meeting_no} and m.userno=p.MEETING_BOARD_WRITER and p.STATUS = 'N'
+								ORDER BY MEETING_BOARD_NO DESC
+							) A
+						)
+				WHERE RN BETWEEN #{start} AND #{end}
 		]]>
 	</select>
 	
@@ -92,7 +147,7 @@
 						p.MEETING_NO=#{MEETING_NO} and p.MEETING_BOARD_NO=#{MEETING_BOARD_NO} and m.userno=p.MEETING_BOARD_WRITER
 		]]>
 	</select>	
-	
+	<!-- insert, update 한 해당 레코드의 시퀀스 가져오기  -->
 	<select id="getParty_no" resultType="int" >
 		SELECT SEQ_MEETING_BOARD.CURRVAL FROM DUAL	
 	</select>
@@ -119,22 +174,6 @@
 		WHERE MEETING_BOARD_NO = #{meeting_board_no}
 
 	</select>
-		<select id="getPartyBoardComment" resultType="com.ez.swm.meeting.vo.MeetingBoardComment" parameterType="int">
-		<![CDATA[	
-				SELECT 
-				    m.NICKNAME,
-				    p.MEETING_BOARD_COMMENT_NO,
-				    p.MEETING_BOARD_NO,
-				    p.USERNO,
-				    p.MEETING_BOARD_COMMENT_CONTENT,
-				    p.MEETING_BOARD_COMMENT_DATE,
-				    p.MEETING_BOARD_COMMENT_LEVEL,
-				    p.MEETING_BOARD_COMMENT_REFNO
-				FROM MEETING_BOARD_COMMENT p, MEMBER m
-				WHERE p.MEETING_BOARD_NO=#{PARTY_NO} AND m.userno=p.USERNO AND p.STATUS='N'
-				ORDER BY p.MEETING_BOARD_COMMENT_REFNO ASC, p.MEETING_BOARD_COMMENT_LEVEL ASC
-		]]>
-	</select>
 	
    <select id="getFileList" parameterType="int" resultType="com.ez.swm.meeting.vo.MeetingBoardFile" >
       <![CDATA[
@@ -154,6 +193,14 @@
 			
 		]]>
 	</select>
+	 <!-- 모임 게시판 조회수 업데이트  -->
+   <update id="updateMeetingboardHitcount" parameterType="int">
+   	<![CDATA[
+   		UPDATE MEETING_BOARD
+   			SET MEETING_BOARD_HIT=MEETING_BOARD_HIT+1 
+   			WHERE MEETING_BOARD_NO = #{MEETING_BOARD_NO}   	   	
+   	]]>
+   </update>
    
    	<update id="meetingUpdate" parameterType="com.ez.swm.meeting.vo.MeetingUpdate">
 		UPDATE MEETING 
@@ -207,18 +254,184 @@
 		WHERE MEETING_NO =#{meeting_no}AND USERNO = #{userNo}
 	</select>
 	
+	<!-- 댓글 가져오기 -->
+		<select id="getPartyBoardComment" resultType="com.ez.swm.meeting.vo.MeetingBoardComment" parameterType="int">
+		<![CDATA[	
+				SELECT 
+				    m.NICKNAME,
+				    p.MEETING_BOARD_COMMENT_NO,
+				    p.MEETING_BOARD_NO,
+				    p.USERNO,
+				    p.MEETING_BOARD_COMMENT_CONTENT,
+				    p.MEETING_BOARD_COMMENT_DATE,
+				    p.MEETING_BOARD_COMMENT_LEVEL,
+				    p.MEETING_BOARD_COMMENT_REFNO,
+				    p.STATUS
+				FROM MEETING_BOARD_COMMENT p, MEMBER m
+				WHERE p.MEETING_BOARD_NO=#{PARTY_NO} AND m.userno=p.USERNO
+				ORDER BY p.MEETING_BOARD_COMMENT_REFNO ASC, p.MEETING_BOARD_COMMENT_LEVEL ASC
+				
+		]]>
+	</select>
+	
+	
+	<!-- 댓글 쓰기 -->
+	<insert id="insertPartyBoardComment" parameterType="com.ez.swm.meeting.vo.MeetingBoardComment">
+	
+	insert into MEETING_BOARD_COMMENT (
+	    MEETING_BOARD_COMMENT_NO,
+	    MEETING_BOARD_NO,
+	    USERNO,
+	    MEETING_BOARD_COMMENT_CONTENT,
+	    MEETING_BOARD_COMMENT_DATE,
+	    MEETING_BOARD_COMMENT_LEVEL,
+	    MEETING_BOARD_COMMENT_REFNO)
+	values(
+	    SEQ_MEETING_BOARD_COMMENT.nextval,
+	    #{meeting_board_no},
+	    #{userno},
+	   	#{meeting_board_comment_content},
+	    SYSDATE,
+	    #{meeting_board_comment_level},
+	    	<!-- 부모댓글이면 새로운 번호 부여 -->
+	    <if test="meeting_board_comment_refno == 0">	    
+	     SEQ_MEETING_BOARD_COMMENT.currval
+		)</if>
+		 <if test="meeting_board_comment_refno != 0">
+		 	<!-- 자식댓글이면 부모댓글 참조 번호 부여  -->
+	     #{meeting_board_comment_refno}
+		)</if>
+	
+	</insert>
+	
+	
+	
+	<!-- 자식댓글의 level가져오기   -->
+	<select id="getLastLevel"   parameterType="int" resultType="int">
+		<![CDATA[
+			SELECT MAX(MEETING_BOARD_COMMENT_LEVEL) 
+			FROM MEETING_BOARD_COMMENT 
+			WHERE MEETING_BOARD_COMMENT_REFNO=#{meeting_board_comment_refno}
+	     ]]>
+	
+	</select>
+ 
+<!-- 	모임 게시판 댓글 갯수 -->
+	<select id="countMeetingboardComment" parameterType="int" resultType="com.ez.swm.meeting.vo.CommentCount"> 
+		<![CDATA[
+			SELECT c.MEETING_BOARD_NO, COUNT(*) as COMMENT_COUNT
+			FROM MEETING_BOARD b, MEETING_BOARD_COMMENT c 
+			WHERE b.MEETING_NO = #{MEETING_NO} and b.MEETING_BOARD_NO = c.MEETING_BOARD_NO AND c.STATUS = 'N'
+			GROUP BY c.MEETING_BOARD_NO
+
+		]]>
+	
+	</select> 
+	
+	
+<!-- 댓글 삭제 -->	
+   <update id="deleteComment" parameterType="int">
+	   	<![CDATA[
+			 update meeting_board_comment set status='Y' where meeting_board_comment_no =#{MEETING_BOARD_COMMENT_NO}
+	   	]]>
+   </update>
+	
+		
+	<!-- 모임게시판 검색(통합검색으로 제목이랑 닉네임으로 검색가능)  -->
+	<select id="searchMeetingBoard" resultType="com.ez.swm.meeting.vo.MeetingBoard" parameterType="hashmap">
+		<![CDATA[
+				SELECT * 
+				FROM (
+					SELECT ROWNUM RN, A.* 
+						FROM (
+							SELECT 
+								m.NICKNAME, 
+								b.MEETING_BOARD_NO,
+								b.MEETING_BOARD_WRITER,
+								b.MEETING_BOARD_TITLE,
+								b.MEETING_BOARD_DATE,
+								b.MEETING_BOARD_HIT
+							FROM MEETING_BOARD b, MEMBER m 
+							WHERE b.MEETING_BOARD_WRITER=m.USERNO 
+								AND b.MEETING_NO=#{meeting_no}
+								AND (b.MEETING_BOARD_TITLE LIKE '%'||#{keyword}||'%' OR m.NICKNAME LIKE '%'||#{keyword}||'%')
+							) A
+						)
+				WHERE RN BETWEEN #{start} AND #{end}
+				
+		]]>
+	
+	</select>
 	
 	
 	
 	
 	
 	
+	<!-- 모집게시판 검색(통합검색으로  구, 제목, 닉네임 으로 검색  -->
+	<select id="searchMeeting" resultType="com.ez.swm.meeting.vo.MeetingList" parameterType="hashmap">
+			<![CDATA[
+							SELECT * 
+				FROM (
+					SELECT ROWNUM RN, A.* 
+						FROM (
+							SELECT 			
+				                m.NICKNAME, 
+								b.MEETING_NO,
+								b.MEETING_LEADER,
+								b.MEETING_TITLE,
+								b.MEETING_ADDRESS,
+								b.MEETING_SUBJECT,
+				                b.MEETING_DATE,
+				                b.MEETING_HIT
+							FROM MEETING b, MEMBER m 
+							WHERE b.MEETING_LEADER=m.USERNO AND b.STATUS='N'
+							AND (b.MEETING_ADDRESS LIKE '%'||#{keyword}||'%'  
+										OR b.MEETING_TITLE LIKE '%'||#{keyword}||'%' 
+										OR m.NICKNAME LIKE '%'||#{keyword}||'%' 
+										OR b.MEETING_SUBJECT LIKE '%'||#{keyword}||'%' 
+										)
+							ORDER BY MEETING_NO DESC
+						) A
+					)
+				WHERE RN BETWEEN #{start} AND #{end}
+			]]>
+		</select>
 	
 	
 	
-	
-	
-	
-	
-	
+	<!-- 모집게시판 분야 선택 검색 -->
+	<select id="selectSubject" resultType="com.ez.swm.meeting.vo.MeetingList" parameterType="hashmap">
+			<![CDATA[	
+				SELECT * 
+				FROM (
+					SELECT ROWNUM RN, A.* 
+						FROM (
+							SELECT 			
+				                m.NICKNAME, 
+								b.MEETING_NO,
+								b.MEETING_LEADER,
+								b.MEETING_TITLE,
+								b.MEETING_ADDRESS,
+								b.MEETING_SUBJECT,
+				                b.MEETING_DATE,
+				                b.MEETING_HIT
+							FROM MEETING b, MEMBER m 
+							WHERE b.MEETING_LEADER=m.USERNO AND b.STATUS='N'
+							AND b.MEETING_SUBJECT LIKE '%'||#{keyword}||'%' 
+							ORDER BY MEETING_NO DESC
+					) A
+				)
+				WHERE RN BETWEEN #{start} AND #{end}
+			
+			]]>
+		</select>
+	<!-- 지역리스트  -->
+		<select id="locationList" resultType="com.ez.swm.meeting.vo.Location" parameterType="hashmap">
+			<![CDATA[
+				select si, gu from location where si=#{location}
+			]]>
+		</select>
 </mapper>
+	
+	

@@ -139,3 +139,46 @@ body.app div.subheader section.tab[data-v-70332c88]{border-bottom:0;background-c
 	
 	
 	div.container div.loading[data-v-70332c88]{margin:96px auto;width:36px;height:36px;background:transparent url("/images/common/loading.svg") no-repeat;background-size:36px 36px}
+
+	
+	div.page[data-v-70332c88]{max-width:720px;
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 1px;
+    padding: 20px;
+    vertical-align: top;
+    background-color: #fff;
+     text-align: center;  }
+     
+        div.page a.page[data-v-70332c88]{   
+   z-index:5;background-color:#1dcdff; background-repeat:no-repeat;cursor:pointer; 
+    text-align: center;  
+   }
+         div.page a.page.move[data-v-70332c88]{
+   display: inline-block;
+
+    width: 50px;
+    height: 20px;
+    color: #0aafdf;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+          vertical-align: middle;
+    background-color: #fff;
+      border-radius: 5px;
+   }
+         div.page a.page.select[data-v-70332c88]{
+   display: inline-block;
+
+    width: 50px;
+    height: 20px;
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+          vertical-align: middle;
+    background-color: #fff;
+      border-radius: 5px;
+   }      
+     
+     

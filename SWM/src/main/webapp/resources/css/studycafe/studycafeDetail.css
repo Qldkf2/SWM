@@ -1,0 +1,116 @@
+
+div.container[data-v-cafe]{max-width:1000px}
+
+
+ div.container div.tab[data-v-cafe]{max-width:1000px}
+
+
+ div.container  div.fixed {
+
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: inline-block;
+    width: 160px;
+    height: 40px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #0aafdf;
+    border-radius: 5px;
+    padding-top: 12px;
+	
+}
+
+div.container article[data-v-cafe]{padding:16px;background-color:#fff}
+
+div.container form.comment[data-v-cafe]{padding-top:16px;background-color:#fff}
+
+
+
+div.container article p.profile[data-v-cafe]{display:inline-block;margin-bottom:16px;padding-left:28px;line-height:20px;color:#4c4c4c;font-size:13px;font-weight:bold;background-repeat:no-repeat;background-position:left center;background-size:20px 20px}div.container article p.completed[data-v-cafe]{float:right;padding:0 8px;border-radius:10px;line-height:20px;color:#fff;font-size:12px;font-weight:bold;background-color:#a6a6a6}div.container article p.completed.highlight[data-v-cafe]{background-color:#1dcdff}
+
+
+div.container article h1[data-v-cafe]{
+    margin: 20px 20px 70px;line-height:27px;word-wrap:break-word;
+	    color: #1dcdff;
+    font-style: italic;
+	font-size:35px;font-weight:bold
+	}
+	
+div.container article h2[data-v-cafe]{
+	margin-bottom:4px;line-height:27px;word-wrap:break-word;
+	color:#292929;font-size:15px;font-weight:bold}
+	
+div.container article p.info[data-v-cafe]{margin-bottom:5px}
+div.container article p.info span[data-v-cafe]{display:inline-block;margin-right:8px;line-height:18px;letter-spacing:0;color:#a6a6a6;font-size:12px}
+div.container article p.info span.viewcount[data-v-cafe]{padding-left:14px;background:transparent url("../../images/viewcount.png")  no-repeat left center;background-size:12px 8px}
+div.container article p.info span.commentcount[data-v-cafe]{padding-left:12px;background:transparent url("https://www.campuspick.com/images/common/info.commentcount.png") no-repeat left center;background-size:9px 9px}div.container article p.info span.secret[data-v-cafe]{padding-left:14px;background:transparent url("/images/common/info.secret.png") no-repeat left center;background-size:12px 12px}div.container article p.info span.button[data-v-cafe]{cursor:pointer}div.container article p.info span.button[data-v-cafe]::before{content:"";display:inline-block;margin-right:8px;width:1px;height:10px;background-color:#d6d6d6}
+
+
+div.container article div.about[data-v-cafe]{margin-bottom:50px}
+div.container article div.about h3[data-v-cafe]{
+
+	margin-left:10px; font-weight:bold; float:left;display:inline-block;width:100px;line-height:30px;color:#a6a6a6;font-size:15px;}
+div.container article div.about p.indent[data-v-cafe]{
+	margin-left:50px;
+	line-height:30px;word-wrap:break-word;color:#4c4c4c;font-size:15px}
+
+div.container article p.text[data-v-cafe]{
+	line-height:20px;
+	word-wrap:break-word;
+	font-size:30px; 
+	height: 50px;
+    margin-top: 20px;
+    color: crimson;
+    font-style: oblique;
+    font-weight: bolder;
+	}
+
+
+
+div.container a.floating[data-v-cafe]{	
+	background-color:#0aafdf;background-repeat:no-repeat;cursor:pointer; 
+	}
+	
+
+section.tab > div.wrap[data-v-cafe] {
+   display: block; margin: 0 auto; max-width: 1200px; text-align: center;margin-bottom:50px;  
+}
+section.tab > div.wrap > a[data-v-cafe] {
+ display: inline-block; width: 100%; height: 48px; line-height: 48px; box-sizing: border-box; border-bottom: 3px solid transparent; text-align: center;
+}
+
+section.tab > div.wrap > a.active[data-v-cafe] {
+  border-bottom-color: #1dcdff;
+
+}
+
+section.tab > div.wrap > a > span.text[data-v-cafe] {
+color: #292929; font-size: 20px;   padding:10px
+}
+@media only screen and (max-width: 719px){
+	div.container a.floating[data-v-cafe]{
+		position:static;display:inline;border-radius:3px;width:100px;height:36px;line-height:36px;
+	color:#fff;font-size:14px;font-weight:bold;background-position:12px center;background-size:18px 18px;
+	    text-align: center;  margin-right:10px; padding:10px 30px
+	}
+	
+
+}
+	
+	
+@media only screen and (min-width: 720px){
+	div.container a.floating[data-v-cafe]{
+	position:static;display:inline;border-radius:3px;width:100px;height:36px;line-height:36px;
+	color:#fff;font-size:14px;font-weight:bold;background-position:12px center;background-size:18px 18px;
+	    text-align: center;  margin-right:10px; padding:10px 30px
+	}
+	
+
+}
+	
+	
+	
+	div.container article[data-v-cafe]{padding:16px;background-color:#fff}

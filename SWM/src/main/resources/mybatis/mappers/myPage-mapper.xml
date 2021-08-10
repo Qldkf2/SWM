@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myPage">
+
+	<!-- 회원 정보 수정 (사용자) -->
+	<update id="updateMemberByUser" parameterType="com.ez.swm.login.vo.Member">
+		update member
+		set password = #{password}, nickName = #{nickName}, phone2 = #{phone2}, phone3 = #{phone3}, email = #{email}
+		where userNo = #{userNo}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<update id="deleteMember" parameterType="com.ez.swm.login.vo.Member">
+		update member
+		set status = 'Y'
+		where userId = #{userId} and password = #{password}
+	</update>
+	
+	<!-- 1:1 문의 작성 -->
+	<insert id="insertAsk" parameterType="com.ez.swm.myPage.vo.Ask">
+		insert into ask(ask_no, userNo, ask_title, ask_content)
+		values(seq_ask.nextval, #{userNo}, #{ask_title}, #{ask_content})
+	</insert>
+	
+	<!-- 사용자 번호에 따른 1:1 문의 확인 -->
+	<select id="getAskByUserNo" parameterType="int" resultType="com.ez.swm.myPage.vo.AskJoin">
+		select a.ask_no, a.ask_title, a.ask_content, a.ask_date, m.userNo, m.nickName
+		from ask a, member m
+		where m.userNo = #{userNo} and a.userNo = m.userNo
+		order by a.ask_no DESC
+	</select>
+	
+	<!-- 1:1문의 상세보기  detail로 영역에 저장 -->
+	<select id="askDetail" parameterType="int" resultType="com.ez.swm.myPage.vo.Ask">
+		select *
+		from ask
+		where ask_no = #{ask_no}
+	</select>
+	
+	<!-- 관리자 용 1:1 문의 리스트 불러오기 allAsk로 영역에 저장 -->
+	<select id="askAllList" resultType="com.ez.swm.myPage.vo.AskJoin">
+		select a.ask_no, a.ask_title, a.ask_content, a.ask_date, a.userNo, m.nickName 
+		from ask a, member m
+		where a.userNo = m.userNo
+		order by ask_no DESC
+	</select>
+	
+	<!-- 1:1문의 관리자 답변 작성 -->
+	<insert id="insertAskReply" parameterType="com.ez.swm.myPage.vo.AskComment">
+		insert into ask_comment(ask_comment_no, ask_no, ask_comment_content)
+		values(seq_ask_comment.nextval, #{ask_no}, #{ask_comment_content})
+	</insert>
+	
+	<!-- 1:1문의 관리자 답변 가져오기 -->
+	<select id="getAskReply" parameterType="int" resultType="com.ez.swm.myPage.vo.AskComment">
+		select *
+		from ask_comment
+		where ask_no = #{ask_no}
+	</select>
+	
+	<!-- 스터디카페 예약 정보 가져오기 -->
+	<select id="getBookInfoList" parameterType="int" resultType="com.ez.swm.book.vo.UserBookVo">
+		SELECT
+	               m.USERNAME,
+	               m.NICKNAME,
+	               m.USERNO,
+	               k.BOOK_NO,
+	               k.STUDYCAFE_NO,
+	               k.BOOKER_NO,
+	               k.STUDYCAFE_ROOMNO,
+	               k.ROOM_STRENGTH,  
+	               k.BOOK_DATE,
+	               k.START_TIME,
+	               k.END_TIME
+				FROM
+					STUDYCAFE_BOOK k, MEMBER m
+				WHERE
+					m.USERNO = #{userNo} 
+				ORDER BY USERNO DESC
+	</select>
+	
+	
+</mapper>

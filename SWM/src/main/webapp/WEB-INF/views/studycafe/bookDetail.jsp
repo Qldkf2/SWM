@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <title>상세보기</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -15,7 +17,68 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/studycafe/bookStyle.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
 <style>
+
+select {
+width: 200px;
+padding: .8em .5em;
+border: 1px solid #999;
+font-family: inherit;
+background: url(../images/arrow.jpg) no-repeat 95% 50%;
+border-radius: 0px;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+}
+
 </style>
+
+
+<script type="text/javascript">
+
+function fn_insertBook(){
+	
+	
+	
+	if($("#studycafe_roomno").val() == "" || $("#studycafe_roomno").val() == null ){
+		alert("카폐방 번호를 선택해 주세요.");
+		
+		return false;
+	}
+	
+	if($("#booker_no").val() == ''){
+		alert("로그인 후 다시 시도해주세요.");
+		location.href = '/loginForm';
+		return false;
+	} 
+	
+	if($("#room_strength").val() == "" || $("#room_strength").val() == null){
+		alert("인원수를 선택해 주세요");
+		 
+		return false;
+	}	
+	
+	
+	if($("#book_date").val() == "" || $("#book_date").val() == null){
+		alert("날짜를 선택해 주세요");
+		
+		return false;
+	}	
+	
+	if($("#start_time").val() == "" || $("#start_time").val() == null){
+		alert("시작시간을 선택해 주세요");
+		
+		return false;
+	}	
+	
+	if($("#end_time").val() == "" || $("#end_time").val() == null){
+		alert("종료시간을 선택해 주세요");
+		
+		return false;
+	}	
+	return true;
+};
+      
+</script>
 
 </head>
 <body>
@@ -35,9 +98,6 @@
 			<h1>이젠스터디</h1>
 			<p>이젠 나의 눈물과 바꿔야하나 숨겨온 너의 진심을 알게 됐으니 사랑보다 먼 우정보다는 가까운</p>
 		</div>
-
-
-
 
 	</div>
 	<div class="footer">
@@ -60,12 +120,7 @@
 
 			<div class="desc">2번방 / 3인</div>
 		</div>
-
-
-
-
 	</div>
-
 
 	<button class="button button2" id="myBtn"
 		style="float: right; bottom: 15px;">
@@ -73,49 +128,110 @@
 	</button>
 
 	<!-- The Modal -->
+<form action="/book/studycafeBook" method="POST" onsubmit="return fn_insertBook();">
 	<div id="myModal" class="modal">
 
 <!-- Modal content -->
-<div class="modal-content">
+
+ <div class="modal-content">
 	<div class="container2" style="display: block;" >
+	
 	<br>
 	<div>
-		<h3>예약하시겠습니까?</h3>
-		<h1>　</h1>
-		<h2>방 선택</h2>
+		<h2>예약정보를 입력해주세요.</h2>
+		
 		<br>
-		<div class="list-group">
-			 <a href="#" class="list-group-item">No.1 / 2인실</a>
-    <a href="#" class="list-group-item">No.2 / 4인실</a>
-    <a href="#" class="list-group-item">No.3 / 5인실</a>
-    
-		</div>
-        
-        <h1>　</h1>
-  <h2>예약 날짜</h2><br>
-<h2>Day: <input type="date" id="datepicker" style="font-size:20px;	border: 1px solid #ccc;"></h2>
-<Br>
-<div style=" display: flex; border: 1px solid #ccc;">
-<form class="col-6 col-s-4 menu">
-  <label for="startTime">시작 시간: </label>
-  <input type="time" id="startTime">
-</form>
-　　　　		
-<form class="col-6 col-s-4 menu">
-  <label for="startTime">끝나는 시간: </label>
-  <input type="time" id="endTime">
-</form>
-</div>
-<br>
+		<!-- studycafe에서 이름받아옴 -->
+		<input type="hidden" id="studycafe_name" name="studycafe_name" value="스터디카페(임시)"  /> 
+		<!-- studycafe테이블에서 카페번호를 받아옴 -->
+		<input type="hidden" id="studycafe_no" name="studycafe_no" value="10"  /> 
+		<!-- 예약자 회원 번호 -->
+		<input type="hidden" id="booker_no" name="booker_no" value="${member.userNo}" />
+		<h3>
+		    <label for="studycafe_roomno">방 선택</label>
+		    <br>
+		       <select id="studycafe_roomno" name="studycafe_roomno" size="1">
+		          <option value="">방 번호를 선택해주세요.</option>
+		          <option value="101">101호</option>
+		          <option value="102">102호</option>
+		          <option value="103">103호</option>
+		       </select> 
+		        <br><br>
+		    <label for="room_strength">인원수 선택</label>
+		    <br>
+		       <select id="room_strength" name="room_strength" size="1">
+		          <option value="">예약하실 인원를 선택해주세요.</option>
+		          <option value="1">1인</option>
+		          <option value="2">2인</option>
+		          <option value="3">3인</option>
+		          <option value="4">4인</option>
+		          <option value="5">5인</option>
+		          <option value="6">6인</option>
+		          
+		       </select> 
+		</h3>
+ 
+        　
+ <h3>예약 날짜</h3>
+ <br>
+ <input type="date" id="book_date" name ="book_date" style="font-size:20px;	border: 1px solid #ccc;">
+ <br>
+ <br>      
+ 
+ <h3>
+     <label for="start_time">시작시간</label>
+     <br>
+      <select id="start_time"  name="start_time" size="1">
+		  <option value="">시작시간을 정해주세요</option>
+		  <option value="9" >09:00</option>
+		  <option value="10">10:00</option>
+		  <option value="11">11:00</option>
+		  <option value="12">12:00</option>
+		  <option value="13">13:00</option>
+	      <option value="14">14:00</option>
+		  <option value="15">15:00</option>
+		  <option value="16">16:00</option>
+		  <option value="17">17:00</option>
+		  <option value="18">18:00</option>
+		  <option value="19">19:00</option>
+		  <option value="20">20:00</option>
+		  <option value="21">21:00</option>
+		  <option value="22">22:00</option>
+	 </select> 
+ </h3>
+ <br>
+  <h3>
+     <label for="end_time">종료시간</label>
+     <br>
+		  <select id="end_time"  name="end_time" size="1">
+		  <option value="">종료시간을 정해주세요.</option>
+		  <option value="9">09:00</option>
+		  <option value="10">10:00</option>
+		  <option value="11">11:00</option>
+		  <option value="12">12:00</option>
+		  <option value="13">13:00</option>
+	      <option value="14">14:00</option>
+		  <option value="15">15:00</option>
+		  <option value="16">16:00</option>
+		  <option value="17">17:00</option>
+		  <option value="18">18:00</option>
+		  <option value="19">19:00</option>
+		  <option value="20">20:00</option>
+		  <option value="21">21:00</option>
+		  <option value="22">22:00</option>
+	 </select> 
+ </h3>
 
 </div>
 	</div>
-<a href="/studycafe/studycafeBook" class="button3"style="text-align:right;float: right; font-size:15px;">예 약</a>
-	<button class="button3">
-<span class="close" style="float: left; font-size:15px;">취 소</span>
-</button>
+	<button type="submit" class="button3" style="text-align:right; float: right; font-size:15px;"> 예 약
+	</button>
+	<button type="reset" class="button3">
+	<span class="close" style="float: left; font-size:15px;">취 소</span>
+	</button>
 	</div>
 </div>
+</form>
 
 	<script>
 		var modal = document.getElementById('myModal');

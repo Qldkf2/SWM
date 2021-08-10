@@ -14,23 +14,27 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/meeting/meeting.css">
 
 
+<script type="text/javascript">
+function fn_searchCheck(){
+	if($("#keyword").val() == null || $("#keyword").val() == ""){
+		alert("검색어를 입력해 주세요!");
+		$("#keyword").focus();
+		return false;
+	}		
+	return true;
+	
+}
+
+
+</script>
+
+
 
 </head>
 <body>
 <c:import url="../common/header.jsp" />
 
-
-	<section class="tab">
-	<div class="wrap">
-     <a href="/subject/list" class="active"><span class="text">전체</span></a>
-      <a href="/subject/language"><span class="text">어학</span></a>
-      <a href="/subject/employment"><span class="text">취업</span></a>
-      <a href="/subject/official"><span class="text">고시/공무원</span></a>
-      <a href="/subject/hobby"><span class="text">취미/교양</span></a>
-      <a href="/subject/programming"><span class="text">프로그래밍</span></a>
-      <a href="/subject/etc"><span class="text">기타</span></a>
-	</div>
-	</section>
+<c:import url="./meetingSubject.jsp" />
 
 
 
@@ -41,11 +45,22 @@
    <div data-v-70332c88 class="container" style >
       <a data-v-70332c88 href="/meeting/meetingWrite" class="floating write" >스터디모임 만들기</a>
       <div data-v-70332c88 class="search">
-         <div data-v-70332c88 class="local">
-            <span data-v-70332c88>지역</span>
-         </div>
-         <form data-v-70332c88 class>
-            <input data-v-70332c88 type="search" name="keyword" class="keyword" placeholder="찾으시는 스터디가 있나요?" value="" autocomplete="off" >
+<%--          <div data-v-70332c88 class="local">
+         	<p data-v-70332c88 class="select unselected">
+			 <select id="location" data-v-70332c88 class="select unselected" name="meeting_address" > 
+							<option value="지역">지역</option>
+						 <c:forEach items="${location}" var="loc">
+							<option value=" ${loc.gu}">${loc.gu}</option>
+						
+						 </c:forEach>
+		 	</select>
+		</p>
+
+			</div> --%>
+         
+         <form data-v-70332c88 action="/meeting/search"onsubmit="return fn_searchCheck();">
+            <input data-v-70332c88 type="search"   id="keyword"  name="keyword" class="keyword" placeholder="찾으시는 스터디가 있나요?" autocomplete="off" >
+            
             <input data-v-70332c88 type="submit" class="submit" >
             
          </form>
@@ -70,6 +85,7 @@
 	         <p data-v-70332c88 class="info" >
 	         	 <span data-v-70332c88="">${row.nickname}</span>
 	         	<span data-v-70332c88="">${row.meeting_date}</span>
+	         	<span data-v-70332c88="" class="viewcount">${row.meeting_hit }</span>
 
           	</p>
 
@@ -83,20 +99,62 @@
      			 	 </a>
 		</c:otherwise>
       </c:choose>
+
       </div>
+      
+      
+         <div data-v-70332c88 class="page" style>
+        <c:if test="${paging.startPage != 1 }">		
+			<a data-v-70332c88  class="page move"   id="&nowPage=${paging.startPage - 1 }"  onclick="fn_changePage(this.id)">&lt;&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+				<%-- 	<a data-v-70332c88    class="page select"   href="/meeting?nowPage=${paging.nowPage }">${paging.nowPage }</a> --%>
+				 	<a data-v-70332c88    class="page select"  id="&nowPage=${p}" onclick="fn_changePage(this.id)">${p }</a> 
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a data-v-70332c88    class="page move"   id="&nowPage=${p }"  onclick="fn_changePage(this.id)">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		
+		<c:if test="${paging.endPage != paging.lastPage}">
+			<a data-v-70332c88  class="page move "  id="&nowPage=${paging.endPage+1 }" onclick="fn_changePage(this.id)">&gt;&gt;</a>
+		</c:if>
+      </div>
+      
    </div>
-   </div>
-
-
-
-<script id="__INITIAL_STATE__" type="application/json">
-   {"apiServerUrl":"https://api.campuspick.com","appInfo":
-   {"appName":"","appVersion":"","osName":"","osVersion":""},
-   "isLogged":false,"pageName":"pages/study/index"}   
    
-</script>
-		</div>
-	</div>
+   </div>
+	<script type="text/javascript">
+		function fn_changePage(movigPage){
+			var url = window.location.href;
+			<%-- var currentSubject = "<%=session.getAttribute("currentSubject")%>"; --%>
+			 var currentSubject = "${currentSubject}";
+			 var keyword = "${keyword}";
+			
+		
+			if(url.indexOf("subject")!=-1){
+				
+				location.replace("/meeting?subject="+currentSubject+movigPage) ;
+				
+			}
+			else if(url.indexOf("search")!=-1){
+				
+				location.replace("/meeting/search?keyword="+keyword+movigPage) ;
+			}
+			
+			else{
+				location.replace("/meeting?"+movigPage) ;
+			}
+			
+	}
+	
+	
+	</script>
+
+
 
 
 </body>

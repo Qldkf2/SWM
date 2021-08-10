@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book">
+
+	<insert id="studycafeBook" parameterType="com.ez.swm.book.vo.BookVo" >
+	  <![CDATA[
+	  insert into studycafe_book values(
+	    SEQ_BOOK_NO.nextval,
+	    #{studycafe_name},
+	    #{studycafe_no},
+	    #{booker_no}, 
+	    #{studycafe_roomno},
+	    #{room_strength}, 
+	    TO_DATE(#{book_date}, 'YYYY-MM-DD'), 
+	    #{start_time}, 
+	    #{end_time}
+	  )
+	  ]]>
+	</insert>
+	
+	<select id="getStudycafeBookList" resultType="com.ez.swm.book.vo.UserBookVo" >
+		<![CDATA[	
+			SELECT
+	               m.USERNAME,
+	               m.NICKNAME,
+	               m.USERNO,
+	               k.BOOK_NO,
+	               k.STUDYCAFE_NAME,
+	               k.STUDYCAFE_NO,
+	               k.BOOKER_NO,
+	               k.STUDYCAFE_ROOMNO,
+	               k.ROOM_STRENGTH,
+	               k.BOOK_DATE,
+	               k.START_TIME,
+	               k.END_TIME
+				FROM
+					STUDYCAFE_BOOK k, MEMBER m
+				WHERE
+					m.USERNO = #{userNo}
+				ORDER BY USERNO DESC
+		]]>
+	</select>
+	
+	
+	<delete id="studycafeBookDelete" parameterType="com.ez.swm.book.vo.BookVo" >
+	  delete from studycafe_book 
+	  where BOOKER_no = #{booker_no}
+	  	
+	</delete>
+
+	
+
+</mapper>

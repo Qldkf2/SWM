@@ -12,6 +12,14 @@ public class MeetingBoardComment {
 	private Date meeting_board_comment_date;
 	private int meeting_board_comment_level;
 	private int meeting_board_comment_refno;
+	private String status;
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getNickname() {
 		return nickname;
 	}

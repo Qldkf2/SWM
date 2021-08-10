@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ez.swm.common.paging.PagingVO;
 import com.ez.swm.login.vo.Member;
 import com.ez.swm.meeting.service.MeetingService;
+import com.ez.swm.meeting.vo.CommentCount;
+import com.ez.swm.meeting.vo.Location;
 import com.ez.swm.meeting.vo.Meeting;
 import com.ez.swm.meeting.vo.MeetingBoard;
 import com.ez.swm.meeting.vo.MeetingBoardComment;
@@ -36,27 +39,65 @@ public class MeetingController {
 	@Autowired
 	MeetingService meetingService;
 	
+	// 메인 미튕
 	@RequestMapping(value="/meeting")
-	public ModelAndView meeting(HttpServletRequest request, Model model) {
+	public ModelAndView meeting(HttpServletRequest request, 
+			PagingVO pagingVo,
+			@RequestParam(value="subject", required=false) String keyword , 
+			@RequestParam(value="nowPage", required=false)String nowPage,
+			Model model) {
 		ModelAndView mv=  new ModelAndView("meeting/meeting");
+			
+		int total=meetingService.countMeeting(keyword);
 		
-		List<MeetingList> list = meetingService.getMeetingList();
+		if (nowPage == null) {
+			nowPage = "1";
+		} 
 		
-		mv.addObject("list", list);
-
+		pagingVo = new PagingVO(total, Integer.parseInt(nowPage));
+		//헤더 저장 및 분야 검색용
+		HttpSession session = request.getSession();
+		//첫화면이나 선택사항이 전체일때
+		if(keyword==null || keyword.equals("all")) {
+			List<MeetingList> list = meetingService.getMeetingList(pagingVo);	
+			
+			mv.addObject("list", list);
+			mv.addObject("paging", pagingVo);
+			session.setAttribute("currentSubject", "all");
+		}	
+		//분야선택 된경우
+		else {
+			//db rownum검색용
+			int start= pagingVo.getStart();
+			int end=pagingVo.getEnd();
+			
+			List<MeetingList> list = meetingService.selectSubject(keyword, start, end);
+			
+			mv.addObject("list", list);
+			mv.addObject("paging", pagingVo);
+			session.setAttribute("currentSubject", keyword);
+		}
 		return mv;
-	}
-	
-	
+		}
+	// 모임 만들기 폼으로 이동 ㅋ
 	@RequestMapping(value="/meeting/meetingWrite")
-	public String meetingWrtie() {
-		return "meeting/meetingWriteForm";
+	public ModelAndView meetingWrtie() {
+		ModelAndView mv=  new ModelAndView("meeting/meetingWriteForm");
+		
+		String si="서울";
+		List<Location> location = meetingService.locationList(si);
+		mv.addObject("location",location);
+		
+		return mv;
 	}
 	
 	// 모임 만들기
 		@RequestMapping(value="/meeting/meetingWriteForm")
 		public ModelAndView meetingWriteForm2(MeetingWrite meetingWrite, Model model, HttpServletRequest request) {
 			ModelAndView mav = new ModelAndView();
+			//다음줄 태그로 바꿔주는 역할
+			String content =  meetingWrite.getMeeting_content().replaceAll("\r\n", "<br />");		
+			meetingWrite.setMeeting_content(content);
 			System.out.println("모임장 회원번호 : " + meetingWrite.getMeeting_leader());
 			boolean result = meetingService.meetingWriteForm(meetingWrite);
 			Member m = new Member();
@@ -160,19 +201,37 @@ public class MeetingController {
 		}
 		
 	
-	// 모임 내 게시판
-		@RequestMapping(value="/meeting/meetingBoard")
-		public ModelAndView meetingBoard(@RequestParam("meeting_no") int meeting_no) throws Exception {
-			ModelAndView mv=  new ModelAndView("meeting/meetingBoard");
-			
-			MeetingDetail article = meetingService.getMeetingArticle(meeting_no);
-			List<MeetingBoard> list = meetingService.getMeetingBoardList(meeting_no);
-
-			mv.addObject("list", list);
-			mv.addObject("article", article);
-			
-			return mv;
-	}
+		// 모임 내 게시판
+				@RequestMapping(value="/meeting/meetingBoard")
+				public ModelAndView meetingBoard(
+						@RequestParam("meeting_no") int meeting_no,
+						@RequestParam(value="nowPage", required=false)String nowPage	) throws Exception {
+					ModelAndView mv=  new ModelAndView("meeting/meetingBoard");
+					
+					int total=meetingService.countMeetingBoard(meeting_no);
+					
+					if (nowPage == null) {
+						nowPage = "1";
+					} 
+					
+					PagingVO pagingVo = new PagingVO(total, Integer.parseInt(nowPage));
+				
+					//db rownum검색용
+					int start= pagingVo.getStart();
+					int end=pagingVo.getEnd();
+					
+					
+					MeetingDetail article = meetingService.getMeetingArticle(meeting_no);
+					List<MeetingBoard> list = meetingService.getMeetingBoardList(meeting_no, start, end);
+					List<CommentCount> count = meetingService.countMeetingboardComment(meeting_no);
+							
+					mv.addObject("paging", pagingVo);
+					mv.addObject("list", list);
+					mv.addObject("article", article);
+					mv.addObject("count", count);
+					
+					return mv;
+			}
 		
 	// 모임 내 게시글 글쓰기 폼
 	@RequestMapping(value="/meeting/meetingBoardWrite")
@@ -194,7 +253,9 @@ public class MeetingController {
 	public ModelAndView meetingBoardInsert(MeetingBoard meetingBoard, MultipartHttpServletRequest request, Model model) 
 			throws Exception {
 		ModelAndView mv=  new ModelAndView("redirect:/meeting/meetingBoardDetail");
-
+		//다음줄 태그로 바꿔주는 역할
+		String content =  meetingBoard.getMeeting_board_content().replaceAll("\r\n", "<br />");		
+		meetingBoard.setMeeting_board_content(content);
 		int party_no = meetingService.insertPartyBoardArticle(meetingBoard,request);
 		
 		model.addAttribute("meeting_no", meetingBoard.getMeeting_no());
@@ -222,11 +283,12 @@ public class MeetingController {
 		Member member = new Member();
 			HttpSession session = request.getSession();
 			member = (Member)session.getAttribute("member");
+			
 		mv.addObject("member", member);
 		mv.addObject("article", article);
 		mv.addObject("partyArticle", partyArticle);
 		mv.addObject("fileList", fileList);
-		mv.addObject("comment", comment);
+		mv.addObject("comments", comment);
 		//System.out.println(fileList.size());
 		return mv;
 		
@@ -309,9 +371,132 @@ public class MeetingController {
 		 meetingService.meetingPermitNo(mp);
 	}
 	
+	// 모임 내 게시글 댓글 달기
+		@RequestMapping(value="/meeting/insertComment")
+		public ModelAndView insertComment(
+				@RequestParam(value="meeting_no", required=false) int meeting_no, 
+				MeetingBoardComment meetingBoardComment,
+				Model model)	throws Exception {
+		
+			ModelAndView mv=  new ModelAndView("redirect:/meeting/meetingBoardDetail");
+			
+			
+			//다음줄 태그로 바꿔주는 역할
+			String content =  meetingBoardComment.getMeeting_board_comment_content().replaceAll("\r\n", "<br />");		
+			meetingBoardComment.setMeeting_board_comment_content(content);
+			
+			//********댓글달기
+			meetingService.insertPartyBoardComment(meetingBoardComment);
+	 
+			model.addAttribute("meeting_no", meeting_no);
+			model.addAttribute("party_no", meetingBoardComment.getMeeting_board_no());
 
+		
+			return mv;
+			
+		}
+		
+//		//댓글삭제1
+//		@RequestMapping(value="/meeting/commentDelete")
+//		public ModelAndView deleteComment(
+//				@RequestParam(value="meeting_board_comment_no", required=false) int meeting_board_comment_no, 
+//				@RequestParam(value="meeting_board_no", required=false) int meeting_board_no,
+//				@RequestParam(value="meeting_no", required=false) int meeting_no,
+//				Model model) {
+	//
+//			ModelAndView mv=  new ModelAndView("redirect:/meeting/meetingBoardDetail");
+//			meetingService.deleteComment(meeting_board_comment_no) ;
+	//
+	//
+//			return mv;
+//			
+	//	
+//		}
+		
+		//댓글삭제2
+
+		@RequestMapping(value="/meeting/commentDelete")
+		@ResponseBody
+		public void deleteComment(
+				@RequestParam(value="meeting_board_comment_no", required=false) int meeting_board_comment_no)  throws Exception {
+
+			meetingService.deleteComment(meeting_board_comment_no) ;
+		
+		}
+		
+		
+		//모임게시판 검색
+		@RequestMapping(value="/meeting/meetingBoard/search")	
+		public ModelAndView searchMeetingBoard(
+				@RequestParam(value="meeting_no", required=false) int meeting_no,
+				@RequestParam(value="keyword", required=false) String keyword,
+				@RequestParam(value="nowPage", required=false)String nowPage) throws Exception {
+			
+			ModelAndView mv=  new ModelAndView("meeting/meetingBoard");
+			
+			
+			int total=meetingService.countMeetingBoardSearch(meeting_no, keyword);
+			System.out.println(total);
+			
+			
+			if (nowPage == null) {
+				nowPage = "1";
+			} 
+			
+			PagingVO	pagingVo = new PagingVO(total, Integer.parseInt(nowPage));
+			
+			//db rownum검색용
+			int start= pagingVo.getStart();
+			int end=pagingVo.getEnd();
+			
+			MeetingDetail article = meetingService.getMeetingArticle(meeting_no);
+			List<MeetingBoard> list = meetingService.searchMeetingBoard(meeting_no, keyword, start, end);
+			List<CommentCount> count = meetingService.countMeetingboardComment(meeting_no);
+					
+			
+			mv.addObject("paging", pagingVo);
+			mv.addObject("keyword", keyword);
+			
+			mv.addObject("list", list);
+			mv.addObject("article", article);
+			mv.addObject("count", count);
+			
+			return mv;
+		}
+		
+		
+		//모집게시판 검색
+		@RequestMapping(value="/meeting/search")	
+		public ModelAndView searchMeeting(
+				@RequestParam(value="keyword", required=false) String keyword,
+				@RequestParam(value="nowPage", required=false)String nowPage) {
+			
+			ModelAndView mv=  new ModelAndView("meeting/meeting");
+
+			int total=meetingService.countMeetingSearch(keyword);
+			System.out.println(total);
+			if (nowPage == null) {
+				nowPage = "1";
+			} 
+			
+			PagingVO pagingVo = new PagingVO(total, Integer.parseInt(nowPage));
+			
+
+			//db rownum검색용
+			int start= pagingVo.getStart();
+			int end=pagingVo.getEnd();
+
+			List<MeetingList> list = meetingService.searchMeeting(keyword, start, end);
+			
+			mv.addObject("list", list);
+			mv.addObject("paging", pagingVo);
+			mv.addObject("keyword", keyword);
+			
+			return mv;
+		}
+		
+
+				
+	}
 	
 	
-	
-	
-}

@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/admin/common_admin.css">
 </head>
 <body>
-       
+	<form>
     <table class="board_view">
         <caption class="my-box">회원정보</caption>
         <colgroup>
@@ -62,7 +62,7 @@
     <a href="#this" id="list" class="btn" >회원목록</a>
     <input class="submit" type="submit" value="회원수정">
     <a href="#this" id="delete" class="btn">회원삭제</a>
-
+	</form>
 
  
  

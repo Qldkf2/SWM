@@ -38,18 +38,8 @@
 </head>
 <body>
 <c:import url="../common/header.jsp" />
+<c:import url="./meetingSubject.jsp"/>
 
-	<section class="tab">
-	<div class="wrap">
-     <a href="/subject/list" class="active"><span class="text">전체</span></a>
-      <a href="/subject/language"><span class="text">어학</span></a>
-      <a href="/subject/employment"><span class="text">취업</span></a>
-      <a href="/subject/official"><span class="text">고시/공무원</span></a>
-      <a href="/subject/hobby"><span class="text">취미/교양</span></a>
-      <a href="/subject/programming"><span class="text">프로그래밍</span></a>
-      <a href="/subject/etc"><span class="text">기타</span></a>
-	</div>
-	</section>
    
 	<div data-v-7c8cb348="" class="container" >
 	

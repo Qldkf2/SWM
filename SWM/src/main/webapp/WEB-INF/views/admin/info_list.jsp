@@ -60,7 +60,7 @@
 					<a href="#" id="spreadBtn02" class="a01">스터디카페관리</a>
 					<ul id="hiddenList01" class="example01" style="display: none;">
 	                  	<li class="gnb04">
-	                  		<a href="?pageChange=studycafe_info.jsp">리스트</a>
+	                  		<a href="?pageChange=/studyCafeinfo">리스트</a>
 	                  	</li>
 	                  	<li class="gnb05">
 	                  		<a href="?pageChange=booking_info.jsp">예약현황</a>

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/header.css">
 
 </head>
@@ -31,9 +31,9 @@
 				<nav>
 					<a href="/" class="active">홈</a>
 					<a href="${pageContext.request.contextPath}/meeting" class="">스터디 모집</a>
-					<a href="/studycafeList" class="">스터디 카페 예약</a>
+					<a href="/studycafeList" class="">스터디 카페</a>
 					<a href="/community" class="">커뮤니티</a>
-					<a href="/activity" class="">보류</a>
+					<a href="/admin" class="">관리자</a>
 					
 				</nav>
 <!-- 				<p class="description">

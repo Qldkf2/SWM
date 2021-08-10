@@ -1,5 +1,7 @@
 package com.ez.swm.login.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -51,5 +53,20 @@ public class MemberDao  {
 		sqlSession.delete("member.deleteMember", member);
 		
 	}
-	
+
+	public List<SignUpForm> selectAllId() {
+		return sqlSession.selectList("member.selectAllId");
+	}
+
+
+	public int idCheck(String userId) {
+		return sqlSession.selectOne("member.idCheck", userId);
+	}
+
+
+	public int nickNameCheck(String nickName) {
+		return sqlSession.selectOne("member.nickNameCheck", nickName);
+	}
+
+
 }	

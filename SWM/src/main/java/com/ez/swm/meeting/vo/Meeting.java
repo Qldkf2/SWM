@@ -13,6 +13,7 @@ public class Meeting {
 	private String meeting_content;
 	private String status;
 	private Date meeting_date;
+	private int meeting_hit;
 	
 	public int getMeeting_no() {
 		return meeting_no;
@@ -75,13 +76,23 @@ public class Meeting {
 		this.meeting_date = meeting_date;
 	}
 	
+	
+	public int getMeeting_hit() {
+		return meeting_hit;
+	}
+	public void setMeeting_hit(int meeting_hit) {
+		this.meeting_hit = meeting_hit;
+	}
+	
 	@Override
 	public String toString() {
 		return "Meeting [meeting_no=" + meeting_no + ", meeting_leader=" + meeting_leader + ", meeting_age="
 				+ meeting_age + ", meeting_subject=" + meeting_subject + ", meeting_address=" + meeting_address
 				+ ", meeting_limit=" + meeting_limit + ", meeting_title=" + meeting_title + ", meeting_content="
-				+ meeting_content + ", status=" + status + ", meeting_date=" + meeting_date + "]";
+				+ meeting_content + ", status=" + status + ", meeting_date=" + meeting_date + ", meeting_hit="
+				+ meeting_hit + "]";
 	}
+
 	
 	
 

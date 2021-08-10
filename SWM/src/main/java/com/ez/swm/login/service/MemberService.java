@@ -1,5 +1,7 @@
 package com.ez.swm.login.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,8 +48,21 @@ public class MemberService {
 		 memberDao.deleteMember(member);
 	  
 	  }
-	 
-	
-	
+
+
+	public List<SignUpForm> selectAllId() {
+		return memberDao.selectAllId();
+	}
+
+
+	public int idCheck(String userId) {
+		return memberDao.idCheck(userId);
+	}
+
+
+	public int nickNameCheck(String nickName) {
+		return memberDao.nickNameCheck(nickName);
+	}
+
 	
 }

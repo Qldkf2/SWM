@@ -18,28 +18,44 @@
 	<c:import url="../common/header.jsp"></c:import>
 	<div id="container" data-id="myarticle">
 		<h1 class="mypagearticlesname">예약 현황</h1>
+		<c:choose>
+		<c:when test="${fn:length(bookList) > 0}">
+			<c:forEach items="${bookList}" var="book">
+		
 		<div class="articlelist" style="display :block;">
 			<ol class="group">
 				<li>
-					<a class="community" href="/community?id=${communityBoardId} "></a>
-					<a class="article" href="/community?id=?&boardId=?&articleId=?">
+					<a class="community" href=""></a>
+					<a class="article" href="">
 						<p class="profile">
-							<span class="nickname">익명</span>
-							<time>07/18 17:05</time>
+							<span class="nickname">${book.nickName}</span> <span>(${book.userName})</span>
+							<time>${book.book_date }</time>
 						</p>
 						<hr>
-						<p class="text short">이젠 스터디카페</p>
+						<p class="text short">스터디카페 이름</p>
 						<!-- <p class="status">
 							<span class ="votecount">0</span>
 							<span class="commentcount">1</span>
 						</p> -->
-						<p class="text short">예약 날짜 : 2021 - 07 - 20</p>
+						<p class="text short">예약 날짜 : ${book.book_date}</p>
+						<p class="text short">예약 시간 : ${book.start_time} ~ ${book.end_time}</p>
 						<hr>
 					</a> 
 				</li>
 			</ol>
 		</div>
+		</c:forEach>
+		</c:when>
+		<c:otherwise>
+		<a data-v-7c8cb348 class="item" style="margin:20px" >
+								
+									<center><img src="https://www.campuspick.com/images/community.board.list.empty.png"/></center>
+									<h1 data-v-7c8cb348="" style="text-align:center; margin:20px">예약한 스터디카페가 없습니다</h1>
+								
+					         </a>
 		
+		</c:otherwise>
+		</c:choose>
 	</div>
 
 </body>

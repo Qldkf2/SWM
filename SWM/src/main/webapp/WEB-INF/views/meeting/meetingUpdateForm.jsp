@@ -22,7 +22,7 @@
 <body>
 
 <c:import url="../common/header.jsp" />
-
+<c:import url="./meetingSubject.jsp"/>
 
 <form data-v-5ccf00ea class="container" name="container" action="/meeting/meetingUpdate" method="post"> 
 <div id="app">

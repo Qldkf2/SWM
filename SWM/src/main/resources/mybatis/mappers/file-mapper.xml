@@ -45,6 +45,23 @@
 		DELETE FROM MEETING_BOARD_FILE
 		WHERE IDX = #{idx}	 
 	 </delete>
-
+	
+	<!-- 스터디 카페 이미지 등록 -->
+	<insert id="studycafeFileInsert" parameterType="hashmap">
+	         <![CDATA[
+            INSERT INTO STUDYCAFE_FILE
+               (IDX,STUDYCAFE_NO,ORIGINAL_FILE_NAME,STORED_FILE_NAME,FILE_SIZE)
+            VALUES
+               (STUDYCAFE_FILE_SEQ.NEXTVAL,#{STUDYCAFE_NO},#{ORIGINAL_FILE_NAME}, #{STORED_FILE_NAME}, #{FILE_SIZE})      
+         ]]>
+	</insert>
+	
+	<!-- 스터디카페 상세보기에 쓸 파일들 가져오기 -->
+	<select id="studycafeDetailFile" resultType="com.ez.swm.studycafe.vo.StudycafeDetailFile">
+		SELECT STUDYCAFE_NO, STORED_FILE_NAME 
+		FROM STUDYCAFE_FILE
+		WHERE STUDYCAFE_NO = #{studycafe_no}	
+		ORDER BY IDX ASC
+	</select>
 
 </mapper>

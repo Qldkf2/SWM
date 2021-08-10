@@ -13,7 +13,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/myPage/askDetail.css">
 
 
-
 </head>
 <body>
 	<c:import url="../common/header.jsp" />
@@ -22,7 +21,7 @@
 	
 	
 	<article data-v-7c8cb348>
-  <h1 data-v-7c8cb348="">1:1 문의</h1>     
+  <h1 data-v-7c8cb348="">내가 쓴 문의 확인</h1>     
 
 				      <div data-v-7c8cb348 class="search">
 				         <form data-v-7c8cb348 class>
@@ -33,92 +32,51 @@
 				      </div>
 					
 					
+					
 		<hr style="background:#d6d6d6; height:1px;">
+					
+					
+					
 				      <div data-v-7c8cb348 class="list">
+				      		<c:choose>
+							  <c:when test="${fn:length(askList) > 0}">
+								 <c:forEach items="${askList}" var="ask">
 				      
-				      <!-- 리스트 -->
-
+				      
+							   	<a data-v-7c8cb348 href="/myPage/myAskDetail?ask_no=${ask.ask_no }" class="item">
+					
+					         	<h2 data-v-7c8cb348="">${ask.ask_title }</h2>
+					         	<p data-v-7c8cb348 class="info" >
+					        	 	<span data-v-7c8cb348="">${ask.nickName }</span>
+					         		<span data-v-7c8cb348="">${ask.ask_date }</span>
+					         		<span data-v-7c8cb348="" class="commentcount">17</span>
+					          </p>
+					         </a>
+					          </c:forEach>	
+					         </c:when>
+					         <c:otherwise>
+					         
+								<a data-v-7c8cb348 class="item" style="margin:20px" >
+								
+									<center><img src="https://www.campuspick.com/images/community.board.list.empty.png"/></center>
+									<h1 data-v-7c8cb348="" style="text-align:center; margin:20px">등록된 문의가 없습니다</h1>
+								
+					         </a>
 		
-							  
-							   <a data-v-7c8cb348 href="/myPage/myAskDetail" class="item">
-					
-					         <h2 data-v-7c8cb348="">질무니가 있어요!</h2>
-					         <p data-v-7c8cb348 class="info" >
-					        	 <span data-v-7c8cb348="">하잇!</span>
-					         	<span data-v-7c8cb348="">오늘 09:12</span>
-					         						         	<span data-v-7c8cb348="" class="commentcount">17</span>
-					          </p>
-					         </a>			
-					         
-						<a data-v-7c8cb348 href="detailAskBoard.jsp" class="item">         					
-					         <h2 data-v-7c8cb348="">오늘 드럽게 느려요!!</h2>
-					         <p data-v-7c8cb348 class="info" >
-					        	 <span data-v-7c8cb348="">끼야야야야</span>
-					         	<span data-v-7c8cb348="">오늘 09:12</span>
-					         						         	<span data-v-7c8cb348="" class="commentcount">17</span>
-					          </p>
-					         </a>
-					         
-					         
-					        <a data-v-7c8cb348 href="/meeting/board?id=113060" class="item">
-					
-					         <h2 data-v-7c8cb348="">오늘 서버 왜이러죵?</h2>
-					         <p data-v-7c8cb348 class="info" >
-					        	 <span data-v-7c8cb348="">하잇!</span>
-					         	<span data-v-7c8cb348="">오늘 09:12</span>
-					         						         	<span data-v-7c8cb348="" class="commentcount">17</span>
-					          </p>
-					         </a>
-	
-					        <a data-v-7c8cb348 href="/meeting/board?id=113060" class="item">
-					
-					         <h2 data-v-7c8cb348="">스터디모임은 어떻게 만들수 있죠?</h2>
-					         <p data-v-7c8cb348 class="info" >
-					        	 <span data-v-7c8cb348="">하잇!</span>
-					         	<span data-v-7c8cb348="">오늘 09:12</span>
-					         						         	<span data-v-7c8cb348="" class="commentcount">17</span>
-					          </p>
-					         </a>
-					         
-					         			         
-
-      				</div>
-
-
-	     	
-	     	
-     	</article>
-     	
-     	
-     </div>
-     	
-
+		
+			
+      						</c:otherwise>
+      						</c:choose>
+      						</div>
  
+     	</article>
+     </div>
 	<div data-v-7c8cb348="" class="container">    		
 		
-		 <a data-v-7c8cb348 href="writeAskBoard.jsp" class="floating write" >문의하기</a>
+		 <a data-v-7c8cb348 href="/myPage/askWrite" class="floating write" >문의하기</a>
 
 	</div>
 	
-
-<div class="modal hidden">
-  <div class="bg"></div>
-
-  <div class="modalBox">
-
-  
-
-	     		<form class="join_meeting">
-					<p class="text"><textarea placeholder="가입신청 글을 간단하게 써주세요! "></textarea></p> 
-					<div class="submit">			
-						<input type="button" id="cancel" value="취소">
-				
-					</div>
-								
-				</form>
-
-  </div>
-</div>
 
 </body>
 </html>

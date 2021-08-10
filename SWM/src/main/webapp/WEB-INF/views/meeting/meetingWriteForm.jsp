@@ -20,8 +20,8 @@
 <link data-vue-meta="ssr" rel="preload" href="${pageContext.request.contextPath}/resources/js/meeting/348d9764bf4bb1ed9da9.js" as="script">
 </head>
 <body>
-
 <c:import url="../common/header.jsp" />
+<c:import url="./meetingSubject.jsp"/>
 
 
 <form data-v-5ccf00ea class="container" name="container" action="/meeting/meetingWriteForm" method="post"> 
@@ -46,27 +46,29 @@
 		</label>
 	</div>
 	
-	<div data-v-5ccf00ea class="section" >
-		<h2 data-v-5ccf00ea>분야</h2>
-		<p data-v-5ccf00ea class="select unselected">분야 선택 : 
-		 <select id="subject" data-v-5ccf00ea class="select unselected" name="meeting_subject" > 
-			<option value="취업">취업</option>
-			<option value="코딩">코딩</option>
-			<option value="토익">토익</option>
-		 </select>
-		</p>
-	</div>
-	
-	<div data-v-5ccf00ea class="section">
-		<h2 data-v-5ccf00ea>지역</h2>
-		<p data-v-5ccf00ea class="select selected">서울 : 
-		 <select id="location" data-v-5ccf00ea class="select unselected" name="meeting_address" > 
-			<option value="강남구">강남구</option>
-			<option value="강서구">강서구</option>
-			<option value="강동구">강동구</option>
-		 </select>
-		</p>
-	</div>
+   <div data-v-5ccf00ea class="section" >
+      <h2 data-v-5ccf00ea>분야</h2>
+      <p data-v-5ccf00ea class="select unselected">분야 선택 : 
+       <select id="subject" data-v-5ccf00ea class="select unselected" name="meeting_subject" > 
+         <option value="어학">어학</option>
+         <option value="취업">취업</option>
+         <option value="고시">고시/공무원</option>
+         <option value="취미">취미/교양</option>
+         <option value="프로그래밍">프로그래밍</option>
+         <option value="기타">기타</option>
+       </select>
+      </p>
+   </div>
+   
+   <div data-v-5ccf00ea class="section">
+      <h2 data-v-5ccf00ea>지역</h2>
+      <p data-v-5ccf00ea class="select unselected">서울 : 
+       <select id="location" data-v-5ccf00ea class="select unselected" name="meeting_address" > 
+          <c:forEach items="${location}" var="loc">
+            <option value=" ${loc.gu}">${loc.gu}</option>
+          </c:forEach>
+       </select>
+
 	
 	<div data-v-5ccf00ea class="section">
 		<h2 data-v-5ccf00ea>모집 인원</h2>

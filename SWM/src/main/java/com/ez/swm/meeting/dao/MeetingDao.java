@@ -9,6 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ez.swm.common.paging.PagingVO;
+import com.ez.swm.meeting.vo.CommentCount;
+import com.ez.swm.meeting.vo.Location;
 import com.ez.swm.meeting.vo.Meeting;
 import com.ez.swm.meeting.vo.MeetingBoard;
 import com.ez.swm.meeting.vo.MeetingBoardComment;
@@ -33,19 +36,38 @@ public class MeetingDao {
 		return sqlSession.insert("Meeting.meetingWrite", meetingWrite);
 	}
 
-	public List<MeetingList> getMeetingList() {
+	public List<MeetingList> getMeetingList(PagingVO vo) {
 	
-		return sqlSession.selectList("Meeting.getMeetingList");
+		return sqlSession.selectList("Meeting.getMeetingList",vo);
+	}
+	//페이징처리  meeting	분야 선택
+	public int countMeeting(Map<String,Object> valueMap) {
+		return sqlSession.selectOne("Meeting.countMeetingSubject", valueMap);
+	}
+	
+	//페이징처리  meeting	검색시 
+	public int countMeetingSearch(Map<String,Object> valueMap) {
+		return sqlSession.selectOne("Meeting.countMeetingSearch", valueMap);
+	}
+	
+	
+	//페이징처리  meeting	검색시 
+	public int countMeetingBoardSearch(Map<String,Object> valueMap) {
+		return sqlSession.selectOne("Meeting.countMeetingBoardSearch", valueMap);
 	}
 
+	//모임게시판 총게시글 수
+	public int countMeetingBoard(int meeting_no){
+		return sqlSession.selectOne("Meeting.countMeetingBoard", meeting_no);
+	}
 	public MeetingDetail getMeetingArticle(int meeting_no) {
 		
 		return sqlSession.selectOne("Meeting.getMeetingArticle", meeting_no);
 	}
 
-	public List<MeetingBoard> getMeetingBoardList(int meeting_no) {
+	public List<MeetingBoard> getMeetingBoardList(Map<String,Object> valueMap) {
 		
-		return sqlSession.selectList("Meeting.getMeetingBoardList", meeting_no);
+		return sqlSession.selectList("Meeting.getMeetingBoardList", valueMap);
 	}
 
 	
@@ -81,7 +103,52 @@ public class MeetingDao {
 	public MeetingBoard getPartyBoardArticle(HashMap<String, Object> valueMap) {
 		return sqlSession.selectOne("Meeting.getPartyBoardArticle", valueMap);
 	}
+	
+	public int getLastLevel(int meeting_board_comment_refno) {
+		return sqlSession.selectOne("Meeting.getLastLevel",meeting_board_comment_refno);
+		
+	}
+	public void insertPartyBoardComment(MeetingBoardComment meetingBoardComment) {
+		 sqlSession.insert("Meeting.insertPartyBoardComment", meetingBoardComment);
+	} 
+	//모임게시판 조회수 업글용
+	public void meetingBoardHitcount(int meeting_board_no) {
+		sqlSession.update("Meeting.updateMeetingboardHitcount", meeting_board_no);
+	}
+	//모임게시판 댓글갯수
+	public List<CommentCount> countMeetingboardComment(int meeting_no) {
+		return sqlSession.selectList("Meeting.countMeetingboardComment", meeting_no);
+		
+	}
+	
 
+	//댓글삭제	
+	public void deleteComment(int meeting_board_comment_no) {
+		sqlSession.update("Meeting.deleteComment", meeting_board_comment_no);
+	}
+	
+	//모임게시판 검색
+	public List<MeetingBoard> searchMeetingBoard(HashMap<String, Object> valueMap) {
+		return sqlSession.selectList("Meeting.searchMeetingBoard", valueMap);
+	}
+	
+	//모집게시판 검색,
+	public List<MeetingList> searchMeeting(HashMap<String, Object> valueMap){
+		return sqlSession.selectList("Meeting.searchMeeting", valueMap);
+	}
+	
+	//모집게시판 분야선택
+	public List<MeetingList> selectSubject(HashMap<String, Object> valueMap){
+		return sqlSession.selectList("Meeting.selectSubject", valueMap);
+	}
+			
+	
+	//지역 리스트
+	public List<Location> locationList(HashMap<String, Object> valueMap){
+		
+		return sqlSession.selectList("Meeting.locationList", valueMap);
+	}
+	
 	public int meetingUpdate(MeetingUpdate mu) {
 		
 		return sqlSession.update("Meeting.meetingUpdate", mu);
@@ -117,14 +184,12 @@ public class MeetingDao {
 	 * sqlSession.update("File.modifyFile", map); }
 	 */
 	public int fileCheck(int idx) {
-		
 		return sqlSession.selectOne("File.fileCheck", idx);
 	}
 
 	// 모임 내 게시글 기존 파일 삭제
 	public void deleteFile(int idx) {
 		sqlSession.delete("File.deleteFile", idx);
-		
 	}
 
 	public int meetingBoardDelete(int meeting_board_no) {
@@ -146,4 +211,36 @@ public class MeetingDao {
 	public String permitCheck(MeetingPermitYes mp) {
 		return sqlSession.selectOne("Meeting.permitCheck",mp);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

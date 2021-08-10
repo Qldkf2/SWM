@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	 namespace="Studycafe">
+
+	<!-- 스터디 카페 등록하기 -->
+	<insert id="studycafeWrite" parameterType="com.ez.swm.admin.vo.StudycafeWrite">
+	INSERT INTO STUDYCAFE VALUES(
+		SEQ_STUDYCAFE.NEXTVAL , #{studycafe_name}, #{studycafe_address} ,#{studycafe_phone},
+		#{studycafe_open} ,#{studycafe_end} ,#{studycafe_content}
+	)
+	</insert>
+	<!-- 파일 업로드 시 스카 번호 불러오기 -->
+	<select id="getStudycafe_no" resultType="int" >
+		SELECT SEQ_STUDYCAFE.CURRVAL FROM DUAL	
+	</select>
+	<!-- 인기스터디카페 리스트 불러오기 -->
+	<select id="BestStudycafeList" resultType="com.ez.swm.studycafe.vo.Studycafe">
+		SELECT STUDYCAFE_NO, STUDYCAFE_NAME, STUDYCAFE_ADDRESS,STUDYCAFE_PHONE,STUDYCAFE_OPEN,STUDYCAFE_END,STUDYCAFE_CONTENT
+		FROM STUDYCAFE
+		WHERE STUDYCAFE_NO BETWEEN 10 AND 14
+	</select>
+	<!-- 신규 스터디카페 지점 리스트 불러오기 -->
+		<select id="NewStudycafeList" resultType="com.ez.swm.studycafe.vo.Studycafe">
+		<![CDATA[
+		SELECT * FROM (SELECT STUDYCAFE_NO, STUDYCAFE_NAME, STUDYCAFE_ADDRESS,
+						STUDYCAFE_PHONE,STUDYCAFE_OPEN,STUDYCAFE_END,STUDYCAFE_CONTENT
+						FROM STUDYCAFE
+						ORDER BY STUDYCAFE_NO DESC)
+        WHERE ROWNUM <=5
+		]]>
+	</select>
+	
+	<!-- 키워드 값 받아서 카페 리스트 뿌려주기 -->
+	<select id="studycafeSearch" resultType="com.ez.swm.studycafe.vo.Studycafe" parameterType="String">
+		SELECT STUDYCAFE_NO, STUDYCAFE_NAME, STUDYCAFE_ADDRESS,STUDYCAFE_PHONE,STUDYCAFE_OPEN,STUDYCAFE_END,STUDYCAFE_CONTENT
+		FROM STUDYCAFE
+		WHERE STUDYCAFE_ADDRESS LIKE #{keyword}||'%'
+	</select>
+	
+	<select id="getStudycafeOne" resultType="com.ez.swm.studycafe.vo.Studycafe">
+		SELECT * FROM STUDYCAFE
+		WHERE STUDYCAFE_NO = #{studycafe_no}
+	</select>
+	
+</mapper>

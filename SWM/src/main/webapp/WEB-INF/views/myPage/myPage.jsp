@@ -19,8 +19,8 @@
 <div id="container" data-token="A2Gc5/hHNw8KbD/hUT90EY+SNWGgSbjYueIr8QOMfbENUfis6eoUJFlAU+Yboqwg8O/yFukL7NEZgF6gM/8protj+L+OOgqFahkJMnXWM2kxi9+fa4Wkt7PhyK5wBQUH6fJxvaesF6DDm0l/KTJnszZasH2tDr9FbxC5IihrkXQ=">
     <div class="profile">
       <img src="https://cf-epi.campuspick.com/0.png" class="picture">
-      <span class="nickname">회원닉네임</span>
-      <span class="userid">회원아이디</span>
+      <span class="nickname">${member.nickName }</span>
+      <span class="userid">${member.userId }</span>
     </div>
     <h2>내 정보</h2>
     <ol class="items">
@@ -41,14 +41,15 @@
     </ol>
     <h2>스터디 카페 정보</h2>
     <ol class="items">
-      <li><a href="/myPage/myBookList">예약 현황</a></li>
+      <li><a href="/myPage/myBookList?userNo=${member.userNo }">예약 현황</a></li>
       <li><a href="/myPage/articles?id=mycommentarticle">예약 변경</a></li>
       <li><a href="/myPage/articles?id=mycommentarticle">예약 취소</a></li>
     </ol>
     <h2>1:1 문의</h2>
     <ol class="items">
       <li><a href="/myPage/askWrite">문의 작성</a></li>
-      <li><a href="/myPage/myAskList">문의 확인</a></li>
+      <li><a href="/myPage/myAskList?id=${member.userNo }">문의 확인</a></li>
+      <li><a href="/myPage/adminAskList">관리자 문의 작성</a></li>
     </ol>
   </div>
 

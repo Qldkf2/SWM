@@ -1,0 +1,219 @@
+
+@charset "utf-8";
+
+section.search, section.loc {
+  position: static; width: 100%; box-sizing: border-box; font-size: 0; background-color: #fff;
+}
+section.search.fixed, section.loc.fixed {
+  position: fixed; z-index: 5; 
+}
+section.loc.fixed {
+  border-bottom: 1px solid #d6d6d6;
+}
+
+section.search {
+  padding: 16px 16px 0 16px;
+}
+section.search > div.wrap {
+  margin: 0 auto; max-width: 440px;
+}
+section.search > div.wrap > form {
+  position: relative;
+}
+section.search > div.wrap > form > input.keyword {
+  width: 100%;  line-height: 20px; padding: 10px 48px 10px 16px; border-radius: 20px; color: #292929; font-size: 14px; background-color: #f2f2f2;
+}
+section.search > div.wrap > form > input.submit {
+  position: absolute; right: 0; top: 0; width: 40px; height: 40px; color: transparent; font-size: 0; background: transparent url("https://www.campuspick.com/images/filter.search.png") no-repeat center center; background-size: 24px 24px;
+}
+
+section.loc {
+  white-space: nowrap;
+}
+section.loc {
+  overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;
+}
+section.loc::-webkit-scrollbar {
+  display: none; background-color: transparent;
+}
+section.loc > div.wrap {
+  text-align: center;
+}
+section.loc > div.wrap > a {
+  display: inline-block; padding: 0 12px; height: 56px; line-height: 56px; box-sizing: border-box; border-bottom: 3px solid transparent;
+}
+section.loc > div.wrap > a > span.text {
+  color: #292929; font-size: 14px;
+}
+section.loc > div.wrap > a > span.count {
+  margin-left: 4px; color: #a6a6a6; font-size: 10px; font-weight: bold; letter-spacing: 0;
+}
+section.loc > div.wrap > a > span.count.highlight {
+  color: #ffa81f;
+}
+section.loc > div.wrap > a.active {
+  border-bottom-color: #1dcdff;
+}
+section.loc > div.wrap > a.active > span.text {
+  color: #0aafdf; font-weight: bold;
+}
+section.loc > div.wrap > a.active > span.count {
+  color: #0aafdf;
+}
+
+#container {
+  margin: 8px auto; font-size: 0;
+}
+@media only screen and (min-width: 896px) {
+  #container {
+    margin: 16px auto; width: 896px;
+  }
+}
+
+#container p.info > span {
+  display: inline-block; margin-right: 8px; line-height: 18px; color: #a6a6a6; font-size: 12px; letter-spacing: 0;
+}
+#container p.info > span.highlight {
+  color: #0aafdf;
+}
+#container p.info > span.dday {
+  font-weight: bold;
+}
+#container p.info > span.viewcount {
+  padding-left: 14px; background: transparent url('/images/viewcount2.png') no-repeat left center; background-size: 12px 8px;
+}
+
+#container > div.horizontal {
+  margin-bottom: 8px; background-color: #fff;
+}
+#container > div.horizontal.dummy {
+  height: 321px;
+}
+#container > div.horizontal > h2 {
+  padding: 24px 0 16px 16px; line-height: 27px; color: #292929; font-size: 18px; font-weight: bold;
+}
+#container > div.horizontal > div.items {
+  padding: 0 16px 24px 16px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; white-space: nowrap;
+}
+#container > div.horizontal > div.items::-webkit-scrollbar {
+  display: none; background-color: transparent;
+}
+#container > div.horizontal > div.items > a.item {
+  display: inline-block; margin-right: 8px; width: 160px;
+}
+#container > div.horizontal > div.items > a.item:last-of-type {
+  margin-right: 0;
+}
+#container > div.horizontal > div.items > a.item > figure {
+  display: block; width: 300px; height: 300px; background-color: #f9f9f9; background-position: center top; background-size: cover;
+}
+#container > div.horizontal > div.items > a.item > h3 {
+  display: -webkit-box; margin: 8px 8px 4px 8px; height: 40px; line-height: 20px; color: #292929; font-size: 14px; white-space: normal; word-wrap: break-word; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+#container > div.horizontal > div.items > a.item > p.info {
+  margin-left: 8px;
+}
+@media only screen and (min-width: 896px) {
+  #container > div.horizontal {
+    margin-bottom: 16px;
+  }
+  #container > div.horizontal > div.items > a.item {
+    margin-right: 16px;
+  }
+}
+
+#container > div.list > div.item {
+  margin-bottom: 8px; background-color: #fff; vertical-align: top;
+}
+#container > div.list > div.item > a.top {
+  display: block; padding: 16px;
+}
+#container > div.list > div.item > a.top > figure {
+  float: right; display: block; margin-left: 8px; width: 80px; height: 114px; background-color: #f9f9f9; background-position: center top; background-size: cover;
+}
+#container > div.list > div.item > a.top > p.badges {
+  margin-bottom: 8px;
+}
+#container > div.list > div.item > a.top > p.badges > span {
+  display: inline-block; margin: 0 4px 4px 0; padding: 0 8px; line-height: 20px; border-radius: 10px; color: #737373; font-size: 12px; background-color: #f2f2f2;
+}
+#container > div.list > div.item > a.top > h2 {
+  display: -webkit-box; margin-bottom: 4px; max-height: 48px; line-height: 24px; color: #292929; font-size: 16px; font-weight: bold; word-wrap: break-word; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+#container > div.list > div.item > a.top > p.company {
+  margin-bottom: 8px; line-height: 20px; color: #737373; font-size: 14px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+#container > div.list > div.item > div.bottom {
+  border-top: 1px solid #f2f2f2;
+}
+#container > div.list > div.item > div.bottom > a {
+  display: inline-block; width: 33%; height: 40px; line-height: 40px; text-align: center;
+}
+#container > div.list > div.item > div.bottom > a > span.text {
+  color: #292929; font-size: 14px;
+}
+#container > div.list > div.item > div.bottom > a > span.count {
+  margin-left: 4px; color: #a6a6a6; font-size: 12px; font-weight: bold; letter-spacing: 0;
+}
+#container > div.list > div.item > div.bottom > a > span.count.highlight {
+  color: #ffa81f;
+}
+
+#container > div.ad {
+  margin-bottom: 8px; text-align: center; background-color: #fff;
+}
+#container > div.ad a {
+  display: flex; justify-content: center; cursor: pointer;
+}
+#container > div.ad img {
+  height: 85px;
+}
+
+@media only screen and (min-width: 896px) {
+  #container > div.list > div.item {
+    display: inline-block; margin-right: 16px; margin-bottom: 16px; width: 440px;
+  }
+  #container > div.list > div.item:nth-child(even) {
+    margin-right: 0;
+  }
+  #container > div.list > div.item > a.top > figure {
+    width: 120px; height: 171px;
+  }
+  #container > div.ad {
+    margin-bottom: 16px;
+  }
+  #container > div.ad img {
+    height: 110px;
+  }
+}
+
+#container > div.empty {
+  padding: 96px 0; text-align: center;
+}
+#container > div.empty > p {
+  color: #a6a6a6; font-size: 18px;
+}
+
+.item .jb-wrap {
+   position:relative ;
+   display : inline-block;
+}
+.jb-wrap img {
+  
+}
+.jb-text {
+    position: absolute;
+    top: 60%;
+    left: 40%;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+}
+.jb-text2 {
+	position: absolute;
+    top: 55%;
+    left: 40%;
+    font-size: 10px;
+    color: white;
+    font-weight: 600;
+}

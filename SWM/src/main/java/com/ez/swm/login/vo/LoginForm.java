@@ -4,6 +4,7 @@ public class LoginForm {
 	
 	private String userId;
 	private String password;
+	private String status;
 	
 	public String getUserId() {
 		return userId;
@@ -18,9 +19,15 @@ public class LoginForm {
 		this.password = password;
 	}
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
-		return "LoginForm [userId=" + userId + ", password=" + password + "]";
+		return "LoginForm [userId=" + userId + ", password=" + password + ", status=" + status + "]";
 	}
 	
 	

@@ -28,101 +28,52 @@
 			
 					<article data-v-7c8cb348>			
 							<div data-v-7c8cb348="">
-							    <h2 data-v-7c8cb348="">질무니가 있어요</h2>  
+							    <h2 data-v-7c8cb348="">${detail.ask_title }</h2>  
 							    		     <p data-v-7c8cb348="" class="info">
-											     <span data-v-7c8cb348="">07/15 10:36</span> 
+											     <span data-v-7c8cb348="">${detail.ask_date }</span> 
 										     </p>
 							    			<p data-v-7c8cb348="" class="text">
-												시간되시는분들 댓글!!1<br>
-												1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>
+												${detail.ask_content }
 											</p>
-					
 							</div>
-
-
-						</article>
-
-			
-
-
-	     		<form data-v-7c8cb348="" class="comment">
-
-					<div data-v-7c8cb348="" class="submit">			
-						<input data-v-7c8cb348="" type="submit" value="댓글쓰기">
-					</div>
-						<hr style="background:#d6d6d6; height:1px;">				
-					<p data-v-7c8cb348="" class="text"><textarea data-v-7c8cb348="" placeholder="댓글을 입력하세요. "></textarea></p> 
-	
-								
-				</form>
-
-	     	<hr style="background:#d6d6d6; height:1px;">
-     	</article>
+					</article>
+     </article>
      	
+				<c:choose>
+		     	<c:when test="${adminReply != null}">
 
-
+				<div data-v-7c8cb348="" class="comments">
 	
-		<div data-v-7c8cb348="" class="comments">
-		
-		<!-- 부모댓글 class="comment parent" -->
 			<div data-v-7c8cb348="" class="comment parent" >			
 				<p data-v-7c8cb348="" class="profile" >
-					<span data-v-7c8cb348="" class="writer" > 닉네임을 몬정해써</span>
-					<span data-v-7c8cb348="" class="info">(07/16 10:25)</span> 
+					<span data-v-7c8cb348="" class="writer" >관리자</span>
+					<span data-v-7c8cb348="" class="info">${adminReply.ask_comment_date }</span> 
 					<span data-v-7c8cb348="" class="delete"><img src="../../images/delete.png" width="13px" height="13px"></span>
 				</p> 			
-				<p data-v-208a49f8="" data-v-7c8cb348="" class="text">저요저요!</p> 
+				<p data-v-208a49f8="" data-v-7c8cb348="" class="text">${adminReply.ask_comment_content }</p> 
 					
-			</div>
-				
-			<!-- 자식댓글 class="comment child" -->	
-			<div data-v-7c8cb348="" class="comment child">			
+			</div>		
+		</div>
+</c:when>	
+					<c:otherwise>
+					<div data-v-7c8cb348="" class="comments">
+					<div data-v-7c8cb348="" class="comment parent" >			
 				<p data-v-7c8cb348="" class="profile" >
-					<span data-v-7c8cb348="" class="writer">댓글답변</span>
-					<span data-v-7c8cb348="" class="info">(07/16 10:25)</span> 
-					<span data-v-7c8cb348="" class="delete"><img src="../../images/delete.png" width="13px" height="13px"></span>
-				</p> 			
-				<p data-v-208a49f8="" data-v-7c8cb348="" class="text">언제 시간되시나용</p> 
-
+					<span data-v-7c8cb348="" class="writer">아직 답변이 완료되지 않았습니다</span>
+				</p> 	
 			</div>
-			
-			
-		<div data-v-7c8cb348="" class="comment parent">			
-			<p data-v-7c8cb348="" class="profile" >
-				<span data-v-7c8cb348="" class="writer">흑흑</span>
-				<span data-v-7c8cb348="" class="info">(07/16 10:25)</span> 
-				<span data-v-7c8cb348="" class="delete"><img src="../../images/delete.png" width="13px" height="13px"></span>
-				
-			</p> 			
-			<p data-v-208a49f8="" data-v-7c8cb348="" class="text">내일은 안되나용?</p> 
+			</div>
+		</c:otherwise>
+		</c:choose>
 
-
-		</div>
 		
-		
-		<div data-v-7c8cb348="" class="comment parent">			
-			<p data-v-7c8cb348="" class="profile" >
-				<span data-v-7c8cb348="" class="writer">구뜨!</span>
-				<span data-v-7c8cb348="" class="info">(07/16 10:25)</span> 
-				<span data-v-7c8cb348="" class="delete"><img src="../../images/delete.png" width="13px" height="13px"></span>
-			</p> 			
-			<p data-v-208a49f8="" data-v-7c8cb348="" class="text">저도 가능!!</p> 
-
-
-		</div>	
-		
-		</div>
-		
-		
-		
-
      </div>
      	
 	
 	  	
 	<div data-v-7c8cb348="" class="container">    	
 
-		  <a data-v-7c8cb348="" href="/myPage/myAskList"  class="floating write">목록</a> <!---->      	
+		  <a data-v-7c8cb348="" href="/myPage/myAskList?id=${member.userNo }"  class="floating write">목록</a> <!---->      	
 		  <a data-v-7c8cb348="" href="deleteBoard.jsp"  class="floating write">삭제</a> <!---->      	
 	</div>
 

@@ -6,6 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html lang="kr">
 <head>
+
 <meta charset="utf-8">
 <title>스윗미</title>
 <link rel="stylesheet" type="text/css"
@@ -16,24 +17,107 @@
 	href="${pageContext.request.contextPath}resources/css/meeting/meeting.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/meeting/meeting2.css">
+<script defer type="text/javascript">
+window.onload = function() {
+	/* 신청 현황 모달 스크립트 */
+	$('.modal-container').hide();
+	
+	$('#modal2').on("click" ,function(){
+		$('.modal-container').show();
+	});
+	$('.bg2').on("click" ,function(){
+		$('.modal-container').hide();
+	});
+	$('.btn-wrap').on("click" ,function(){
+		$('.modal-container').hide();
+	});
+	
+	
+	function onClick() {
+	    document.querySelector(".modal").classList.remove("hidden");
+	  }
+	  function offClick() {
+	    document.querySelector(".modal").classList.add("hidden");
+	  }
+	
+	  document.getElementById('modal').addEventListener("click", onClick);
+	  document.getElementById('cancel').addEventListener("click", offClick);
+	  document.querySelector(".bg").addEventListener("click", offClick);
+	  
+	
+};	
+
+</script>
 <script>
+/* 모임 삭제 ajax */
+var meetingDelete = document.getElementById('meetingDelete');
+var meeting_no = document.getElementById('meeting_no');
+	meetingDelete.addEventListener('click', function(){
+		if(confirm("삭제하시겠습니까 ?.?")) {
+			$.ajax({
+				url :"/meeting/meetingDelete",
+				type : "POST",
+				data : {
+					meeting_no : meeting_no
+				},
+				success :function() {
+					alert("삭제되었습니당");
+					location.href='/meeting';
+				}
+			});
+		}
+	});
+/* 모임 신청 수락 ajax */
+ 
+function meetingPermitYes(userNo){
+	var meeting_no = $('#meeting_no').val();
+	$.ajax({
+		url :"/meeting/meetingPermitYes" ,
+		type : "POST" ,
+		data :"meeting_no="+meeting_no+"&userNo="+userNo,
+		success :function() {
+			console.log("성공");
+			location.reload();
+			$('.modal-container').show();
+				
+		}  ,error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+		});
+	}
+	
+/* 모임 신청 거절 ajax */
+	function meetingPermitNo(userNo){
+		$.ajax({
+			url :"/meeting/meetingPermitNo" ,
+			type : "POST" ,
+			data :"meeting_no="+meeting_no+"&userNo="+userNo,
+			success :function() {
+				console.log("성공");
+				location.reload();
+				
+			}  ,error:function(request,status,error){
+			   alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+
+		});
+	}
+/* 모임 가입 유뮤 체크 스크립트 */
+function permitCheck(){
+	var userNo = ${member.userNo};
+	var permitCheck = $('#permitCheck').val();
+			if(permitCheck == 'N'){
+				alert("모임에 가입되지 않은 사용자입니다 ");
+			location.href="/meeting/meetingDetail?meeting_no="+${article.meeting_no};
+		} else{
+			location.href="/meeting/meetingBoard?meeting_no="+${article.meeting_no};
+		}
+}
 
 </script>
 </head>
 <body>
-	<c:import url="../common/header.jsp" />
 
-	<section class="tab">
-		<div class="wrap">
-			<a href="/subject/list" class="active"><span class="text">전체</span></a>
-			<a href="/subject/language"><span class="text">어학</span></a> <a
-				href="/subject/employment"><span class="text">취업</span></a> <a
-				href="/subject/official"><span class="text">고시/공무원</span></a> <a
-				href="/subject/hobby"><span class="text">취미/교양</span></a> <a
-				href="/subject/programming"><span class="text">프로그래밍</span></a> <a
-				href="/subject/etc"><span class="text">기타</span></a>
-		</div>
-	</section>
+	<c:import url="../common/header.jsp" />
+<c:import url="./meetingSubject.jsp"/>
 
 	<div data-v-7c8cb348="" class="container">
 
@@ -71,7 +155,6 @@
 			</section>
 				</c:otherwise>
 			</c:choose>
-			
 
 			<div data-v-7c8cb348="" class="about">
 				<h3 data-v-7c8cb348="">분야</h3>
@@ -180,93 +263,6 @@
 		</div>
 	</div>
 
-<script defer type="text/javascript">
-window.onload = function() {
-	/* 신청 현황 모달 스크립트 */
-	$('.modal-container').hide();
-	
-	$('#modal2').on("click" ,function(){
-		$('.modal-container').show();
-	});
-	$('.bg2').on("click" ,function(){
-		$('.modal-container').hide();
-	});
-	$('.btn-wrap').on("click" ,function(){
-		$('.modal-container').hide();
-	});
-	
-	function onClick() {
-	    document.querySelector(".modal").classList.remove("hidden");
-	  }
-	  function offClick() {
-	    document.querySelector(".modal").classList.add("hidden");
-	  }
-	
-	  document.getElementById('modal').addEventListener("click", onClick);
-	  document.getElementById('cancel').addEventListener("click", offClick);
-	  document.querySelector(".bg").addEventListener("click", offClick);
-	  
-		/* 모임 가입 유뮤 체크 스크립트 */
-		function permitCheck(){
-			var userNo = ${member.userNo};
-			var permitCheck = ${permitCheck};
-					if(permitCheck == 'N'){
-						alert("모임에 가입되지 않은 사용자입니다 ");
-					location.href="/meeting/meetingDetail?meeting_no="+${article.meeting_no};
-				} else{
-					location.href="/meeting/meetingBoard?meeting_no="+${article.meeting_no};
-				}
-		}
-	/* 모임 신청 수락 ajax */
-	function meetingPermitYes(userNo){
-		$.ajax({
-			url :"/meeting/meetingPermitYes" ,
-			type : "POST" ,
-			data :"meeting_no="+meeting_no+"&userNo="+userNo,
-			success :function() {
-				console.log("성공");
-				location.reload();
-					
-			}  ,error:function(request,status,error){
-			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
-			});
-		}
-		
-	/* 모임 신청 거절 ajax */
-		function meetingPermitNo(userNo){
-			$.ajax({
-				url :"/meeting/meetingPermitNo" ,
-				type : "POST" ,
-				data :"meeting_no="+meeting_no+"&userNo="+userNo,
-				success :function() {
-					console.log("성공");
-					location.reload();
-					
-				}  ,error:function(request,status,error){
-				   alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
-
-			});
-		}
-	/* 모임 삭제 ajax */
-		var meetingDelete = document.getElementById('meetingDelete');
-		var meeting_no = document.getElementById('meeting_no');
-			meetingDelete.addEventListener('click', function(){
-				if(confirm("삭제하시겠습니까 ?.?")) {
-					$.ajax({
-						url :"/meeting/meetingDelete",
-						type : "POST",
-						data : {
-							meeting_no : meeting_no
-						},
-						success :function() {
-							alert("삭제되었습니당");
-							location.href='/meeting';
-						}
-					});
-				}
-			});
-};	
-</script>
 
 </body>
 </html>
