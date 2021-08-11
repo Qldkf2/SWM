@@ -7,14 +7,11 @@ public class BookVo {
 	private String studycafe_name;
 	private int studycafe_no;
 	private int booker_no;
-	private int studycafe_roomno;
-	private String room_strength;
+	private String studycafe_room;
+	private int permit_limit;
 	private String book_date;
 	private String start_time;
 	private String end_time;
-	
-	
-
 	public int getBook_no() {
 		return book_no;
 	}
@@ -39,12 +36,17 @@ public class BookVo {
 	public void setBooker_no(int booker_no) {
 		this.booker_no = booker_no;
 	}
-	
-	public int getStudycafe_roomno() {
-		return studycafe_roomno;
+	public String getStudycafe_room() {
+		return studycafe_room;
 	}
-	public void setStudycafe_roomno(int studycafe_roomno) {
-		this.studycafe_roomno = studycafe_roomno;
+	public void setStudycafe_room(String studycafe_room) {
+		this.studycafe_room = studycafe_room;
+	}
+	public int getPermit_limit() {
+		return permit_limit;
+	}
+	public void setPermit_limit(int permit_limit) {
+		this.permit_limit = permit_limit;
 	}
 	public String getBook_date() {
 		return book_date;
@@ -64,20 +66,16 @@ public class BookVo {
 	public void setEnd_time(String end_time) {
 		this.end_time = end_time;
 	}
-	
-	public String getRoom_strength() {
-		return room_strength;
-	}
-	public void setRoom_strength(String room_strength) {
-		this.room_strength = room_strength;
-	}
 	@Override
 	public String toString() {
 		return "BookVo [book_no=" + book_no + ", studycafe_name=" + studycafe_name + ", studycafe_no=" + studycafe_no
-				+ ", booker_no=" + booker_no + ", studycafe_roomno=" + studycafe_roomno + ", room_strength="
-				+ room_strength + ", book_date=" + book_date + ", start_time=" + start_time + ", end_time=" + end_time
-				+ "]";
+				+ ", booker_no=" + booker_no + ", studycafe_room=" + studycafe_room + ", permit_limit=" + permit_limit
+				+ ", book_date=" + book_date + ", start_time=" + start_time + ", end_time=" + end_time + "]";
 	}
+	
+	
+	
+	
 	
 		
 

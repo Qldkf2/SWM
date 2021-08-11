@@ -1,38 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
 <head>
 <meta charset="UTF-8">
-    <title>아이디찾기</title>
-<link rel="stylesheet" type="text/css" href="../css/findId.css">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/login/findId2.css">
 </head>
 <body>
-    <header>
-        <div class="header_logo" style="width:15%;margin-top:50px;">
-        </div>
-    </header>
-    <div class="form-wrap">
-        <div id="register">
-            <p style="font-size:35px;">비밀번호 찾기</p>
-        </div>
-        <div class="secondmenu">
-            <div><p id="join"><font size="2px">고객님의 정보와 일치하는 비밀번호 입니다.</font></div>
-            
-            <div id="menu2">
-                <p>&nbsp;비밀번호 : <b>${findPw.password }</b> </p>
-            </div>
-        </div>
-        <div id="notice">
-        	<p>· 비밀번호를 찾지 못했다면 고객센터(0000-0000)로 문의해주세요. </p>
-        	<p>· 아직 스윗미 회원이 아니시라면 회원가입을 해주세요. &nbsp; <a href="link"><b><font size="0.5">바로가기</font></b></a> </p>
-        </div>
-        <br/><br/><br/>
-        	<div class="btn_wrap">
-				<a href="javascript:;">로그인</a> <!-- 나중에 넘어갈 로그인 화면 페이지 a태그로 연결! -->
-			</div>
-        <br />
-        <br />
+
+ <c:import url="../common/header.jsp"></c:import>
+ 
+<div id="container" >
+    <div class="menu">
+      <a class="active"><span>비밀번호 찾기 결과</span></a>
     </div>
+    <form>
+    <p style="text-align:center"><b> ${findPw.userName} </b>의 비밀번호는 <b><font color="#c62917"> ${findPw.password} </font></b> 입니다.</p>
+    <br/><br/>
+      <input type="button" onclick="location.href='/loginForm';" value="로그인 하기">
+    </form>
+  </div>
+  
 </body>
 </html>

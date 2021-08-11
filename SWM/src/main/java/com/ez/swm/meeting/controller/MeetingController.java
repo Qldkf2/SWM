@@ -122,20 +122,23 @@ public class MeetingController {
 			Member m = new Member();
 			HttpSession session = request.getSession();
 			m = (Member)session.getAttribute("member");
-			int userNo = m.getUserNo();
+			if(m != null) {
+				int userNo = m.getUserNo();
+				MeetingPermitYes mp = new MeetingPermitYes();
+				mp.setMeeting_no(meeting_no);
+				mp.setUserNo(userNo);
+				String permitCheck = meetingService.permitCheck(mp);
+				System.out.println("N아 왔냐 :" + permitCheck);
+				mv.addObject("permitCheck",permitCheck);
+			}
+			
 			MeetingDetail meetingDetail = meetingService.getMeetingArticle(meeting_no);
 			List<MeetingPermitList> meetingPermitList = meetingService.meetingPermitList(meeting_no);
-			MeetingPermitYes mp = new MeetingPermitYes();
-			mp.setMeeting_no(meeting_no);
-			mp.setUserNo(userNo);
-			String permitCheck = meetingService.permitCheck(mp);
-			System.out.println("N아 왔냐 :" + permitCheck);
-
 			
 			mv.addObject("article",meetingDetail);
 			mv.addObject("member",m);
 			mv.addObject("mpList",meetingPermitList);
-			mv.addObject("permitCheck",permitCheck);
+			
 			return mv;
 	}
 	
@@ -209,7 +212,6 @@ public class MeetingController {
 					ModelAndView mv=  new ModelAndView("meeting/meetingBoard");
 					
 					int total=meetingService.countMeetingBoard(meeting_no);
-					
 					if (nowPage == null) {
 						nowPage = "1";
 					} 
@@ -324,10 +326,11 @@ public class MeetingController {
 	public ModelAndView meetingBoardModify(MeetingBoardModify meetingBoardModify, MultipartHttpServletRequest request,
 			@RequestParam(value="idx",defaultValue="9999") int idx) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
+		int meeting_no = meetingBoardModify.getMeeting_no();
+		int party_no = meetingBoardModify.getMeeting_board_no();
 		int result = meetingService.meetingBoardModify(meetingBoardModify, request, idx);
 		String msg = ""; 
-		String loc = "/meeting"; 
+		String loc = "/meeting/meetingBoardDetail?meeting_no="+meeting_no+"&party_no="+party_no;
 		if(result > 0) { 
 			 msg = "게시글수정 성공~.~";
 		 	  

@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ez.swm.admin.vo.StudycafeWrite;
+import com.ez.swm.freeBoard.vo.FreeBoardWrite;
 import com.ez.swm.meeting.vo.MeetingBoard;
 import com.ez.swm.meeting.vo.MeetingBoardModify;
 
@@ -138,6 +139,48 @@ public List<Map<String, Object>> parseInsertFileInfo(StudycafeWrite studycafeWri
 			
 			listMap = new HashMap<String,Object>(); 
 			listMap.put("STUDYCAFE_NO", studycafe_no); 
+			listMap.put("ORIGINAL_FILE_NAME", originalFileName); 
+			listMap.put("STORED_FILE_NAME", storedFileName); 
+			listMap.put("FILE_SIZE", multipartFile.getSize()); 
+			list.add(listMap);
+			
+		}
+	}
+	// System.out.println("АЇЖїБо : " + list);
+	
+	return list;
+}
+
+public List<Map<String, Object>> parseInsertFileInfo(FreeBoardWrite freeBoardWrite, MultipartHttpServletRequest request) throws Exception{
+	Iterator<String> iterator = request.getFileNames();
+	 String filePath ="C:\\Users\\kimbb\\git\\SWM\\SWM\\src\\main\\webapp\\resources\\files\\freeBoard\\";
+	MultipartFile multipartFile=null;
+	String originalFileName = null; 
+	String originalFileExtension = null;
+	String storedFileName = null;
+
+	List<Map<String, Object>> list = new ArrayList<Map<String,Object>>()	;
+	Map<String,Object> listMap = null;
+	
+	int  free_no = freeBoardWrite.getFree_no();
+
+	File file = new File(filePath);
+	
+	while(iterator.hasNext()) {
+		multipartFile=request.getFile(iterator.next());
+
+		if(multipartFile.isEmpty()==false) {
+
+			originalFileName = multipartFile.getOriginalFilename();
+
+			originalFileExtension=originalFileName.substring(originalFileName.lastIndexOf(".")); 
+			storedFileName = getRandomString() + originalFileExtension;
+
+			file=new File(filePath+storedFileName);
+			multipartFile.transferTo(file);
+			
+			listMap = new HashMap<String,Object>(); 
+			listMap.put("FREE_NO", free_no); 
 			listMap.put("ORIGINAL_FILE_NAME", originalFileName); 
 			listMap.put("STORED_FILE_NAME", storedFileName); 
 			listMap.put("FILE_SIZE", multipartFile.getSize()); 

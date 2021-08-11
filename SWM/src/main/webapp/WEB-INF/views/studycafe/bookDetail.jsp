@@ -221,14 +221,14 @@ function fn_insertBook(){
 		  <option value="22">22:00</option>
 	 </select> 
  </h3>
-
-</div>
-	</div>
-	<button type="submit" class="button3" style="text-align:right; float: right; font-size:15px;"> 예 약
+<button type="submit" class="button3" style="text-align:right; float: right; font-size:15px;"> 예 약
 	</button>
 	<button type="reset" class="button3">
 	<span class="close" style="float: left; font-size:15px;">취 소</span>
 	</button>
+</div>
+	</div>
+	
 	</div>
 </div>
 </form>

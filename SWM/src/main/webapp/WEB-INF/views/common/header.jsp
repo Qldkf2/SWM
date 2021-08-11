@@ -32,7 +32,7 @@
 					<a href="/" class="active">홈</a>
 					<a href="${pageContext.request.contextPath}/meeting" class="">스터디 모집</a>
 					<a href="/studycafeList" class="">스터디 카페</a>
-					<a href="/community" class="">커뮤니티</a>
+					<a href="/freeBoard" class="">커뮤니티</a>
 					<a href="/admin" class="">관리자</a>
 					
 				</nav>

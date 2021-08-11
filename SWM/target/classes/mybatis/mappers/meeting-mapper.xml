@@ -289,7 +289,7 @@
 	values(
 	    SEQ_MEETING_BOARD_COMMENT.nextval,
 	    #{meeting_board_no},
-	    #{userno},
+	    #{userNo},
 	   	#{meeting_board_comment_content},
 	    SYSDATE,
 	    #{meeting_board_comment_level},

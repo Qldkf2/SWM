@@ -19,18 +19,21 @@ public class BookController {
 	@Autowired
 	private BookService bookService; 
 	
-	
-	//데이터 넣기		
-	
-	
 		@RequestMapping(value="/book/studycafeBook", method=RequestMethod.POST) 
-		public String book(BookVo bookVo ,Model model) throws Exception{
-			
+		public ModelAndView book(BookVo bookVo ,Model model) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			String msg = ""; 
+			String loc = "/"; 
+				 	
+			 model.addAttribute("msg", msg); 
+			 model.addAttribute("loc", loc);
 			int result = bookService.studycafeBook(bookVo);
 			if(result > 0) {
-				System.out.println("성공!");
-			} 
-			return "studycafe/book";
+				msg = "예약이 정상적으로 완료되었습니다";		
+				mav.setViewName("common/msg");
+			}
+			
+			return mav;
 		}
 		
 		//회원정보 + 예약폼 데이터 가져오기

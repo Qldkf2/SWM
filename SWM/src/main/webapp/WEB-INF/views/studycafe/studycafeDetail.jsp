@@ -13,6 +13,51 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/studycafe/studycafeDetail.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/studycafe/listStyle.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/studycafe/bookStyle.css">
+	<script defer type="text/javascript">
+	window.onload = function() {
+		
+		var modal = document.getElementById('myModal');
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+		// When the user clicks on the button, open the modal 
+		btn.onclick = function() {
+			modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+		document.getElementById("modal_close_btn").onclick = function() {
+			document.getElementById("modal").style.display = "none";
+		}
+	}
+	</script>
+	<style>
+
+select {
+width: 200px;
+padding: .8em .5em;
+border: 1px solid #999;
+font-family: inherit;
+background: url(../images/arrow.jpg) no-repeat 95% 50%;
+border-radius: 0px;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+}
+
+</style>
 
 </head>
 <body>
@@ -23,8 +68,6 @@
 	
 	
 	<article data-v-cafe="">
-
-	     
 	     <h1 data-v-cafe="">스윗미 ${s.studycafe_name }</h1>     
 		
 			<section data-v-cafe="" class="tab" style="top: 0px;">
@@ -32,10 +75,11 @@
 				      <a data-v-cafe="" href="" class="active"><span data-v-cafe="" class="text" >상세보기</span></a>
 			    </div>
 			  </section>
+			  
 			<div data-v-cafe class="fixed">
-				<a data-v-cafe="" class="myBtn" id="myBtn" href="">예약하기</a>
+				<a data-v-cafe="" class="myBtn" id="myBtn">예약하기</a>
 			</div>
-				
+
 				<div data-v-cafe="" class="about">	     	  
 		  		<h3 data-v-cafe="">주소</h3>  <p data-v-cafe="" class="indent"> ${s.studycafe_address}  </p> 
 		     	<h3 data-v-cafe="">영업시간</h3>  <p data-v-cafe="" class="indent">  ${s.studycafe_open} ~ ${s.studycafe_end} </p> 
@@ -56,59 +100,49 @@
      </div>    	
      
 <!-- The Modal -->
-<form action="/book/studycafeBook" method="POST" onsubmit="return fn_insertBook();">
+
 	<div id="myModal" class="modal">
 
 <!-- Modal content -->
 
  <div class="modal-content">
 	<div class="container2" style="display: block;" >
-	
+	<form action="/book/studycafeBook" method="POST">
 	<br>
 	<div>
-		<h2>예약정보를 입력해주세요.</h2>
-		
+		<h2>예약정보를 입력해주3</h2>
 		<br>
-		<!-- studycafe에서 이름받아옴 -->
-		<input type="hidden" id="studycafe_name" name="studycafe_name" value="스터디카페(임시)"  /> 
-		<!-- studycafe테이블에서 카페번호를 받아옴 -->
-		<input type="hidden" id="studycafe_no" name="studycafe_no" value="10"  /> 
+		<input type="hidden" id="studycafe_name" name="studycafe_name" value="${s.studycafe_name }"  /> 
+		<input type="hidden" id="studycafe_no" name="studycafe_no" value="${s.studycafe_no}"  /> 
 		<!-- 예약자 회원 번호 -->
 		<input type="hidden" id="booker_no" name="booker_no" value="${member.userNo}" />
 		<h3>
 		    <label for="studycafe_roomno">방 선택</label>
-		    <br>
-		       <select id="studycafe_roomno" name="studycafe_roomno" size="1">
-		          <option value="">방 번호를 선택해주세요.</option>
-		          <option value="101">101호</option>
-		          <option value="102">102호</option>
-		          <option value="103">103호</option>
+		    
+		       <select id="studycafe_room" name="studycafe_room" size="1">
+		          <option value="">방을 선택해주세요 ~.~ </option>
+		          <option value="1인실">1인실</option>
+		          <option value="3~4인실">3~4인실</option>
+		          <option value="5~6인실">5~6인실</option>
+		          <option value="7~8인실">7~8인실</option>
+		          <option value="세미나룸(11인실)">세미나룸(11인실)</option>
 		       </select> 
-		        <br><br>
-		    <label for="room_strength">인원수 선택</label>
+		        <br>
 		    <br>
-		       <select id="room_strength" name="room_strength" size="1">
-		          <option value="">예약하실 인원를 선택해주세요.</option>
-		          <option value="1">1인</option>
-		          <option value="2">2인</option>
-		          <option value="3">3인</option>
-		          <option value="4">4인</option>
-		          <option value="5">5인</option>
-		          <option value="6">6인</option>
-		          
-		       </select> 
+		       
+		         인원수 : <input type="text"  size="1" id="room_strength" name="room_strength" 
+		       style="text-align: center; font-size:14pt; height:25px; "
+		       placeholder="0">명
 		</h3>
  
         　
  <h3>예약 날짜</h3>
- <br>
- <input type="date" id="book_date" name ="book_date" style="font-size:20px;	border: 1px solid #ccc;">
+ <input type="date" id="book_date" name="book_date" style="font-size:20px;	border: 1px solid #ccc;">
  <br>
  <br>      
  
  <h3>
      <label for="start_time">시작시간</label>
-     <br>
       <select id="start_time"  name="start_time" size="1">
 		  <option value="">시작시간을 정해주세요</option>
 		  <option value="9" >09:00</option>
@@ -124,16 +158,13 @@
 		  <option value="19">19:00</option>
 		  <option value="20">20:00</option>
 		  <option value="21">21:00</option>
-		  <option value="22">22:00</option>
 	 </select> 
  </h3>
  <br>
   <h3>
      <label for="end_time">종료시간</label>
-     <br>
 		  <select id="end_time"  name="end_time" size="1">
 		  <option value="">종료시간을 정해주세요.</option>
-		  <option value="9">09:00</option>
 		  <option value="10">10:00</option>
 		  <option value="11">11:00</option>
 		  <option value="12">12:00</option>
@@ -149,46 +180,20 @@
 		  <option value="22">22:00</option>
 	 </select> 
  </h3>
-
-</div>
-	</div>
-	<button type="submit" class="button3" style="text-align:right; float: right; font-size:15px;"> 예 약
+<button type="submit" class="button3" style="text-align:left; float: left; font-size:15px;"> 예 약
 	</button>
 	<button type="reset" class="button3">
 	<span class="close" id="modal_close_btn" style="float: left; font-size:15px;">취 소</span>
 	</button>
-	</div>
 </div>
 </form>
+	</div>
+	
+	</div>
+	
+</div>
 
-	<script>
-		var modal = document.getElementById('myModal');
 
-		// Get the button that opens the modal
-		var btn = document.getElementById("myBtn");
-
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];
-		// When the user clicks on the button, open the modal 
-		btn.onclick = function() {
-			modal.show();
-		}
-
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-			modal.style.display = "none";
-		}
-
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
-		document.getElementById("modal_close_btn").onclick = function() {
-			document.getElementById("modal").style.display = "none";
-		}
-	</script>
 
 
 

@@ -10,77 +10,308 @@
     <title>회원가입</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/login/joinForm.css">
-<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css"> --%>
-    
-    <script type="text/javascript">
+<c:import url="../common/header.jsp"/> 
+<style>
 
-    
-    </script> 
+	#password1 {
+   	display: block;
+    box-sizing: border-box;
+    margin-top: 4px;
+    padding: 8px;
+    border: 1px solid #f2f2f2;
+    border-radius: 3px;
+    width: 54%;
+    height: 36px;
+    line-height: 20px;
+    color: #292929;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 24px 24px
+   	}
+   	
+	#password2 {
+   	display: block;
+    box-sizing: border-box;
+    margin-top: 4px;
+    padding: 8px;
+    border: 1px solid #f2f2f2;
+    border-radius: 3px;
+    width: 54%;
+    height: 36px;
+    line-height: 20px;
+    color: #292929;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 24px 24px
+   	}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>	
+
+		<script>
+		// 아이디 중복 검사
+			$(function() {
+				$('#userId').keyup(function () {
+					$.ajax({
+						type:"POST",
+						url:"/idCheck",
+						data:{
+							"id":$('#userId').val()
+						},
+						success:function(data) {
+							if(data=="YES") {
+								$('#idCheck').text("이미 사용중인 아이디 입니다");
+								$('#userId').val("");
+								$('#userId').focus();
+								return false;
+							} else if(data=="") {
+								$('#idCheck').text("아이디를 입력해주세요");
+							} else if(data=="NO") {
+								$('#idCheck').text("사용 가능한 아이디 입니다");
+								return true;
+							}
+						}	
+				
+					})
+				
+				})
+				
+				// 닉네임 중복 확인
+				$('#nickName').keyup(function () {
+					$.ajax({
+						type:"POST",
+						url:"/nickNameCheck",
+						data:{
+							"nickName":$('#nickName').val()
+						},
+						success:function(data) {
+							if(data=="YES") {
+								$('#nickNameCheck').text("이미 사용중인 닉네임 입니다");
+								$('#nickName').val("");
+								$('#nickName').focus();
+								return false;
+							} else {
+								$('#nickNameCheck').text("사용 가능한 닉네임 입니다");
+								return true;
+							}
+						}
+				})
+			})
+			
+		}); 
+	
+	</script> 
+
+
+	<script>
+	function checkAll() {
+		
+		var reId = /^[a-zA-Z0-9]{4,15}$/;
+		var rePw = /^[a-zA-Z0-9]{8,15}$/;
+		var reName = /^[가-힣]{1,5}$/;
+		var reNickName = /^[가-힣]{1,6}$/;
+		var reEmail = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+		
+		// 아이디 공백 검사
+		if($("#userId").val()=="" || $("#userId").val()==null) {
+			alert("아이디를 입력하세요");
+			$("#userId").focus();
+			return false;
+		}
+		
+		// 아이디 정규표현식 검사
+		if(!reId.test($("#userId").val())) {
+			alert("아이디는 영문 대소문자와 숫자 4~15자리로 입력하세요");
+			$("#userId").val("");
+			$("#userId").focus();
+			return false;
+		}
+		
+		// 비밀번호 공백 검사
+		if($("#password1").val()=="" || $("#password1").val()==null) {
+			alert("비밀번호를 입력하세요");
+			$("#password1").focus();
+			return false;
+		}
+		
+		// 비밀번호 정규표현식 검사
+		if(!rePw.test($("#password1").val())) {
+			alert("비밀번호는 영문 대소문자와 숫자 8~15자리로 입력하세요");
+			$("#password1").val("");
+			$("#password1").focus();
+			return false;
+		}
+		
+		// 비밀번호 재확인 공백 검사
+		if($("#password2").val()=="" || $("#password2").val()==null) {
+			alert("비밀번호 재확인을 입력하세요");
+			$("#password2").focus();
+			return false;
+		}
+		
+		//비밀번호 동일한지 검사
+		if($("#password1").val() != $("#password2").val()) {
+			alert("비밀번호를 동일하게 입력하세요");
+			$("#password2").val("");
+			$("#password2").focus();
+			return false;
+		}
+		
+		//아이디 비밀번호 동일한지 검사
+		if($("#userId").val()==$("#password1").val()) {
+			alert("아이디와 비밀번호는 동일할 수 없습니다");
+			$("#password1").val("");
+			$("#password2").val("");
+			$("#password1").focus();
+			return false;
+		}
+		
+		// 이름 공백 검사
+		if($("#userName").val()=="" || $("#userName").val()==null) {
+			alert("이름을 입력하세요");
+			$("#userName").focus();
+			return false;
+		}
+		
+		// 이름 정규표현식 검사
+		if(!reName.test($("#userName").val())) {
+			alert("이름은 한글 1~5자로 입력하세요");
+			$("#userName").val("");
+			$("#userName").focus();
+			return false;
+		}
+		
+		// 닉네임 공백 검사
+		if($("#nickName").val()=="" || $("#nickName").val()==null) {
+			alert("닉네임을 입력하세요");
+			$("#nickName").focus();
+			return false;
+		}
+		
+		// 이름 정규표현식 검사
+		if(!reNickName.test($("#nickName").val())) {
+			alert("닉네임은 한글 1~6자로 입력하세요");
+			$("#nickName").val("");
+			$("#nickName").focus();
+			return false;
+		}
+		
+		// 전화번호2 공백 검사
+		if($("#phone2").val()=="" || $("#phone2").val()==null) {
+			alert("2번째 전화번호를 입력하세요");
+			$("#phone2").focus();
+			return false;
+		}
+		
+		// 전화번호 수 검사
+		if($("#phone2").val().length < 4 ) {
+			alert("전화번호는 4자리로 입력하세요");
+			$("#phone2").val("");
+			$("#phone2").focus();
+			return false;
+		}
+		
+		// 전화번호3 공백 검사
+		if($("#phone3").val()=="" || $("#phone3").val()==null) {
+			alert("3번째 전화번호를 입력하세요");
+			$("#phone3").focus();
+			return false;
+		}
+		
+		// 전화번호 수 검사
+		if($("#phone3").val().length < 4 ) {
+			alert("전화번호는 4자리로 입력하세요");
+			$("#phone3").val("");
+			$("#phone3").focus();
+			return false;
+		}
+		
+		// 이메일 공백 검사
+		if($("#email").val()=="" || $("#email").val()==null) {
+			alert("이메일을 입력하세요");
+			$("#email").focus();
+			return false;
+		}
+		
+		// 이메일 정규표현식 검사
+		if(!reEmail.test($("#email").val())) {
+			alert("올바른 이메일 양식을 입력하세요");
+			$("#email").val("");
+			$("#email").focus();
+			return false;
+		}
+		
+	
+	}
+</script>
 </head>
 <body>
-	 <c:import url="../common/header.jsp"/> 
-	 
-	<form data-v-08798b35="" class="container" action="/joinForm" method="POST">
+ 																			<!-- sumbit 버튼을 누르면 checkAll 함수 호출 -->
+	<form data-v-08798b35="" class="container" action="/joinForm" method="POST" onsubmit="return checkAll();">
 		<section data-v-08798b35="">
 			<h1 data-v-08798b35="">회원가입</h1>
 			 <p data-v-08798b35="" class="description">
-        에브리타임과 캠퍼스픽은<br data-v-08798b35="">
-        전국 396개 캠퍼스, 520만 명의 가입자를 보유한<br data-v-08798b35=""> <strong data-v-08798b35="">국내 1위 대학생 서비스</strong>입니다.
-      </p> <p data-v-08798b35="" class="description">
-        대학생의 대학 생활에 가치를 더하고자 하는<br data-v-08798b35="">
-        다양한 제휴 문의를 환영합니다.
-      </p> <p data-v-08798b35="" class="rules">
-        * 표시는 필수 기입 항목입니다. </p> 
+        정보를 모두 입력해주세요<br data-v-08798b35="">
+        <strong data-v-08798b35="">모든 정보를 입력해주셔야 회원가입이 정상적으로 완료됩니다</strong>
+      </p> 
     	 <div data-v-08798b35="" class="input">
-    	 	<div data-v-08798b35="" class="label">
+    	 	<div data-v-08798b35="" class="label" style="float:left; margin-right:10px;">
     	 		<label data-v-08798b35="">아이디 *</label>
     	 	</div>
-    	 		 <input data-v-08798b35="" type="text" name="userId" maxlength="255" autocomplete="off" class="medium">
+    	 	<div id ="idCheck" style="float:left; font-size:3px; font-family:맑은 고딕, sans-serif; color:red;"></div>
+    	 		 <input id="userId" data-v-08798b35="" type="text" name="userId" maxlength="255" autocomplete="off" class="medium">
     	 </div> 
     	 <div data-v-08798b35="" class="input">
     	 	<div data-v-08798b35="" class="label">
     	 		<label data-v-08798b35="">비밀번호 *</label>
     	 	</div> 
-    	 		<input data-v-08798b35="" type="password" name="password" maxlength="45" autocomplete="off" class="medium">
+    	 		<input id="password1" data-v-08798b34="" type="password" name="password" maxlength="45" autocomplete="off" class="medium"
+    	 		style="">
     	 	</div> 
     	 <div data-v-08798b35="" class="input">
     	 	<div data-v-08798b35="" class="label">
     	 		<label data-v-08798b35="">비밀번호 재확인 *</label>
     	 	</div> 
-    	 		<input data-v-08798b35="" type="password" name="re_password" maxlength="45" autocomplete="off" class="medium">
+    	 		<input data-v-08798b35="" id="password2" type="password" name="re_password" maxlength="45" autocomplete="off" class="medium">
     	 	</div> 
     	 		<div data-v-08798b35="" class="input">
     	 			<div data-v-08798b35="" class="label">
     	 				<label data-v-08798b35="">이름</label>
     	 			</div> 
-    	 				<input data-v-08798b35="" type="text" name="userName" maxlength="45" autocomplete="off" class="medium">
+    	 				<input id="userName" data-v-08798b35="" type="text" name="userName" maxlength="45" autocomplete="off" class="medium">
     	 			</div>
     	 			<div data-v-08798b35="" class="input">
-    	 			<div data-v-08798b35="" class="label">
+    	 			<div data-v-08798b35="" class="label" style="float:left; margin-right:10px;">
     	 				<label data-v-08798b35="">닉네임</label>
     	 			</div> 
-    	 				<input data-v-08798b35="" type="text" name="nickName" maxlength="45" autocomplete="off" class="medium">
-    	 			</div> 
+    	 			<div id ="nickNameCheck" style="float:left; font-size:3px; font-family:맑은 고딕, sans-serif; color:red;"></div>
+    	 				<input id="nickName" data-v-08798b35="" type="text" name="nickName" maxlength="45" autocomplete="off" class="medium">
+    	 			</div>
+    	 			 
     	 			<div data-v-08798b35="" class="input">
     	 				<div data-v-08798b35="" class="label">
     	 					<label data-v-08798b35="">전화번호 *</label>
     	 				</div> 
     	 					<input data-v-08798b35="" type="text" name="phone1" maxlength="4" autocomplete="off" class="small" value="010" readonly> 
     	 					<span data-v-08798b35="" class="delimiter">-</span> 
-    	 					<input data-v-08798b35="" type="text" name="phone2" maxlength="4" autocomplete="off" class="small"> 
+    	 					<input id="phone2" data-v-08798b35="" type="text" name="phone2" maxlength="4" autocomplete="off" class="small"> 
     	 					<span data-v-08798b35="" class="delimiter">-</span> 
-    	 					<input data-v-08798b35="" type="text" name="phone3" maxlength="4" autocomplete="off" class="small">
+    	 					<input id="phone3" data-v-08798b35="" type="text" name="phone3" maxlength="4" autocomplete="off" class="small">
     	 			</div> 
     	 			<div data-v-08798b35="" class="input">
     	 				<div data-v-08798b35="" class="label">
     	 					<label data-v-08798b35="">이메일 *</label>
     	 				</div> 
-    	 					<input data-v-08798b35="" type="email" name="email" maxlength="255" autocomplete="off" class="large">
+    	 					<input id="email" data-v-08798b35="" type="email" name="email" maxlength="255" autocomplete="off" class="large">
     	 				</div> 
     	 				 
     	 					
     					
-           <h2 data-v-08798b35="">개인정보 수집 및 이용</h2> 	
+           <!-- <h2 data-v-08798b35="">개인정보 수집 및 이용</h2> 	
            		<div data-v-08798b35="" class="agreement">
            			<label data-v-08798b35="">
            				<input data-v-08798b35="" type="checkbox"> 
@@ -95,7 +326,8 @@
            					<li data-v-08798b35="">자세한 내용은 개인정보처리방침을 참고하시기 바랍니다.</li>
            				</ul>
            			</div>
-           		</div> 
+           		</div>  -->
+           		
            			<input data-v-08798b35="" type="submit" value="다음">
            		</section>
            	</form>

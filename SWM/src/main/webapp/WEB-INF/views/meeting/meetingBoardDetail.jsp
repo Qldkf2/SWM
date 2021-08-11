@@ -170,7 +170,7 @@ function fn_insertCommentChild(eventNum){
 					<c:choose>
 	      			 <c:when test="${row.status eq 'N'}">		
 					<p data-v-7c8cb348="" class="profile" >
-						<span data-v-7c8cb348="" class="writer">${row.nickname}</span>
+						<span data-v-7c8cb348="" class="writer">${row.nickName}</span>
 						<span data-v-7c8cb348="" class="info">${row.meeting_board_comment_date}</span> 
 							<!-- 삭제 -->
 							<c:choose>

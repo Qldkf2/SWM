@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="freeBoard">
+	
+	<!-- 커뮤니티 작성 : 번호, 작성자, 제목, 내용, 등록날짜, 파일올리기, 조회수, 삭제여부 특수문자포함 -->
+	<insert id="writeFreeBoard" parameterType="com.ez.swm.freeBoard.vo.FreeBoardWrite">
+	 <![CDATA[
+		INSERT INTO free_board
+		 VALUES(
+			SEQ_FREE_BOARD.NEXTVAl, #{userNo}, #{free_title}, #{free_content}, 
+			sysdate , 0, default
+		) 
+		
+		]]>
+	</insert>
+	<select id="getFree_no" resultType="int">
+		SELECT SEQ_FREE_BOARD.CURRVAL FROM DUAL	
+	</select>
+	
+	<!-- 리스트 보기 -->
+	<select id="FreeBoardList"	resultType="com.ez.swm.freeBoard.vo.FreeBoard">
+		select FREE_NO,USERNO,  FREE_TITLE, FREE_DATE, FREE_HIT
+		 from free_board
+		order by free_no desc
+	</select>
+
+	
+	
+	<!-- 상세보기 : 번호, 작성자, 제목, 내용, 날짜, 파일, 조회수 -->
+	<select id="FreeBoardDetail" resultType="com.ez.swm.freeBoard.vo.FreeBoard">
+		select * from free_board
+		where FREE_NO = #{free_no}
+	</select>
+	
+	
+	<!-- 글삭제 -->
+	<delete id="DeleteFreeBoard" parameterType="int">
+	 <![CDATA[
+		delete from free_board
+		where free_no = #{free_no}
+	]]>
+	</delete>
+	
+	<!-- 댓글달기 : 해당 글번호에 댓글번호, 유저번호, 내용, 날짜, 댓글번호 -->
+	<insert id="writeComment" parameterType="com.ez.swm.freeBoard.vo.FreeBoardComment">
+
+		INSERT INTO free_comment(
+		FREE_COMMENT_NO, free_no, userNo, free_comment_content, FREE_COMMENT_DATE,
+		free_comment_level, free_comment_refno
+		)
+		 VALUES(
+			SEQ_FREE_COMMENT.NEXTVAL, #{free_no}, #{userNo}, #{free_comment_content}, 
+			sysdate, #{free_comment_level},
+			<if test="free_comment_refno==0">
+			SEQ_FREE_COMMENT.currval
+			</if>
+			<if test="free_comment_refno!=0">
+			#{free_comment_refno}
+			</if>
+		) 
+		
+	</insert>
+	
+	<!-- 대댓글 지정, 레벨설정 -->
+	<select id="commentLastLevel" parameterType="int" resultType="int">
+	 <![CDATA[
+			select max(free_comment_level)
+			from free_comment
+			where free_comment_refno = #{free_comment_refno}
+			
+	]]>
+	</select>
+	
+	<!-- 댓글 보기 -->
+	<select id="FreeComment" resultType="com.ez.swm.freeBoard.vo.FreeBoardCommentList">
+		select f.FREE_COMMENT_NO ,f.free_no, f.userNo,f.free_comment_content,f.free_comment_date,
+		       f.free_comment_level, f.free_comment_refno , f.status, m.nickName
+		from free_comment f , member m
+        where f.userNo = m.userNo and free_no = #{free_no}
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="DeleteFreeComment" parameterType="int">
+	 <![CDATA[
+		delete from free_comment
+		where free_comment_no = #{free_comment_no}
+	]]>
+	</delete>
+	
+	<!-- 게시판 수정 -->
+	<update id="FreeBoardUpdate">
+	update free_board
+		free_title = #{free_title}
+		free_content = #{free_content}
+		free_file = #{free_file}
+	where free_no = #{free_no}
+	</update>
+
+</mapper>

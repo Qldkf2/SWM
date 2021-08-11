@@ -62,6 +62,21 @@
 		FROM STUDYCAFE_FILE
 		WHERE STUDYCAFE_NO = #{studycafe_no}	
 		ORDER BY IDX ASC
+	</select> 
+	<!-- 자유게시판  파일 등록 -->
+	<insert id="freeBoardInsertFile" parameterType="hashmap">
+	         <![CDATA[
+            INSERT INTO FREE_BOARD_FILE
+               (IDX,FREE_NO,ORIGINAL_FILE_NAME,STORED_FILE_NAME,FILE_SIZE)
+            VALUES
+               (FREE_BOARD_FILE_SEQ.NEXTVAL,#{FREE_NO},#{ORIGINAL_FILE_NAME}, #{STORED_FILE_NAME}, #{FILE_SIZE})      
+         ]]>
+	</insert>
+	
+	<!-- 자유게시판 파일 하나 들고오기 -->
+	<select id="freeBoardGetFile" parameterType="int" resultType="com.ez.swm.freeBoard.vo.FreeBoardFile">
+		SELECT FREE_NO , STORED_FILE_NAME
+		FROM FREE_BOARD_FILE
+		WHERE FREE_NO = #{free_no}
 	</select>
-
 </mapper>

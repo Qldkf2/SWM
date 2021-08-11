@@ -10,8 +10,8 @@
 	    #{studycafe_name},
 	    #{studycafe_no},
 	    #{booker_no}, 
-	    #{studycafe_roomno},
-	    #{room_strength}, 
+	    #{studycafe_room},
+	    #{permit_limit}, 
 	    TO_DATE(#{book_date}, 'YYYY-MM-DD'), 
 	    #{start_time}, 
 	    #{end_time}

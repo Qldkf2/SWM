@@ -9,12 +9,32 @@
 <meta charset="utf-8">
 <title>로그인</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/login/login.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+	
+	function fn_login() {
+		
+		if($("#userId").val()=="" || $("#userId").val()==null) {
+			alert("아이디를 입력하세요");
+			$("#userId").focus();
+			return false;
+		}
+		
+		if($("#password").val()=="" || $("#password").val()==null) {
+			alert("비밀번호를 입력하세요");
+			$("#password").focus();
+			return false;
+		}
+	}
+
+</script>
 </head>
 <body>
 
   <c:import url="../common/header.jsp"></c:import>
 
-  <form action="/loginForm" id="container" method="post" data-redirect="">
+  <form action="/loginForm" id="container" method="post" data-redirect="" onsubmit="return fn_login()">
     <div class="introduction">
       <div class="wrap">
         <h1>로그인</h1>
@@ -23,13 +43,13 @@
     </div>
     <div class="form">
       <div class="wrap">
-        <input type="text" name="userId" maxlength="20" class="text" placeholder="스윗미 아이디">
-        <input type="password" name="password" maxlength="20" class="text" placeholder="비밀번호">
+        <input id="userId" type="text" name="userId" maxlength="20" class="text" placeholder="스윗미 아이디">
+        <input id="password" type="password" name="password" maxlength="20" class="text" placeholder="비밀번호">
         <input type="submit" value="로그인" class="submit">
         <hr>
-        <a href="/findId" class="find">아이디/비밀번호 찾기</a>
+        <a href="/findIdForm" class="find">아이디/비밀번호 찾기</a>
         <hr>
-        <a href="https://everytime.kr/register" class="register">
+        <a href="/joinForm" class="register">
           <span>스윗미 계정이 없으신가요?</span>
           <strong>회원가입</strong>
         </a>
