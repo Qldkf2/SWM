@@ -38,47 +38,40 @@
 		where ask_no = #{ask_no}
 	</select>
 	
-	<!-- 관리자 용 1:1 문의 리스트 불러오기 allAsk로 영역에 저장 -->
-	<select id="askAllList" resultType="com.ez.swm.myPage.vo.AskJoin">
-		select a.ask_no, a.ask_title, a.ask_content, a.ask_date, a.userNo, m.nickName 
-		from ask a, member m
-		where a.userNo = m.userNo
-		order by ask_no DESC
-	</select>
-	
-	<!-- 1:1문의 관리자 답변 작성 -->
-	<insert id="insertAskReply" parameterType="com.ez.swm.myPage.vo.AskComment">
-		insert into ask_comment(ask_comment_no, ask_no, ask_comment_content)
-		values(seq_ask_comment.nextval, #{ask_no}, #{ask_comment_content})
-	</insert>
-	
-	<!-- 1:1문의 관리자 답변 가져오기 -->
-	<select id="getAskReply" parameterType="int" resultType="com.ez.swm.myPage.vo.AskComment">
-		select *
-		from ask_comment
-		where ask_no = #{ask_no}
-	</select>
-	
 	<!-- 스터디카페 예약 정보 가져오기 -->
 	<select id="getBookInfoList" parameterType="int" resultType="com.ez.swm.book.vo.UserBookVo">
-		SELECT
-	               m.USERNAME,
-	               m.NICKNAME,
-	               m.USERNO,
-	               k.BOOK_NO,
-	               k.STUDYCAFE_NO,
-	               k.BOOKER_NO,
-	               k.STUDYCAFE_ROOMNO,
-	               k.ROOM_STRENGTH,  
-	               k.BOOK_DATE,
-	               k.START_TIME,
-	               k.END_TIME
-				FROM
-					STUDYCAFE_BOOK k, MEMBER m
-				WHERE
-					m.USERNO = #{userNo} 
-				ORDER BY USERNO DESC
+		select m.userName, b.studycafe_name, b.booker_no, b.studycafe_room, b.permit_limit, b.book_date, b.start_time, b.end_time
+		from member m, studycafe_book b
+		where m.userNo=b.booker_no and b.booker_no = #{userNo}
 	</select>
+	
+	<!-- 내가 만든 스터디 -->
+	<select id="myCreateStudy" parameterType="int" resultType="com.ez.swm.meeting.vo.Meeting">
+		SELECT * 
+		FROM MEETING
+		WHERE MEETING_LEADER = #{userNo}
+	</select>
+	<!-- 내가 가입한 스터디 -->
+	<select id="myJoinStudy" parameterType="int" resultType="com.ez.swm.myPage.vo.MyJoinStudy">
+		SELECT M.MEETING_NO,M.MEETING_LEADER,M.MEETING_AGE,M.MEETING_TITLE,
+       M.MEETING_CONTENT,M.MEETING_ADDRESS,M.MEETING_SUBJECT,M.MEETING_LIMIT,
+       M.STATUS,M.MEETING_DATE ,
+    ( SELECT  PERMIT 
+		FROM MEETING_PERMIT
+		WHERE USERNO = #{userNo} AND PERMIT ='Y') AS PERMIT
+    FROM MEETING M ,MEETING_PERMIT P
+    WHERE m.MEETING_NO = P.MEETING_NO
+ 
+	</select>
+	
+	<!-- 내가 쓴 글(스터디 모임 내 게시판) -->
+	<select id="myStudyBoard" parameterType="int" resultType="com.ez.swm.myPage.vo.MyStudyBoard">
+		select b.meeting_board_no, b.meeting_no, b.meeting_board_writer, b.meeting_board_title, b.meeting_board_content, 
+			   b.meeting_board_date, m.meeting_title
+		from meeting m, meeting_board b
+		where meeting_board_writer = #{userNo} and m.meeting_no = b.meeting_no
+	</select>
+	
 	
 	
 </mapper>

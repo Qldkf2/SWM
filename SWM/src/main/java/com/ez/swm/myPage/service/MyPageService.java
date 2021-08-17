@@ -1,5 +1,6 @@
 package com.ez.swm.myPage.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.ez.swm.book.vo.UserBookVo;
 import com.ez.swm.login.vo.Member;
+import com.ez.swm.meeting.vo.Meeting;
 import com.ez.swm.myPage.dao.MyPageDao;
 import com.ez.swm.myPage.vo.Ask;
 import com.ez.swm.myPage.vo.AskComment;
 import com.ez.swm.myPage.vo.AskJoin;
+import com.ez.swm.myPage.vo.MyStudyBoard;
 
 @Service
 public class MyPageService {
@@ -39,19 +42,19 @@ public class MyPageService {
 		return myPageDao.askDetail(askNo);
 	}
 
-	public List<AskJoin> askAllList() {
-		return myPageDao.askAllList();
-	}
-
-	public int insertAskReply(AskComment comment) {
-		return myPageDao.insertAskReply(comment);
-	}	
-
-	public AskComment getAskReply(int ask_no) {
-		return myPageDao.getAskReply(ask_no);
-	}
-
 	public List<UserBookVo> getBookInfoList(int userNo) {
 		return myPageDao.getBookInfoList(userNo);
+	}
+
+	public List<Meeting> myCreateStudy(int userNo) {
+		return myPageDao.myCreateStudy(userNo);
+	}
+
+	public List<Meeting> myJoinStudy(int userNo) {
+		return myPageDao.myJoinStudy(userNo);
+	}
+
+	public List<MyStudyBoard> myStudyBoard(int userNo) {
+		return myPageDao.myStudyBoard(userNo);
 	}
 }

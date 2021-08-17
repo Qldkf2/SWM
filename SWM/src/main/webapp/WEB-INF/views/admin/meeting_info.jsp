@@ -10,19 +10,13 @@
 <title>스터디 관리</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/admin/studycafe_info.css">
-<script>
-	$(document).ready(function(){
-		$('.mng-nav .gnb02').addClass('on');
-	})
-</script>
+<c:import url="../common/header.jsp" />
 </head>
 <body>
 <div class="my-box">스터디관리</div>
 <div>
 	<input type="text" placeholder="검색하실 단어를 입력해주세요." class="cafe_text">
 	<button type="button" class="cafe_button">검색</button>
-	<a href=".jsp" class="cafe_a">쓰기</a>
-
 </div>
 
 <table class="list-table">
@@ -31,40 +25,27 @@
 		<col>
 		<col>
 		<col>
-		<col>
-		<col>
-		<col>
-		<col>
-		<col>
-		<col>
 	</colgroup>
 	<thead>
 		<tr>
-			<th>선택</th>
 			<th>스터디번호</th>
-			<th>회원번호</th>
-			<th>닉네임</th>
 			<th>제목</th>
-			<th>내용</th>
-			<th>주소</th>
+			<th>닉네임</th>
 			<th>과목</th>
-			<th>모집인원</th>
-			<th>삭제여부</th>
 		</tr>
 	</thead>
 	<tbody>
+		<c:forEach items="${meetingList}" var="MTlist">
 		<tr>
-			<td><input type="checkbox"></td>
-			<td>스터디번호</td>
-			<td>회원번호</td>
-			<td>닉네임</td>
-			<td>제목</td>
-			<td>내용</td>
-			<td>주소</td>
-			<td>과목</td>
-			<td>모집인원</td>
-			<td>삭제여부</td>
+			<td>${MTlist.meeting_no}</td>
+			<td class="hiddenId">
+				<a href="/admin/adminMeetingDetail?meeting_No=${MTlist.meeting_no}" name="meeting_Title">${MTlist.meeting_title}</a>
+				<input type="hidden" id="hiddenId"  value="${MTlist.meeting_no}">
+			</td>
+			<td>${MTlist.meeting_age}</td>
+			<td>${MTlist.meeting_subject}</td>
 		</tr>
+		</c:forEach>
 </tbody>
 </table>
 </body>

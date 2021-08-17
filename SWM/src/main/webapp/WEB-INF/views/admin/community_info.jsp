@@ -10,6 +10,7 @@
 <title>커뮤니티 관리</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/admin/studycafe_info.css">
+<c:import url="../common/header.jsp" />
 <script>
 	$(document).ready(function(){
 		$('.mng-nav .gnb03').addClass('on');
@@ -21,9 +22,6 @@
 <div>
 	<input type="text" placeholder="검색하실 단어를 입력해주세요." class="cafe_text">
 	<button type="button" class="cafe_button">검색</button>
-	<a href=".jsp" class="cafe_a">쓰기</a>
-	<a href="?pageChange=detailFreeboard.jsp" class="cafe_a">수정</a>
-	<a href=".jsp" class="cafe_a">삭제</a>
 </div>
 
 <table class="list-table">
@@ -38,24 +36,20 @@
 	</colgroup>
 	<thead>
 		<tr>
-			<th>선택</th>
 			<th>넘버</th>
 			<th>제목</th>
 			<th>닉네임</th>
 			<th>날자</th>
 			<th>조회수</th>
-			<th>삭제여부</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><input type="checkbox"></td>
-			<td>넘버</td>
-			<td>제목</td>
-			<td>닉네임</td>
-			<td>날자</td>
-			<td>조회수</td>
-			<td>삭제여부</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 </tbody>
 </table>

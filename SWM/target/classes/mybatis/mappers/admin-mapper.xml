@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+	
+	<!-- 관리자 용 1:1 문의 리스트 불러오기 allAsk로 영역에 저장 -->
+	<select id="askAllList" resultType="com.ez.swm.myPage.vo.AskJoin">
+		select a.ask_no, a.ask_title, a.ask_content, a.ask_date, a.userNo, m.nickName 
+		from ask a, member m
+		where a.userNo = m.userNo
+		order by ask_no DESC
+	</select>
+
+		<!-- 1:1문의 관리자 답변 가져오기 -->
+	<select id="getAskReply" parameterType="int" resultType="com.ez.swm.myPage.vo.AskComment">
+		select *
+		from ask_comment
+		where ask_no = #{ask_no}
+	</select>
+	
+	<!-- 1:1문의 관리자 답변 작성 -->
+	<insert id="insertAskReply" parameterType="com.ez.swm.myPage.vo.AskComment">
+		insert into ask_comment(ask_comment_no, ask_no, ask_comment_content)
+		values(seq_ask_comment.nextval, #{ask_no}, #{ask_comment_content})
+	</insert>
+	
+	<!-- 관리자 회원 탈퇴(강퇴) -->
+	<update id="adminMemberDelete" parameterType="int">
+		update member
+			set STATUS = 'Y'
+		where userNo = #{userNo}
+	</update>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateMemberByAdmin" parameterType="com.ez.swm.login.vo.Member">
+		UPDATE MEMBER
+		SET USERID = #{userId}, USERNAME = #{userName}, NICKNAME= #{nickName}, PASSWORD = #{password}, PHONE2 = #{phone2}, 	PHONE3 = #{phone3}, email = #{email}
+		WHERE USERNO = #{userNo}
+	</update>
+	
+	<!-- 자유게시판리스트 보기 -->
+	<select id="FreeBoardList"	resultType="com.ez.swm.admin.vo.AdminVo">
+		select FREE_NO, FREE_TITLE, USERNO, FREE_DATE, FREE_COUNT
+		 from free_board
+		order by free_no desc
+	</select>
+	
+	<!-- 자유게시판상세보기 : 번호, 작성자, 제목, 내용, 날짜, 파일, 조회수 -->
+	<select id="FreeBoardDetail"
+	resultType="com.ez.swm.admin.vo.AdminVo">
+		select * from free_board
+		where FREE_NO = #{free_no}
+	</select>
+	
+	<!-- 미팅모집 리스트  -->
+	<select id="selectAdminMeeting" resultType="com.ez.swm.admin.vo.AdminVo">
+		SELECT
+			MEETING_NO,
+			MEETING_AGE,
+			MEETING_TITLE,
+			MEETING_SUBJECT
+		FROM 
+			MEETING
+	</select>
+	<!-- 미팅 상세화면 -->
+	<select id="detailAdminMeeting" parameterType="int" resultType="com.ez.swm.admin.vo.AdminVo">
+		SELECT
+			*
+		FROM 
+			MEETING
+		WHERE 
+			meeting_no = #{meeting_no}
+	</select>
+	
+	<!-- 회원 정보 가져오기 / 관리자 페이지에서 쓸, 회원 멤버 리스트에 띄울 항목 값도 여기서 가져와 
+										 상세 보기 데이터도 여기서 가져와-->
+	<select id="selectOneMember" parameterType="int" resultType="com.ez.swm.login.vo.Member">
+		SELECT * 
+		FROM MEMBER 
+		WHERE USERNO = #{userNo}
+	</select>
+	
+	<!-- 회원 정보 리스트 가져오기 --> <!-- 얘 일단 필요한지 모르겠음 -->
+	<select id="selectMemberList" resultType="com.ez.swm.login.vo.Member">
+		SELECT USERNO, USERID, USERNAME, NICKNAME, PASSWORD, PHONE1, PHONE2, PHONE3, EMAIL, STATUS
+		FROM MEMBER
+		WHERE STATUS = 'N'
+		ORDER BY USERNO DESC
+	</select>
+	
+	<!-- 스터디카페 리스트 -->
+	<select id="adminstudycafelist" resultType="com.ez.swm.admin.vo.AdminVo">
+		select
+			studycafe_no,
+			studycafe_name, 
+			studycafe_phone,
+			studycafe_open,
+			studycafe_end
+		from 
+			studycafe
+	</select>
+	
+	<!-- 스터디카페 상세페이지 -->
+	<select id="studycafedetail" parameterType="int" resultType="com.ez.swm.admin.vo.AdminVo">
+		SELECT
+			*
+		FROM 
+			studycafe
+		WHERE 
+			studycafe_no = #{studycafe_no}
+	</select>
+	
+	<!-- 관리자 스터디 카페 삭제 -->
+	<update id="studycafedelete" parameterType="int">
+		update studycafe
+			set studycafe_GB = 'Y'
+		where studycafe_no = #{studycafe_no}
+	</update>
+	
+	<!-- 관리자 스터디 카페 삭제 -->
+	<update id="meetingdelete" parameterType="int">
+		update meeting
+			set STATUS = 'Y'
+		where studycafe_no = #{studycafe_no}
+	</update>
+
+</mapper>

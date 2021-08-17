@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ez.swm.common.paging.PagingVO;
 import com.ez.swm.meeting.vo.CommentCount;
+import com.ez.swm.meeting.vo.LeaderPermit;
 import com.ez.swm.meeting.vo.Location;
 import com.ez.swm.meeting.vo.Meeting;
 import com.ez.swm.meeting.vo.MeetingBoard;
@@ -210,6 +211,15 @@ public class MeetingDao {
 
 	public String permitCheck(MeetingPermitYes mp) {
 		return sqlSession.selectOne("Meeting.permitCheck",mp);
+	}
+
+	public int meetingLeaderPermit(LeaderPermit lp) {
+	   return sqlSession.insert("Meeting.meetingLeaderPermit",lp);
+		
+	}
+
+	public int getMeetingNo() {
+		return sqlSession.selectOne("Meeting.getMeetingNo");
 	}
 	
 	

@@ -2,6 +2,7 @@ package com.ez.swm.myPage.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +11,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.ez.swm.admin.service.AdminService;
 import com.ez.swm.book.vo.UserBookVo;
 import com.ez.swm.login.vo.Member;
 import com.ez.swm.meeting.service.MeetingService;
+import com.ez.swm.meeting.vo.CommentCount;
+import com.ez.swm.meeting.vo.Meeting;
 import com.ez.swm.myPage.service.MyPageService;
 import com.ez.swm.myPage.vo.Ask;
 import com.ez.swm.myPage.vo.AskComment;
 import com.ez.swm.myPage.vo.AskJoin;
+import com.ez.swm.myPage.vo.MyStudyBoard;
 
 @Controller
 public class MyPageController {
@@ -27,6 +33,9 @@ public class MyPageController {
 	
 	@Autowired
 	MeetingService meetingService;
+	
+	@Autowired
+	AdminService adminService;
 	
 	// 마이페이지 이동
 	@RequestMapping(value="/myPage")
@@ -87,30 +96,48 @@ public class MyPageController {
 	
 	// 내가 만든 스터디
 	@RequestMapping(value="/myPage/myCreateStudy")
-	public String myCreateStudy() {
+	public ModelAndView myCreateStudy(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		Member m = new Member();
+		HttpSession session = request.getSession();
+		m = (Member)session.getAttribute("member");
+		int userNo = m.getUserNo();
 		
-		return "myPage/myCreateStudy";
+		List<Meeting> list = myPageService.myCreateStudy(userNo);
+		mav.addObject("myCreateStudy", list);
+		mav.setViewName("myPage/myCreateStudy");
+		return mav;
 	}
 	
 	// 내가 가입한 스터디
 	@RequestMapping(value="/myPage/myJoinStudy")
-	public String myJoinStudy() {
+	public ModelAndView myJoinStudy(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		Member m = new Member();
+		HttpSession session = request.getSession();
+		m = (Member)session.getAttribute("member");
+		int userNo = m.getUserNo();
 		
-		return "myPage/myJoinStudy";
+		List<Meeting> list = myPageService.myJoinStudy(userNo);
+		mav.addObject("myJoinStudy", list);
+		mav.setViewName("myPage/myJoinStudy");
+		return mav;
 	}
 	
 	// 스터디 모임에서 내가 쓴 게시글
-	@RequestMapping(value="/myPage/myMeetingBoard")
-	public String myMeetingBoard() {
+	@RequestMapping(value="/myPage/myMeetingBoard", method=RequestMethod.GET)
+	public String myMeetingBoard(@RequestParam("userNo") int userNo, Model model) {
+		
+		List<MyStudyBoard> studyBoardList = myPageService.myStudyBoard(userNo);	
+		model.addAttribute("SBList", studyBoardList);
+		
+		/*
+		 * List<CommentCount> commentCount =
+		 * meetingService.countMeetingboardComment(meeting_no);
+		 * model.addAttribute("commentCount", commentCount);
+		 */
 		
 		return "myPage/myMeetingBoard";
-	}
-	
-	// 스터디 모임에서 내가 쓴 댓글 
-	@RequestMapping(value="/myPage/myMeetingBoardComment")
-	public String myMeetingBoardComment() {
-		
-		return "myPage/myMeetingBoardComment";
 	}
 	
 
@@ -153,7 +180,7 @@ public class MyPageController {
 	public String askWrite(Ask ask, Model model) {
 		
 		int askResult = myPageService.insertAsk(ask);
-		
+		System.out.println(askResult);
 		if(askResult == 1) {
 			
 			return "redirect: /myPage";
@@ -169,10 +196,6 @@ public class MyPageController {
 		
 		
 		List<AskJoin> askList = myPageService.getAskByUserNo(userNo);
-		/*
-		 * for(int i=0;i<askList.size();i++) {
-		 * System.out.println(askList.get(i).getUserNo()); }
-		 */
 		model.addAttribute("askList", askList);
 		
 		return "/myPage/myAskList";
@@ -185,47 +208,15 @@ public class MyPageController {
 		Ask askDetail = myPageService.askDetail(askNo);
 		model.addAttribute("detail", askDetail);
 		
-		AskComment replyResult = myPageService.getAskReply(askNo);
+		AskComment replyResult = adminService.getAskReply(askNo);
 		System.out.println(replyResult);
 		model.addAttribute("adminReply",replyResult);
 		
 		return "/myPage/myAskDetail";
 	}
 	
-	// 관리자의 1:1 문의 답변 페이지 이동
-	@RequestMapping(value="/myPage/adminAskList", method=RequestMethod.GET)
-	public String adminAskList(Model model) {
-		
-		List<AskJoin> allAsk = myPageService.askAllList();
-		model.addAttribute("allAsk", allAsk);
-		
-		return "/myPage/adminAskList";
-	}
 	
-	// 관리자 1:1 문의 상세페이지 - 답변 가능
-	@RequestMapping(value="/myPage/askReply", method=RequestMethod.GET)
-	public String askReply(@RequestParam("ask_no") int askNo, Ask ask, Model model, AskComment comment) {
-		
-		Ask askDetail = myPageService.askDetail(askNo);
-		model.addAttribute("detail", askDetail);
-		
-		AskComment replyResult = myPageService.getAskReply(askNo);
-		model.addAttribute("adminReply",replyResult);
-		
-		return "/myPage/askReply";
-	}
-	
-	// 관리자 1:1문의 답변
-	@RequestMapping(value="/myPage/askReplyByAdmin", method=RequestMethod.POST)
-	public String askReplyByAdmin(AskComment comment, Model model) {
-		
-		int reply = myPageService.insertAskReply(comment);
-		int ask_no = comment.getAsk_no();
-		model.addAttribute("ask_no", ask_no);
-	
-		return "redirect: /myPage/askReply";
-	}
-	
+
 	
 	
 	

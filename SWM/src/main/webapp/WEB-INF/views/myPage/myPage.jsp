@@ -31,25 +31,21 @@
     <ol class="items">
       <li><a href="/myPage/myCreateStudy">내가 개설한 스터디</a></li>
       <li><a href="/myPage/myJoinStudy">내가 참여한 스터디</a></li>
-      <li><a href="/myPage/myMeetingBoard">내가 쓴 글</a></li>
-      <li><a href="/myPage/myMeetingBoardComment">내가 쓴 댓글</a></li>
+      <li><a href="/myPage/myMeetingBoard?userNo=${member.userNo }">내가 쓴 글</a></li>
     </ol>
     <h2>커뮤니티 정보</h2>
     <ol class="items">
       <li><a href="/myPage/myCommunityList">내가 쓴 글</a></li>
-      <li><a href="/myPage/myCommunityCommentList">내가 쓴 댓글</a></li>
     </ol>
     <h2>스터디 카페 정보</h2>
     <ol class="items">
       <li><a href="/myPage/myBookList?userNo=${member.userNo }">예약 현황</a></li>
-      <li><a href="/myPage/articles?id=mycommentarticle">예약 변경</a></li>
       <li><a href="/myPage/articles?id=mycommentarticle">예약 취소</a></li>
     </ol>
     <h2>1:1 문의</h2>
     <ol class="items">
       <li><a href="/myPage/askWrite">문의 작성</a></li>
-      <li><a href="/myPage/myAskList?id=${member.userNo }">문의 확인</a></li>
-      <li><a href="/myPage/adminAskList">관리자 문의 작성</a></li>
+      <li><a href="/myPage/myAskList?id=${member.userNo }">문의 답변 확인</a></li>
     </ol>
   </div>
 

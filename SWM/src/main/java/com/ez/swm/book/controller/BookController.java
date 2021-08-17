@@ -30,6 +30,7 @@ public class BookController {
 			int result = bookService.studycafeBook(bookVo);
 			if(result > 0) {
 				msg = "예약이 정상적으로 완료되었습니다";		
+				mav.addObject("msg",msg);
 				mav.setViewName("common/msg");
 			}
 			

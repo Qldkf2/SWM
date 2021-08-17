@@ -28,11 +28,11 @@
 					<a class="community" href=""></a>
 					<a class="article" href="">
 						<p class="profile">
-							<span class="nickname">${book.nickName}</span> <span>(${book.userName})</span>
+							<span class="nickname">${book.userName}</span> 
 							<time>${book.book_date }</time>
 						</p>
 						<hr>
-						<p class="text short">스터디카페 이름</p>
+						<p class="text short">${book.studycafe_name }</p>
 						<!-- <p class="status">
 							<span class ="votecount">0</span>
 							<span class="commentcount">1</span>
@@ -49,8 +49,9 @@
 		<c:otherwise>
 		<a data-v-7c8cb348 class="item" style="margin:20px" >
 								
+									<br/><br/><br/><br/>
 									<center><img src="https://www.campuspick.com/images/community.board.list.empty.png"/></center>
-									<h1 data-v-7c8cb348="" style="text-align:center; margin:20px">예약한 스터디카페가 없습니다</h1>
+									<h1 data-v-7c8cb348="" style="text-align:center; margin:30px">예약한 스터디카페가 없습니다</h1>
 								
 					         </a>
 		

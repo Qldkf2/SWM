@@ -47,22 +47,24 @@
 	</div>
 	
    <div data-v-5ccf00ea class="section" >
-      <h2 data-v-5ccf00ea>분야</h2>
-      <p data-v-5ccf00ea class="select unselected">분야 선택 : 
+      <h2 data-v-5ccf00ea>*분야</h2>
+      <p data-v-5ccf00ea class="select unselected" style="color: mediumvioletred;">분야 선택 : 
        <select id="subject" data-v-5ccf00ea class="select unselected" name="meeting_subject" > 
-         <option value="어학">어학</option>
-         <option value="취업">취업</option>
+         <option value="면접">면접</option>
+         <option value="토익">토익</option>
          <option value="고시">고시/공무원</option>
-         <option value="취미">취미/교양</option>
+         <option value="자율">자율</option>
          <option value="프로그래밍">프로그래밍</option>
+         <option value="취업">취업</option>
+         <option value="자격증">자격증</option>
          <option value="기타">기타</option>
        </select>
       </p>
    </div>
    
    <div data-v-5ccf00ea class="section">
-      <h2 data-v-5ccf00ea>지역</h2>
-      <p data-v-5ccf00ea class="select unselected">서울 : 
+      <h2 data-v-5ccf00ea>*지역</h2>
+      <p data-v-5ccf00ea class="select unselected"style="color: mediumvioletred;">서울 : 
        <select id="location" data-v-5ccf00ea class="select unselected" name="meeting_address" > 
           <c:forEach items="${location}" var="loc">
             <option value=" ${loc.gu}">${loc.gu}</option>
@@ -85,11 +87,14 @@
 	</div>
 	
 	<p data-v-5ccf00ea class="title" >
-		<input data-v-5ccf00ea type="text" id="meetingTitle" placeholder="제목" name="meeting_title">
+		<input data-v-5ccf00ea type="text" id="meetingTitle" placeholder="제목을 입력하세용." 
+			  name="meeting_title" style="color: mediumvioletred; height: 40px;">
 	</p>
 	
 	<p data-v-5ccf00ea class="text">
-		<textarea data-v-5ccf00ea id="meetingContent" name="meeting_content" placeholder="내용을 입력하세용. (시간, 장소 ,진행 방식 등등)"></textarea>
+		<textarea data-v-5ccf00ea id="meetingContent" 
+			name="meeting_content" placeholder="내용을 입력하세용. (시간, 장소 ,진행 방식 등등)"  
+			style="color: mediumvioletred;" ></textarea>
 	</p>	
 	
 	<div data-v-5ccf00ea class="submit">

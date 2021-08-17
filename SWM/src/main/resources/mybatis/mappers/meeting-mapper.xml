@@ -6,7 +6,7 @@
 	<insert id="meetingWrite" parameterType="com.ez.swm.meeting.vo.MeetingWrite">
 		<![CDATA[
 		INSERT INTO MEETING VALUES(
-			SEQ_MEETING_BOARD.NEXTVAl, #{meeting_leader}, #{meeting_age,jdbcType=VARCHAR}, #{meeting_title}, 
+			SEQ_MEETING.NEXTVAl, #{meeting_leader}, #{meeting_age,jdbcType=VARCHAR}, #{meeting_title}, 
 			#{meeting_content}, #{meeting_address} , #{meeting_subject}, #{meeting_limit} 
 			,  DEFAULT , DEFAULT, DEFAULT
 		) 
@@ -432,6 +432,15 @@
 				select si, gu from location where si=#{location}
 			]]>
 		</select>
+		
+		<select id="getMeetingNo"  resultType="int">
+			SELECT SEQ_MEETING.CURRVAL FROM DUAL
+			
+		</select>
+		
+		<insert id="meetingLeaderPermit" parameterType="com.ez.swm.meeting.vo.LeaderPermit">
+			INSERT INTO MEETING_PERMIT VALUES(#{meeting_no},#{userNo}, '모임장이다','Y')
+		</insert>
 </mapper>
 	
 	

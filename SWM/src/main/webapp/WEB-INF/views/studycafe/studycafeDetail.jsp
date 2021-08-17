@@ -85,8 +85,17 @@ appearance: none;
 		     	<h3 data-v-cafe="">영업시간</h3>  <p data-v-cafe="" class="indent">  ${s.studycafe_open} ~ ${s.studycafe_end} </p> 
 				<h3 data-v-cafe="">룸수</h3>  <p data-v-cafe="" class="indent"> 5개 호실 & 1인용 자리</p> 
 				  <hr style="background:#d6d6d6; margin-top:15px; height:1px;">
+				  
 				</div>
-	    			
+	    			<p data-v-cafe="" class="text " style="font-size: 15px;
+    display: contents;
+    color: black;">
+	    				1. 친절한 직원이 관리합니다. </br>
+						2. 학습 유형에 따라 공부가 가장 잘되는 환경을 제공합니다.<br>
+						3. 스스로 공부할 수 있는 분위기를 제공합니다.<br>
+						4. 공부하기에 적합한 환경(온도, 서비스)을 제공합니다.<br>
+						5. 입/퇴실시 문자메세지 발송 서비스를 제공합니다.<br>
+						6. 잠이 들면 깨워드리는 서비스를 제공합니다.<br></p>
 	    			
 	    			<c:forEach items="${files}" var="file" varStatus="status">
 	    			 <img src="${pageContext.request.contextPath}/resources/files/studycafe/${file.stored_file_name}" style="width: 950px;">
@@ -130,7 +139,7 @@ appearance: none;
 		        <br>
 		    <br>
 		       
-		         인원수 : <input type="text"  size="1" id="room_strength" name="room_strength" 
+		         인원수 : <input type="text"  size="1" id="permit_limit" name="permit_limit" 
 		       style="text-align: center; font-size:14pt; height:25px; "
 		       placeholder="0">명
 		</h3>

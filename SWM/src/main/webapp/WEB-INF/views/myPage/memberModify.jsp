@@ -48,59 +48,35 @@
     background-size: 24px 24px
    	}
 </style>
-      <script>
-      // 아이디 중복 검사
-         $(function() {
-            $('#userId').keyup(function () {
-               $.ajax({
-                  type:"POST",
-                  url:"/idCheck",
-                  data:{
-                     "id":$('#userId').val()
-                  },
-                  success:function(data) {
-                     if(data=="YES") {
-                        $('#idCheck').text("이미 사용중인 아이디 입니다");
-                        $('#userId').val("");
-                        $('#userId').focus();
-                        return false;
-                     } else if(data=="") {
-                        $('#idCheck').text("아이디를 입력해주세요");
-                     } else if(data=="NO") {
-                        $('#idCheck').text("사용 가능한 아이디 입니다");
-                        return true;
-                     }
-                  }   
-            
-               })
-            
-            })
-            
-            // 닉네임 중복 확인
-            $('#nickName').keyup(function () {
-               $.ajax({
-                  type:"POST",
-                  url:"/nickNameCheck",
-                  data:{
-                     "nickName":$('#nickName').val()
-                  },
-                  success:function(data) {
-                     if(data=="YES") {
-                        $('#nickNameCheck').text("이미 사용중인 닉네임 입니다");
-                        $('#nickName').val("");
-                        $('#nickName').focus();
-                        return false;
-                     } else {
-                        $('#nickNameCheck').text("사용 가능한 닉네임 입니다");
-                        return true;
-                     }
-                  }
-            })
-         })
-         
-      }); 
-   
-   </script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+		// 아이디 중복 검사
+			$(function() {
+				$('#nickName').keyup(function () {
+					$.ajax({
+						type:"POST",
+						url:"/nickNameCheck",
+						data:{
+							"nickName":$('#nickName').val()
+						},
+						success:function(data) {
+							if(data=="YES") {
+								$('#nickNameCheck').text("이미 사용중인 닉네임 입니다");
+								$('#nickName').val("");
+								$('#nickName').focus();
+								return false;
+							} else {
+								$('#nickNameCheck').text("사용 가능한 닉네임 입니다");
+								return true;
+							}
+						}
+
+			})
+			
+		}); 
+			});
+	
+	</script> 
 <script>
 	function checkAll() {
 		
@@ -220,11 +196,7 @@
 			<h1 data-v-08798b35="">회원 정보 수정</h1>
 			 <p data-v-08798b35="" class="description">
         수정하고자 하는 정보를<br data-v-08798b35="">
-        입력해주세요<br data-v-08798b35=""> <strong data-v-08798b35="">국내 1위 대학생 서비스</strong>입니다.
-      </p> <p data-v-08798b35="" class="description">
-        대학생의 대학 생활에 가치를 더하고자 하는<br data-v-08798b35="">
-        다양한 제휴 문의를 환영합니다.
-      </p> <p data-v-08798b35="" class="rules">
+        입력해주세요<br data-v-08798b35=""> <p data-v-08798b35="" class="rules">
         * 표시는 수정 가능한 항목입니다. </p> 
     	 <div data-v-08798b35="" class="input">
     	 	<div data-v-08798b35="" class="label">

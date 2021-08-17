@@ -8,8 +8,6 @@
 <meta charset="UTF-8">
 <title>스윗미</title>
 <script type="text/javascript">
-
-
 function fn_insertComment(){
 	
 	if($("#parent_comment").val() == null || $("#parent_comment").val() == ""){

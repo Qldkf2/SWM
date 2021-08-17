@@ -1,0 +1,101 @@
+package com.ez.swm.myPage.vo;
+
+import java.sql.Date;
+
+public class MyJoinStudy {
+	private int meeting_no;
+	private int meeting_leader;
+	private String meeting_age;
+	private String meeting_subject;
+	private String meeting_address;
+	private int meeting_limit;
+	private String meeting_title;
+	private String meeting_content;
+	private String status;
+	private Date meeting_date;
+	private int meeting_hit;
+	private String permit;
+	public int getMeeting_no() {
+		return meeting_no;
+	}
+	public void setMeeting_no(int meeting_no) {
+		this.meeting_no = meeting_no;
+	}
+	public int getMeeting_leader() {
+		return meeting_leader;
+	}
+	public void setMeeting_leader(int meeting_leader) {
+		this.meeting_leader = meeting_leader;
+	}
+	public String getMeeting_age() {
+		return meeting_age;
+	}
+	public void setMeeting_age(String meeting_age) {
+		this.meeting_age = meeting_age;
+	}
+	public String getMeeting_subject() {
+		return meeting_subject;
+	}
+	public void setMeeting_subject(String meeting_subject) {
+		this.meeting_subject = meeting_subject;
+	}
+	public String getMeeting_address() {
+		return meeting_address;
+	}
+	public void setMeeting_address(String meeting_address) {
+		this.meeting_address = meeting_address;
+	}
+	public int getMeeting_limit() {
+		return meeting_limit;
+	}
+	public void setMeeting_limit(int meeting_limit) {
+		this.meeting_limit = meeting_limit;
+	}
+	public String getMeeting_title() {
+		return meeting_title;
+	}
+	public void setMeeting_title(String meeting_title) {
+		this.meeting_title = meeting_title;
+	}
+	public String getMeeting_content() {
+		return meeting_content;
+	}
+	public void setMeeting_content(String meeting_content) {
+		this.meeting_content = meeting_content;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Date getMeeting_date() {
+		return meeting_date;
+	}
+	public void setMeeting_date(Date meeting_date) {
+		this.meeting_date = meeting_date;
+	}
+	public int getMeeting_hit() {
+		return meeting_hit;
+	}
+	public void setMeeting_hit(int meeting_hit) {
+		this.meeting_hit = meeting_hit;
+	}
+	public String getPermit() {
+		return permit;
+	}
+	public void setPermit(String permit) {
+		this.permit = permit;
+	}
+	@Override
+	public String toString() {
+		return "MyJoinStudy [meeting_no=" + meeting_no + ", meeting_leader=" + meeting_leader + ", meeting_age="
+				+ meeting_age + ", meeting_subject=" + meeting_subject + ", meeting_address=" + meeting_address
+				+ ", meeting_limit=" + meeting_limit + ", meeting_title=" + meeting_title + ", meeting_content="
+				+ meeting_content + ", status=" + status + ", meeting_date=" + meeting_date + ", meeting_hit="
+				+ meeting_hit + ", permit=" + permit + "]";
+	}
+	
+	 
+
+}

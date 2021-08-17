@@ -9,6 +9,7 @@
 <title>스터디 카페 관리</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/admin/studycafe_info.css">
+<c:import url="../common/header.jsp" />
 <script>
 	$(document).ready(function(){
 		$('.mng-nav .gnb04').addClass('on');
@@ -54,26 +55,26 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th>대표이미지</th>
+				<th>글번호</th>
 				<th>카페명</th>
 				<th>전화번호</th>
 				<th>영업시간</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list}" var="sdclist">
+			<c:forEach items="${studycafeList}" var="sdclist">
 			<c:url var="viewURL" value="">
 				<c:param name="studycafe_no" value="${sdclist.studycafe_no}" />
 			</c:url>
 			<tr>
-				<td></td>
-				<td><a href="/studycafe/bookDetail?cafeNo=${sdclist.studycafe_no}"
+				<td>${sdclist.studycafe_no}</td>
+				<td><a href="/admin/studycafedetail?studycafe_no=${sdclist.studycafe_no}"
 				id="BIG_CATEGORY" class="">${sdclist.studycafe_name}</a></td>
 				<td>${sdclist.studycafe_phone}</td>
 				<td>
-				${sdclist.studycafe_starttime}
+				${sdclist.studycafe_open}
 				~
-				${sdclist.studycafe_endtime}
+				${sdclist.studycafe_end}
 				</td>
 			</tr>
 			</c:forEach>

@@ -23,15 +23,19 @@
       <span class="nickname">회원닉네임</span>
       <span class="userid">회원아이디</span>
     </div>
+    <h2>회원 관리</h2>
+    <ol class="items">  
+      <li><a href="/admin/adminMemberinfo">회원 리스트</a></li>
+    </ol>
     <h2>스터디 카페 관리</h2>
     <ol class="items">
       <li><a href="/admin/studycafeWriteForm">스터디 카페 등록하기</a></li>
-      <li><a href="/admin/management">스터디카페 관리하기</a></li>
+      <li><a href="/admin/studycafeinfo">스터디카페 관리하기</a></li>
     </ol>
     <h2>스터디 모임 관리</h2>
     <ol class="items">
+      <li><a href="/myPage/myJoinStudy">개설된 스터디 모임</a></li>
       <li><a href="/myPage/myCreateStudy">스터디 모임들 삭제하기</a></li>
-      <li><a href="/myPage/myJoinStudy">내가 참여한 스터디</a></li>
       <li><a href="/myPage/myMeetingBoard">내가 쓴 글</a></li>
       <li><a href="/myPage/myMeetingBoardComment">내가 쓴 댓글</a></li>
     </ol>
@@ -42,7 +46,7 @@
     </ol>
     <h2>1:1 문의</h2>
     <ol class="items">
-      <li><a href="/myPage/myAskList">문의 확인</a></li>
+      <li><a href="/admin/adminAskList">문의 확인</a></li>
     </ol>
   </div>
 

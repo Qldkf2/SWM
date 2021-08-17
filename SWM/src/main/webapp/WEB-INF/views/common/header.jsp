@@ -8,7 +8,18 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/header.css">
+<%
+String menu =(String)session.getAttribute("menu");
 
+
+
+%>
+<script type="text/javascript">
+
+
+
+
+</script>
 </head>
 <body>
 		<header class="root">
@@ -21,6 +32,12 @@
 					<a href="/joinForm" class="white">회원가입</a>
 				</div>
 				</c:when>
+				<c:when test="${member.userNo == 44}">
+				<div class="account">
+					<a href="/admin" class="blue">관리자페이지</a>
+					<a href="/logout" class="white">로그아웃</a>
+				</div>
+				</c:when>
 				<c:otherwise>
 				<div class="account">
 					<a href="/myPage" class="blue">마이페이지</a>
@@ -29,11 +46,11 @@
 				</c:otherwise>
 				</c:choose>
 				<nav>
-					<a href="/" class="active">홈</a>
-					<a href="${pageContext.request.contextPath}/meeting" class="">스터디 모집</a>
-					<a href="/studycafeList" class="">스터디 카페</a>
-					<a href="/freeBoard" class="">커뮤니티</a>
-					<a href="/admin" class="">관리자</a>
+			
+					 <a href="/" <%if(menu.equals("main")){%> class="active"<%} %>>홈</a>
+					<a href="${pageContext.request.contextPath}/meeting"  <%if(menu.equals("meeting")){%> class="active"<%} %>>스터디 모집</a>
+					<a href="/studycafeList" <%if(menu.equals("studycafe")){%> class="active"<%} %>>스터디 카페</a>
+					<a href="/freeBoard" <%if(menu.equals("freeBoard")){%> class="active"<%} %>>커뮤니티</a>
 					
 				</nav>
 <!-- 				<p class="description">

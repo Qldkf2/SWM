@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	 namespace="Main">
+
+
+	<!-- 신규 스터디카페 지점 리스트 불러오기 -->
+	<select id="NewStudycafeList" resultType="com.ez.swm.home.vo.StudycafeList">
+		<![CDATA[
+		SELECT * FROM (
+						SELECT 
+							STUDYCAFE_NO, 
+							STUDYCAFE_NAME
+						FROM STUDYCAFE
+						ORDER BY STUDYCAFE_NO DESC)
+        WHERE ROWNUM <=3
+		]]>
+	</select>
+
+
+	<!-- 신규 모임 모집글 리스트 불러오기  -->	
+	<select id="NewMeetingList"  resultType="com.ez.swm.home.vo.MeetingList" >
+		<![CDATA[
+    
+		 	 SELECT *
+				FROM (	
+						SELECT
+							m.NICKNAME,
+							b.MEETING_NO,
+							b.MEETING_TITLE, 
+							b.MEETING_HIT
+						FROM
+							MEETING b, MEMBER m
+						WHERE
+							b.STATUS = 'N' and m.userno=b.meeting_leader
+						ORDER BY MEETING_NO DESC
+						) 
+		        WHERE ROWNUM<=5
+		]]>
+	</select>
+	
+
+	<!-- 내가 가입한 모임의 글 리스트 불러오기  -->	
+	<select id="MyMeetingList"  resultType="com.ez.swm.home.vo.MyMeetingList" parameterType="int">
+		<![CDATA[
+
+			select mm.nickname, ff.meeting_title, ff.meeting_no
+			    from member mm, 
+			        (select m.meeting_no, m.meeting_title, m.meeting_leader as leader from meeting m, meeting_permit p 
+			        where m.meeting_no = p.meeting_no and p.userno=#{userno} and p.permit='Y') ff
+			where mm.userno=ff.leader
+		]]>
+	</select>
+		<select id="MyMeetingListCount"  resultType="int" parameterType="int">
+		<![CDATA[
+
+			select count(*)
+			    from member mm, 
+			        (select m.meeting_no, m.meeting_title, m.meeting_leader as leader from meeting m, meeting_permit p 
+			        where m.meeting_no = p.meeting_no and p.userno=#{userno} and p.permit='Y') ff
+			where mm.userno=ff.leader
+		]]>
+	</select>
+
+	<!-- 신규 커뮤니티게시글 불러오기 -->
+	
+	<select id="NewCommunityList"  resultType="com.ez.swm.home.vo.CommunityList" >
+		<![CDATA[
+
+		  	SELECT *
+					FROM (	
+						SELECT
+			                m.NICKNAME,
+							b.FREE_NO,
+							b.FREE_TITLE,
+							b.FREE_HIT
+						FROM
+							FREE_BOARD b, MEMBER m
+						WHERE
+							b.STATUS = 'N' and m.userno=b.userno
+						ORDER BY FREE_NO DESC
+						)   
+		            WHERE ROWNUM<=5
+		]]>
+	</select>
+	
+
+
+</mapper>

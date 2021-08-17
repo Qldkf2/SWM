@@ -9,6 +9,7 @@
 <title>예약현황관리</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/admin/studycafe_info.css">
+<c:import url="../common/header.jsp" />
 <script>
 	$(document).ready(function(){
 		$('.mng-nav .gnb05').addClass('on');

@@ -12,6 +12,7 @@ import com.ez.swm.common.FileUtils;
 import com.ez.swm.common.paging.PagingVO;
 import com.ez.swm.meeting.dao.MeetingDao;
 import com.ez.swm.meeting.vo.CommentCount;
+import com.ez.swm.meeting.vo.LeaderPermit;
 import com.ez.swm.meeting.vo.Location;
 import com.ez.swm.meeting.vo.Meeting;
 import com.ez.swm.meeting.vo.MeetingBoard;
@@ -38,8 +39,13 @@ public class MeetingService {
 	
 	private HashMap<String, Object> valueMap;
 
-	public boolean meetingWriteForm(MeetingWrite meetingWrite) {
-		return meetingDao.meetingWriteForm(meetingWrite) > 0;
+	public boolean meetingWriteForm(MeetingWrite meetingWrite, int userNo) {
+		meetingDao.meetingWriteForm(meetingWrite) ;
+		int meeting_no = meetingDao.getMeetingNo(); 
+		LeaderPermit lp = new LeaderPermit();
+		lp.setMeeting_no(meeting_no);
+		lp.setUserNo(userNo);
+		return meetingDao.meetingLeaderPermit(lp) >0;
 	}
 
 	public List<MeetingList> getMeetingList(PagingVO vo) {

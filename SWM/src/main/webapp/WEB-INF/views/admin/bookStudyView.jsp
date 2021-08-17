@@ -9,6 +9,7 @@
 <title>상세보기</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/admin/common_admin.css">
+<c:import url="../common/header.jsp" />
 </head>
 <body>
     <table class="board_view">

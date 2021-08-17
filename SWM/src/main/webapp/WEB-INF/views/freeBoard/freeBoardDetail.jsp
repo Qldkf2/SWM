@@ -23,7 +23,7 @@
 	<div data-v-7c8cb348="" class="container" >
 	
 	
-	<article data-v-7c8cb348 style="height: 500px;">
+	<article data-v-7c8cb348 style="height: 100%;">
 
 			
 							
@@ -97,7 +97,7 @@
 		  <a data-v-7c8cb348="" href="/community"  class="floating write">목록</a> <!---->   
 		  <c:if test="${member.userNo == freeBoardDetail.userNo}">   	
 		  <a data-v-7c8cb348="" href="/community/communityBoardModufy"  class="floating write">수정</a> <!---->      	
-		  <a data-v-7c8cb348="" href="/community/communityBoardDelete?free_no=${boardDetail.free_no}"  class="floating write">삭제</a> <!---->
+		  <a data-v-7c8cb348="" href="/community/communityBoardDelete?free_no=${freeBoardDetail.free_no}"  class="floating write">삭제</a> <!---->
 		  </c:if>      	
 	</div>
 

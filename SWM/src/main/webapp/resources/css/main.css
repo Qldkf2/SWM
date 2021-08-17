@@ -63,6 +63,7 @@ div.container section.center div.recent {
 	position: relative;
 	margin-bottom: 16px;
 	width: 576px;
+	    margin-left: 40px;
 }
 
 div.container section.leftside div.loggedout {
@@ -118,13 +119,13 @@ div.container section.center div.recent div.title p.description {
 }
 
 div.container section.center div.recent ol.items {
-	min-height: 462px;
+	min-height: 400px;
 	background-color: #fff;
 }
 
 div.container section.center div.recent ol.items li a.item {
 	display: block;
-	padding: 16px;
+	padding: 20px;
 	border-bottom: 1px solid #f2f2f2;
 }
 
@@ -137,7 +138,7 @@ div.container section.center div.recent ol.items li a.item div.profile span.name
 	overflow: hidden;
 	text-overflow: ellipsis;
 	color: #292929;
-	font-size: 14px;
+	font-size: 20px;
 	font-weight: bold;
 }
 
@@ -151,15 +152,18 @@ div.container section.center div.recent ol.items li a.item span.viewcount
 	letter-spacing: 0;
 	color: #a6a6a6;
 	font-size: 12px;
-	background: transparent url(/images/common/info.viewcount.png) no-repeat
+	background: transparent url("../images/viewcount.png")  no-repeat
 		left center;
 	background-size: 12px 8px;
 }
 
 div.container section.center div.recent ol.items li a.item h3.light {
-	margin-top: 4px;
-	color: #4c4c4c;
-	font-size: 14px;
+
+    margin-top: 10px;
+    margin-left: 5px;
+    color: darkgray;
+    font-size: 12px;
+
 }
 
 div.container section.center div.recent ol.items li a.item h3 {
@@ -170,15 +174,16 @@ div.container section.center div.recent ol.items li a.item h3 {
 }
 
 div.container section.center div.cards {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 280px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    text-align: center;
 }
 
 div.container section.center div.cards div.card {
 	width: 100%;
-	margin-bottom: 16px;
+	margin-bottom: 200px;
 	background-color: #fff;
 }
 
@@ -187,7 +192,6 @@ div.container section.center div.cards div.card p.profile {
 }
 
 div.container section.center div.cards div.card p.profile img.picture {
-	display: inline-block;
 	margin-right: 6px;
 	width: 20px;
 	height: 20px;
@@ -432,7 +436,7 @@ div.container section.center div.recent div.title p.description
 }
 
 div.container section.center div.recent ol.items{
-	min-height: 462px;
+	min-height: 400px;
 	background-color: #fff
 }
 
@@ -479,9 +483,12 @@ div.container section.center div.recent ol.items li a.item h3
 
 div.container section.center div.recent ol.items li a.item h3.light
 	{
-	margin-top: 4px;
-	color: #4c4c4c;
-	font-size: 14px
+
+    margin-top: 10px;
+    margin-left: 5px;
+    color: darkgray;
+    font-size: 12px;
+
 }
 
 div.container section.center div.recent ol.items li a.item h3.bold
@@ -517,7 +524,7 @@ div.container section.center div.recent ol.items li a.item span.dday
 
 div.container section.center div.recent ol.items li a.item span.dday.active
 	{
-	color: #0aafdf
+	    color: red;
 }
 
 div.container section.center div.recent ol.items li a.item span.viewcount
@@ -530,11 +537,10 @@ div.container section.center div.recent ol.items li a.item span.viewcount
 	letter-spacing: 0;
 	color: #a6a6a6;
 	font-size: 12px;
-	background: transparent url("/images/common/info.viewcount.png")
+	background: transparent url("../images/viewcount.png")  
 		no-repeat left center;
 	background-size: 12px 8px
 }
-
 div.container section.center div.recent ol.items li a.item hr
 	{
 	margin-bottom: 4px
@@ -545,7 +551,7 @@ div.container section.center div.recent ol.items li a.item hr
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 280px
+		width: 200px
 	}
 }
 
@@ -572,7 +578,8 @@ div.container section.center div.cards div.card{
 
 @media only screen and (min-width: 1200px) {
 	div.container section.center div.cards div.card{
-		margin-bottom: 16px
+    margin-bottom: 200px;
+    height: 150px;
 	}
 }
 
@@ -605,7 +612,7 @@ div.container section.center div.cards div.card p.profile img.picture
 div.container section.center div.cards div.card p.profile span.nickname
 	{
 	display: inline-block;
-	max-width: 60%;
+	max-width: 100%;
 	line-height: 20px;
 	white-space: nowrap;
 	overflow: hidden;
@@ -648,40 +655,44 @@ div.container section.center div.cards div.card figure.thumbnail img
 
 div.container section.center div.cards div.card div.content
 	{
-	padding: 16px
+    position: relative;
+    padding: 10px;
+    top: -50px;
 }
 
 div.container section.center div.cards div.card div.content h3
 	{
-	line-height: 18px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	color: #292929;
-	font-size: 14px;
-	font-weight: bold
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: floralwhite;
+    font-size: 20px;
+    line-height: unset;
+    font-weight: bolder;
 }
 
 div.container section.center div.cards div.card div.content p.text
 	{
-	max-height: 36px;
-	line-height: 18px;
-	overflow: hidden;
-	color: #4c4c4c;
-	font-size: 14px
+
+    max-height: 36px;
+    line-height: 50px;
+    overflow: hidden;
+    color: lightyellow;
+    font-size: 24px;
+    margin-bottom: 18px;
 }
 
 div.container section.center div.cards div.card div.content a.button
 	{
-	display: block;
-	margin-top: 12px;
-	border-radius: 3px;
-	line-height: 36px;
-	color: #fff;
-	font-size: 14px;
-	font-weight: bold;
-	text-align: center;
-	background-color: #ffcc1c
+    display: block;
+    margin-top: 10px;
+    line-height: 36px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #ffcc1c;
 }
 
 @media only screen and (min-width: 1200px) {
@@ -794,8 +805,9 @@ div.container section.leftside h2{
 	padding: 8px;
 	line-height: 18px;
 	color: #737373;
-	font-size: 12px;
-	font-weight: bold
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 40px;
 }
 
 div.container section.leftside ol.communities{
@@ -840,11 +852,20 @@ li a.community p.details span{
     font-size: 12px;
 }
 
+
 li a.community p.details span.pick{
-    padding-left: 14px;
-    color: #0aafdf;
-    background: transparent url(/images/pages/main/pick.blue.png) no-repeat left center;
-    background-size: 10px 11.5px;
+
+	float: right;
+	display: block;
+	margin-left: 8px;
+	padding-left: 14px;
+	line-height: 18px;
+	letter-spacing: 0;
+	color: #a6a6a6;
+	font-size: 12px;
+	background: transparent url("../images/viewcount.png")  
+		no-repeat left center;
+	background-size: 12px 8px
 }
 
 li a.community p.details span.category{

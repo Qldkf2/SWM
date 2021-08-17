@@ -49,9 +49,6 @@
     background-size: 24px 24px
    	}
 </style>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>	
-
 		<script>
 		// 아이디 중복 검사
 			$(function() {

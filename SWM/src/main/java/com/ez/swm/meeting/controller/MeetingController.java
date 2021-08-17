@@ -95,15 +95,17 @@ public class MeetingController {
 		@RequestMapping(value="/meeting/meetingWriteForm")
 		public ModelAndView meetingWriteForm2(MeetingWrite meetingWrite, Model model, HttpServletRequest request) {
 			ModelAndView mav = new ModelAndView();
+			Member m = new Member();
+			HttpSession session = request.getSession();
+			m = (Member)session.getAttribute("member");
+			int userNo = m.getUserNo();
 			//다음줄 태그로 바꿔주는 역할
 			String content =  meetingWrite.getMeeting_content().replaceAll("\r\n", "<br />");		
 			meetingWrite.setMeeting_content(content);
 			System.out.println("모임장 회원번호 : " + meetingWrite.getMeeting_leader());
-			boolean result = meetingService.meetingWriteForm(meetingWrite);
-			Member m = new Member();
-			HttpSession session = request.getSession();
-			m = (Member)session.getAttribute("member");
-			if(!result) {
+			boolean result = meetingService.meetingWriteForm(meetingWrite,userNo);
+
+			if(result == false) {
 				mav.addObject("msg", "fail");
 			}
 			

@@ -52,7 +52,7 @@
 	 <a class="item" href="/studycafe/studycafeDetail?studycafe_no=${best.studycafe_no}" style="display: inline-grid;">
 	 <div  class="jb-wrap">
            <div class="jb-image">
-           <img src="${pageContext.request.contextPath}/resources/images/studycafe/main.PNG" style="width: 170px; height: 300px;"/>
+           <img src="${pageContext.request.contextPath}/resources/images/studycafe/main.jpg" style="width: 170px; height: 300px;"/>
            	<span class="jb-text2">스윗미 스터디카페</span>
             <span class="jb-text">${best.studycafe_name}</span>
         </div>
@@ -70,10 +70,10 @@
 <div class="horizontal">
 <h2>신규오픈!</h2>
 	<c:forEach  items="${newStudycafeList}" var="newList">
-	 <a class="item" href="/studycafe/studycafeDetail?studycafe_no=${best.studycafe_no}" style="display: inline-grid;">
+	 <a class="item" href="/studycafe/studycafeDetail?studycafe_no=${newList.studycafe_no}" style="display: inline-grid;">
 	 <div class="jb-wrap">
            <div class="jb-image">
-           <img src="${pageContext.request.contextPath}/resources/images/studycafe/main.PNG" style="width: 170px; height: 300px;"/>
+           <img src="${pageContext.request.contextPath}/resources/images/studycafe/main.jpg" style="width: 170px; height: 300px;"/>
            	<span class="jb-text2">스윗미 스터디카페</span>
             <span class="jb-text">${newList.studycafe_name}</span>
         </div>
@@ -87,7 +87,7 @@
 	</c:forEach>
 </div>
 <div class="horizontal">
-	<img src="${pageContext.request.contextPath}/resources/images/studycafe/hongbo.PNG" style="width: 100%;">
+	<img src="${pageContext.request.contextPath}/resources/images/studycafe/hongbo1.PNG" style="width: 100%;">
 </div>
 
 </body>

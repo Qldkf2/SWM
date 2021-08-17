@@ -21,7 +21,7 @@
 	
 	
 	<article data-v-7c8cb348>
-  <h1 data-v-7c8cb348="">내가 쓴 문의 확인</h1>     
+  <h1 data-v-7c8cb348="">내가 쓴 문의 </h1>     
 
 				      <div data-v-7c8cb348 class="search">
 				         <form data-v-7c8cb348 class>
@@ -49,7 +49,14 @@
 					         	<p data-v-7c8cb348 class="info" >
 					        	 	<span data-v-7c8cb348="">${ask.nickName }</span>
 					         		<span data-v-7c8cb348="">${ask.ask_date }</span>
-					         		<span data-v-7c8cb348="" class="commentcount">17</span>
+					         		<c:choose>
+					         		<c:when test="${reply == 0 }">
+					         		<span data-v-7c8cb348="" class="commentcount">0</span>
+					         		</c:when>
+					         		<c:otherwise>
+					         		<span data-v-7c8cb348="" class="commentcount">1</span>
+					         		</c:otherwise>
+					         		</c:choose> 
 					          </p>
 					         </a>
 					          </c:forEach>	

@@ -44,29 +44,29 @@ window.onload = function() {
 	  document.getElementById('cancel').addEventListener("click", offClick);
 	  document.querySelector(".bg").addEventListener("click", offClick);
 	  
-	
+	  /* 모임 삭제 ajax */
+	  var meetingDelete = document.getElementById('meetingDelete');
+	  var meeting_no = $('#meeting_no').val();
+	  	meetingDelete.addEventListener('click', function(){
+	  		if(confirm("삭제하시겠습니까 ?.?")) {
+	  			$.ajax({
+	  				url :"/meeting/meetingDelete",
+	  				type : "POST",
+	  				data : {
+	  					meeting_no : meeting_no
+	  				},
+	  				success :function() {
+	  					alert("삭제되었습니당");
+	  					location.href='/meeting';
+	  				}
+	  			});
+	  		}
+	  	});
 };	
 
 </script>
 <script>
-/* 모임 삭제 ajax */
-var meetingDelete = document.getElementById('meetingDelete');
-var meeting_no = document.getElementById('meeting_no');
-	meetingDelete.addEventListener('click', function(){
-		if(confirm("삭제하시겠습니까 ?.?")) {
-			$.ajax({
-				url :"/meeting/meetingDelete",
-				type : "POST",
-				data : {
-					meeting_no : meeting_no
-				},
-				success :function() {
-					alert("삭제되었습니당");
-					location.href='/meeting';
-				}
-			});
-		}
-	});
+
 /* 모임 신청 수락 ajax */
  
 function meetingPermitYes(userNo){
