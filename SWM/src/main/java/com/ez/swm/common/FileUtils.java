@@ -116,12 +116,15 @@ public List<Map<String, Object>> parseInsertFileInfo(StudycafeWrite studycafeWri
 	String originalFileName = null; 
 	String originalFileExtension = null;
 	String storedFileName = null;
+	String roomName = null;
 
 	List<Map<String, Object>> list = new ArrayList<Map<String,Object>>()	;
 	Map<String,Object> listMap = null;
 	
 	int  studycafe_no = studycafeWrite.getStudycafe_no();
-
+	String roomNames[] = studycafeWrite.getRoom_name();
+	// int i >> 룸네임[] 을 다 넣을려고 하나만들어줌 ㅇㅋ?(인덱스용)
+	int i = 0;
 	File file = new File(filePath);
 	
 	while(iterator.hasNext()) {
@@ -142,6 +145,7 @@ public List<Map<String, Object>> parseInsertFileInfo(StudycafeWrite studycafeWri
 			listMap.put("ORIGINAL_FILE_NAME", originalFileName); 
 			listMap.put("STORED_FILE_NAME", storedFileName); 
 			listMap.put("FILE_SIZE", multipartFile.getSize()); 
+			listMap.put("ROOM_NAME",roomNames[i++]);
 			list.add(listMap);
 			
 		}

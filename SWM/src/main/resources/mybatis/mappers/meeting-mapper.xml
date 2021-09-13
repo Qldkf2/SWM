@@ -62,11 +62,16 @@
 					b.MEETING_LEADER,
 					b.MEETING_LIMIT,
 					b.MEETING_DATE,
-					b.MEETING_HIT
+					b.MEETING_HIT ,
+                    p.totalMember
 				FROM
-					MEETING b, MEMBER m
+					MEETING b, MEMBER m ,(SELECT MEETING_NO ,COUNT(PERMIT) totalMember
+                        FROM MEETING_PERMIT
+                        WHERE PERMIT = 'Y'
+                        GROUP BY MEETING_NO
+                        ORDER BY MEETING_NO DESC) p
 				WHERE
-					b.STATUS = 'N' and m.userno=b.meeting_leader
+					b.STATUS = 'N' and m.userno=b.meeting_leader AND p.meeting_no = b.meeting_no
 				ORDER BY MEETING_NO DESC
 				) A
 						)
@@ -83,7 +88,8 @@
 					b.MEETING_CONTENT,
 					b.MEETING_ADDRESS,
 					b.MEETING_LEADER,
-					b.MEETING_LIMIT					
+					b.MEETING_LIMIT,
+					b.MEETING_HIT				
 				FROM
 					MEETING b, MEMBER m
 				WHERE					
@@ -441,6 +447,20 @@
 		<insert id="meetingLeaderPermit" parameterType="com.ez.swm.meeting.vo.LeaderPermit">
 			INSERT INTO MEETING_PERMIT VALUES(#{meeting_no},#{userNo}, '모임장이다','Y')
 		</insert>
+		<!-- 현재 모임 인원 구하기  -->
+		<select id="totalMember" resultType="int">
+		SELECT COUNT(PERMIT) 
+		FROM MEETING_PERMIT
+		WHERE MEETING_NO = #{meeting_no} AND PERMIT ='Y'
+		</select>
+		
+		<!-- 모임 조회수 올리기 -->
+		<update id="meetingHit" parameterType="int">
+			UPDATE MEETING 
+			SET MEETING_HIT = MEETING_HIT +1
+			WHERE MEETING_NO = #{meeting_no}
+		</update>
+		
 </mapper>
 	
 	

@@ -116,9 +116,11 @@ section.loc > div.wrap > a.active > span.count {
 @media only screen and (min-width: 896px) {
   #container > div.horizontal {
     margin-bottom: 16px;
+    text-align: center;
   }
   #container > div.horizontal > div.items > a.item {
     margin-right: 16px;
+      text-align: center;	
   }
 }
 
@@ -204,15 +206,17 @@ section.loc > div.wrap > a.active > span.count {
 .jb-text {
     position: absolute;
     top: 60%;
-    left: 40%;
-    font-size: 14px;
+    left: 10%;
+    right: 10%;
+    font-size: 20px;
     color: white;
     font-weight: 600;
 }
 .jb-text2 {
 	position: absolute;
     top: 55%;
-    left: 40%;
+    left: 10%;
+    right: 10%;
     font-size: 10px;
     color: white;
     font-weight: 600;

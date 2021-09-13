@@ -1,5 +1,7 @@
 package com.ez.swm.login.vo;
 
+import java.sql.Date;
+
 public class Member {
 	private int userNo; 
 	private String userId;
@@ -11,6 +13,8 @@ public class Member {
 	private String phone2;
 	private String phone3;
 	private char status;
+	private String sessionId;
+	private Date limitTime;
 	
 	
 	public int getUserNo() {
@@ -73,7 +77,18 @@ public class Member {
 	public void setStatus(char status) {
 		this.status = status;
 	}
-
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	public Date getLimitTime() {
+		return limitTime;
+	}
+	public void setLimitTime(Date limitTime) {
+		this.limitTime = limitTime;
+	}
 	
 	
 

@@ -49,7 +49,6 @@ public class MemberService {
 	  
 	  }
 
-
 	public List<SignUpForm> selectAllId() {
 		return memberDao.selectAllId();
 	}
@@ -64,5 +63,11 @@ public class MemberService {
 		return memberDao.nickNameCheck(nickName);
 	}
 
+	public int keepLogin(LoginForm member) {
+		return memberDao.keepLogin(member);
+	}
 	
+	public Member sessionKeyCheck(String sessionId) {
+		return memberDao.sessionKeyCheck(sessionId);
+	}
 }

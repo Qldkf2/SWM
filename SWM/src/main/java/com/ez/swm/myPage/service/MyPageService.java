@@ -1,7 +1,9 @@
 package com.ez.swm.myPage.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,5 +58,10 @@ public class MyPageService {
 
 	public List<MyStudyBoard> myStudyBoard(int userNo) {
 		return myPageDao.myStudyBoard(userNo);
+	}
+	
+	public int payStatus (HashMap<String,Object> resultMap) {
+		return myPageDao.payStatus(resultMap);
+		
 	}
 }

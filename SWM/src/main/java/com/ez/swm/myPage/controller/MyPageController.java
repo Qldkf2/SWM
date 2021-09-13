@@ -1,6 +1,8 @@
 package com.ez.swm.myPage.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ez.swm.admin.service.AdminService;
@@ -160,6 +163,8 @@ public class MyPageController {
 	public String myBookList(@RequestParam("userNo") int userNo,Model model) {
 		
 		List<UserBookVo> bookResult = myPageService.getBookInfoList(userNo);
+		
+		
 		model.addAttribute("bookList", bookResult);
 		
 		return "/myPage/myBookList";
@@ -215,8 +220,21 @@ public class MyPageController {
 		return "/myPage/myAskDetail";
 	}
 	
-	
-
+	//결제 완료되면 결제완료로 바꿈	
+	@RequestMapping(value="/myPage/payStatus")
+	@ResponseBody
+	public void payStatus(@RequestParam(value="book_no", required = false) int book_no,
+			@RequestParam(value="status", required = false ) String status) {
+		
+		HashMap<String,Object> resultMap = new HashMap<String,Object>();
+		
+		resultMap.put("book_no",book_no);
+		resultMap.put("status", status);
+		
+		int result = myPageService.payStatus(resultMap);
+		
+		
+	}
 	
 	
 	

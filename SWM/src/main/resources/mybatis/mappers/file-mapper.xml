@@ -50,15 +50,15 @@
 	<insert id="studycafeFileInsert" parameterType="hashmap">
 	         <![CDATA[
             INSERT INTO STUDYCAFE_FILE
-               (IDX,STUDYCAFE_NO,ORIGINAL_FILE_NAME,STORED_FILE_NAME,FILE_SIZE)
+               (IDX,STUDYCAFE_NO,ORIGINAL_FILE_NAME,STORED_FILE_NAME,FILE_SIZE, ROOM_NAME)
             VALUES
-               (STUDYCAFE_FILE_SEQ.NEXTVAL,#{STUDYCAFE_NO},#{ORIGINAL_FILE_NAME}, #{STORED_FILE_NAME}, #{FILE_SIZE})      
+               (STUDYCAFE_FILE_SEQ.NEXTVAL,#{STUDYCAFE_NO},#{ORIGINAL_FILE_NAME}, #{STORED_FILE_NAME}, #{FILE_SIZE},#{ROOM_NAME})      
          ]]>
 	</insert>
 	
 	<!-- 스터디카페 상세보기에 쓸 파일들 가져오기 -->
 	<select id="studycafeDetailFile" resultType="com.ez.swm.studycafe.vo.StudycafeDetailFile">
-		SELECT STUDYCAFE_NO, STORED_FILE_NAME 
+		SELECT STUDYCAFE_NO,ORIGINAL_FILE_NAME, STORED_FILE_NAME, ROOM_NAME 
 		FROM STUDYCAFE_FILE
 		WHERE STUDYCAFE_NO = #{studycafe_no}	
 		ORDER BY IDX ASC

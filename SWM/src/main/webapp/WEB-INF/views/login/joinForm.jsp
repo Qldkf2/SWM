@@ -99,12 +99,53 @@
 				})
 			})
 			
+				var code = ""; // 밑에 ajax에서 컨트롤러를 통해 반환된 인증번호 담을 변수
+			
+			// 이메일 전송 스크립트 (인증코드)
+			$('#sendEmail').click(function() {
+				if($('#email').val()=="" || $("#email").val()==null) {
+					alert("이메일을 입력해주세요");
+					$('#email').focus();
+				}
+				
+				var email = $('#email').val();
+				
+				alert("이메일이 전송되었습니다");
+				
+				$.ajax({
+					
+					type:"POST",
+					url:"/mailCheck",
+					data:{ 'email' : email },
+					success:function(data) {
+						code = data;
+					}
+				});
+			});
+			
+			// 인증코드 확인 
+			$('#inputCode').blur(function(){
+				
+				var inputCode = $('#inputCode').val();
+				
+				if(inputCode == code) {
+					$('#checkMessage').html('<span id="checkMessage" style="color:green"> 인증번호가 일치합니다 </span>');
+					return true;
+				} else if(inputCode != code) {
+					$('#checkMessage').html('<span id="checkMessage" style="color:red"> 인증번호를 다시 확인해주세요 </span>');
+					$('#inputCode').val("");
+					return false;
+				} else if(inputCode == null || inputCode == "") {
+					$('#checkMessage').html('<span id="checkMessage" style="color:red"> 인증번호를 입력해주세요 </span>');
+					return false;
+				}
+				
+			});
+		
 		}); 
-	
-	</script> 
-
-
+	</script>
 	<script>
+
 	function checkAll() {
 		
 		var reId = /^[a-zA-Z0-9]{4,15}$/;
@@ -185,6 +226,7 @@
 		// 닉네임 공백 검사
 		if($("#nickName").val()=="" || $("#nickName").val()==null) {
 			alert("닉네임을 입력하세요");
+			$("#nickName").val("");
 			$("#nickName").focus();
 			return false;
 		}
@@ -242,7 +284,13 @@
 			return false;
 		}
 		
-	
+		// 이메일 인증 공백 검사
+		if($("#inputCode").val()=="" || $("#inputCode").val()==null) {
+			alert("인증번호를 입력하세요");
+			$("#inputCode").focus();
+			return false;
+		}
+		
 	}
 </script>
 </head>
@@ -260,7 +308,7 @@
     	 		<label data-v-08798b35="">아이디 *</label>
     	 	</div>
     	 	<div id ="idCheck" style="float:left; font-size:3px; font-family:맑은 고딕, sans-serif; color:red;"></div>
-    	 		 <input id="userId" data-v-08798b35="" type="text" name="userId" maxlength="255" autocomplete="off" class="medium">
+    	 		 <input id="userId" data-v-08798b35="" type="text" name="userId" maxlength="255" autocomplete="off" class="medium" >
     	 </div> 
     	 <div data-v-08798b35="" class="input">
     	 	<div data-v-08798b35="" class="label">
@@ -303,10 +351,11 @@
     	 				<div data-v-08798b35="" class="label">
     	 					<label data-v-08798b35="">이메일 *</label>
     	 				</div> 
-    	 					<input id="email" data-v-08798b35="" type="email" name="email" maxlength="255" autocomplete="off" class="large">
-    	 				</div> 
-    	 				 
-    	 					
+    	 					<input id="email" data-v-08798b35="" type="email" name="email" maxlength="255" autocomplete="off" class="large" style="float:left;">&nbsp; 
+    	 					<button id="sendEmail">인증번호 전송</button>
+    	 					<input id="inputCode" data-v-08798b35="" type="text" maxlength="45" autocomplete="off" class="medium">
+    	 					<span id="checkMessage"> 인증 번호를 입력해주세요 </span>
+    	 				</div> 	
     					
            <!-- <h2 data-v-08798b35="">개인정보 수집 및 이용</h2> 	
            		<div data-v-08798b35="" class="agreement">

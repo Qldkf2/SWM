@@ -1,5 +1,6 @@
 package com.ez.swm.login.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -68,5 +69,11 @@ public class MemberDao  {
 		return sqlSession.selectOne("member.nickNameCheck", nickName);
 	}
 
-
-}	
+	public int keepLogin(LoginForm member) {
+		return sqlSession.update("member.keepLogin", member);
+	}
+	
+	public Member sessionKeyCheck(String sessionId) {
+		return sqlSession.selectOne("member.sessionKeyCheck", sessionId);
+	}
+ }

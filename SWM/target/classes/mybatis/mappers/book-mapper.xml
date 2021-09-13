@@ -3,6 +3,7 @@
 
 <mapper namespace="book">
 
+	<!-- 스터디카페 예약하기 ㅋ -->
 	<insert id="studycafeBook" parameterType="com.ez.swm.book.vo.BookVo" >
 	  <![CDATA[
 	  insert into studycafe_book values(
@@ -14,11 +15,14 @@
 	    #{permit_limit}, 
 	    TO_DATE(#{book_date}, 'YYYY-MM-DD'), 
 	    #{start_time}, 
-	    #{end_time}
+	    #{end_time},
+	    #{pay},
+	    default
 	  )
 	  ]]>
 	</insert>
 	
+	<!-- 스터디카페 예약한애들 불러오기 ㅋ -->
 	<select id="getStudycafeBookList" resultType="com.ez.swm.book.vo.UserBookVo" >
 		<![CDATA[	
 			SELECT
@@ -29,15 +33,16 @@
 	               k.STUDYCAFE_NAME,
 	               k.STUDYCAFE_NO,
 	               k.BOOKER_NO,
-	               k.STUDYCAFE_ROOMNO,
-	               k.ROOM_STRENGTH,
+	               k.STUDYCAFE_ROOM,
+	               k.permit_limit,
 	               k.BOOK_DATE,
 	               k.START_TIME,
-	               k.END_TIME
+	               k.END_TIME,
+	               k.PAY
 				FROM
 					STUDYCAFE_BOOK k, MEMBER m
 				WHERE
-					m.USERNO = #{userNo}
+				m.USERNO = k.BOOKER_NO	and k.BOOKER_NO = #{userNo}   
 				ORDER BY USERNO DESC
 		]]>
 	</select>
@@ -46,8 +51,50 @@
 	<delete id="studycafeBookDelete" parameterType="com.ez.swm.book.vo.BookVo" >
 	  delete from studycafe_book 
 	  where BOOKER_no = #{booker_no}
-	  	
 	</delete>
+	
+	<!--  지정된 일자에 룸에 예약된 시간이 있는지 확인용  -->
+	<select id="confirmBook" parameterType="com.ez.swm.book.vo.BookTime"  resultType="int">
+		<![CDATA[	
+			 select count(*) 
+			 from studycafe_book_time
+			 where studycafe_no=#{studycafe_no} and studycafe_room=#{studycafe_room} and book_date=TO_DATE(#{book_date}, 'YYYY-MM-DD')
+		]]>
+	</select>
+	
+	
+	<!-- 예약된 적이 없으면 insert  -->
+	<insert id="insertBookTime" parameterType="com.ez.swm.book.vo.BookTime" >
+		  <![CDATA[
+		  insert into studycafe_book_time values(
+		    #{studycafe_no},
+		    #{studycafe_room},
+		    TO_DATE(#{book_date}, 'YYYY-MM-DD'), 
+		    #{book_time}
+		  )
+	  	]]>
+	</insert>
+	
+	
+	<!-- 예약된 적이 있다면 update  -->
+	
+	<update id="updateBookTime" parameterType="com.ez.swm.book.vo.BookTime" >
+		 <![CDATA[
+		 	update studycafe_book_time 
+		 	set book_time=book_time||#{book_time}
+		 	 where studycafe_no=#{studycafe_no} and studycafe_room=#{studycafe_room} and book_date=TO_DATE(#{book_date}, 'YYYY-MM-DD')
+		 ]]>
+	
+	</update>
+
+<!--  결제창에서 필요한 정보 얻기  -->
+	<select id="payInfo" resultType="com.ez.swm.book.vo.PayInfo"  parameterType="int">
+		<![CDATA[	
+	        select b.book_no, b.studycafe_name||'/'||studycafe_room item, b.pay , m.username, m.email, m.phone1||m.phone2||m.phone3 phone
+        from (select * from studycafe_book where book_no=#{book_no})b, member m
+        where m.userNo=b.booker_no
+		]]>
+	</select>
 
 	
 

@@ -1,6 +1,8 @@
 package com.ez.swm.myPage.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,4 +60,8 @@ public class MyPageDao {
 		return sqlSession.selectList("myPage.myStudyBoard", userNo);
 	}
 
+	
+	public int payStatus(HashMap<String,Object> resultMap) {
+		return sqlSession.insert("myPage.payStatus", resultMap);
+	}
 }

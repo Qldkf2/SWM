@@ -47,6 +47,22 @@
 		where userId = #{userId} and password = #{password} and status = 'N'
 	</select>
 	
+	<!-- 자동 로그인 (자동 로그인 선택 하면, 세션 id와 유효시간을 테이블에 업데이트) -->
+	<update id="keepLogin" parameterType="com.ez.swm.login.vo.LoginForm">
+		update member
+		set sessionkey = #{sessionId}, sessionlimit = #{limitTime}
+		where userId = #{userId}
+	</update>
+	
+	<!-- 자동 로그인 된 로그인 정보 가져옴 -->
+	<select id="sessionKeyCheck" parameterType="String" resultType="com.ez.swm.login.vo.Member">
+		<![CDATA[
+		select * 
+		from member
+		where sessionkey = #{sessionId} and sessionlimit > sysdate and status = 'N'
+		]]>
+	</select>
+	
 	<!-- 아이디 찾기 (이름, 이메일 사용) -->
 	<select id="findId" parameterType="com.ez.swm.login.vo.Member" resultType="com.ez.swm.login.vo.Member">
 		select userId, userName

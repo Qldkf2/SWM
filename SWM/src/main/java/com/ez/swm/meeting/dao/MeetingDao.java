@@ -209,8 +209,8 @@ public class MeetingDao {
 		return sqlSession.delete("Meeting.meetingPermitNo",mp );
 	}
 
-	public String permitCheck(MeetingPermitYes mp) {
-		return sqlSession.selectOne("Meeting.permitCheck",mp);
+	public List<Object> permitCheck(MeetingPermitYes mp) {
+		return sqlSession.selectList("Meeting.permitCheck",mp);
 	}
 
 	public int meetingLeaderPermit(LeaderPermit lp) {
@@ -220,6 +220,15 @@ public class MeetingDao {
 
 	public int getMeetingNo() {
 		return sqlSession.selectOne("Meeting.getMeetingNo");
+	}
+
+	public int totalMember(int meeting_no) {		
+		return sqlSession.selectOne("Meeting.totalMember", meeting_no);
+	}
+
+	public void meetingHit(int meeting_no) {
+		sqlSession.update("Meeting.meetingHit",meeting_no);
+		
 	}
 	
 	

@@ -15,6 +15,20 @@
 
 
 <script type="text/javascript">
+
+	
+	function meetingDetail(meeting_no){
+		$.ajax({
+			url :"/meeting/meetingHit",
+			type : "POST" ,
+			data :{ meeting_no : meeting_no},
+			success : function(data){
+				location.href="/meeting/meetingDetail?meeting_no="+meeting_no
+			},error:function(request,status,error){
+			  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+		});
+	};
+
 function fn_searchCheck(){
 	if($("#keyword").val() == null || $("#keyword").val() == ""){
 		alert("검색어를 입력해 주세요!");
@@ -25,19 +39,13 @@ function fn_searchCheck(){
 	
 }
 
-
 </script>
-
-
 
 </head>
 <body>
 <c:import url="../common/header.jsp" />
 
 <c:import url="./meetingSubject.jsp" />
-
-
-
 
 
    <div data-v-70332c88>
@@ -69,13 +77,22 @@ function fn_searchCheck(){
       <div data-v-70332c88 class="list">
 	 <c:choose>
       	<c:when test="${fn:length(list) > 0}">
-      	      	<c:forEach items="${list}" var="row">	         	       	 
-      	<a data-v-70332c88 href="<c:url value='/meeting/meetingDetail'/>?meeting_no=${row.meeting_no}"  id="article" class="item" >
-		
-			<input type="hidden" id="idx" value="${row.meeting_no}">
-	         <p data-v-70332c88 class="completed highlight">
+      	      	<c:forEach items="${list}" var="row" varStatus="status">	         	       	 
+      	<a data-v-70332c88  id="article" class="item" onclick="meetingDetail(${row.meeting_no})">
+			
+			<input type="hidden"  class="idx" value="${row.meeting_no}">
+			<c:if test="${row.totalMember == row.meeting_limit }">
+	         <p data-v-70332c88 class="completed highlight">  
+	         	<span data-v-70332c88="">모집마감</span>
+	         	  </p>
+	         </c:if>
+	      	  <c:if test="${row.totalMember < row.meeting_limit }">
+	         <p data-v-70332c88 class="completed highlight">  
 	         	<span data-v-70332c88="">모집중</span>
-	         </p>
+	         	  </p>
+	         </c:if>
+	         
+	       
 	         <p data-v-70332c88 class="badges">
 	         	<span data-v-70332c88="">${row.meeting_subject}</span>
 	         	 <span data-v-70332c88="">${row.meeting_address}</span>
@@ -150,7 +167,8 @@ function fn_searchCheck(){
 			}
 			
 	}
-	
+
+
 	
 	</script>
 

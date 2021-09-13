@@ -40,10 +40,22 @@
 	
 	<!-- 스터디카페 예약 정보 가져오기 -->
 	<select id="getBookInfoList" parameterType="int" resultType="com.ez.swm.book.vo.UserBookVo">
-		select m.userName, b.studycafe_name, b.booker_no, b.studycafe_room, b.permit_limit, b.book_date, b.start_time, b.end_time
+		select b.book_no, m.userName, b.studycafe_name, b.booker_no, b.studycafe_room, b.permit_limit, b.book_date, b.start_time, b.end_time, b.pay, b.status
 		from member m, studycafe_book b
 		where m.userNo=b.booker_no and b.booker_no = #{userNo}
+		 order by b.book_no desc
 	</select>
+	
+	<!-- 결제완료 -->
+	<insert id="payStatus" parameterType="hashmap"  >
+	
+		<![CDATA[
+			update  studycafe_book set status=#{status} where book_no = #{book_no}		
+		]]>
+	
+	
+	</insert>
+	
 	
 	<!-- 내가 만든 스터디 -->
 	<select id="myCreateStudy" parameterType="int" resultType="com.ez.swm.meeting.vo.Meeting">
@@ -53,14 +65,11 @@
 	</select>
 	<!-- 내가 가입한 스터디 -->
 	<select id="myJoinStudy" parameterType="int" resultType="com.ez.swm.myPage.vo.MyJoinStudy">
-		SELECT M.MEETING_NO,M.MEETING_LEADER,M.MEETING_AGE,M.MEETING_TITLE,
-       M.MEETING_CONTENT,M.MEETING_ADDRESS,M.MEETING_SUBJECT,M.MEETING_LIMIT,
-       M.STATUS,M.MEETING_DATE ,
-    ( SELECT  PERMIT 
-		FROM MEETING_PERMIT
-		WHERE USERNO = #{userNo} AND PERMIT ='Y') AS PERMIT
-    FROM MEETING M ,MEETING_PERMIT P
-    WHERE m.MEETING_NO = P.MEETING_NO
+    SELECT ff.MEETING_NO,ff.MEETING_LEADER,ff.MEETING_AGE,ff.MEETING_TITLE,ff.MEETING_ADDRESS,ff.MEETING_SUBJECT,ff.MEETING_DATE
+    from member mm,  (select m.meeting_no, m.meeting_title, m.meeting_leader, m.meeting_age, m.meeting_address,m.meeting_subject,m.meeting_date 
+                            from meeting m, meeting_permit p 
+                            where m.meeting_no = p.meeting_no and p.userno=#{userNo} and p.permit='Y') ff
+    where mm.userno=ff.meeting_leader
  
 	</select>
 	

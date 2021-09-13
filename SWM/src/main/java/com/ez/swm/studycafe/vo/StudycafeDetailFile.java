@@ -4,7 +4,16 @@ public class StudycafeDetailFile {
 	
 	private int studycafe_no;
 	private String stored_file_name;
+	private String room_name;
 	
+
+	
+	public String getRoom_name() {
+		return room_name;
+	}
+	public void setRoom_name(String room_name) {
+		this.room_name = room_name;
+	}
 	public int getStudycafe_no() {
 		return studycafe_no;
 	}

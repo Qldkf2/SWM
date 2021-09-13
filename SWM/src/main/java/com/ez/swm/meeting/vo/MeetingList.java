@@ -14,6 +14,7 @@ public class MeetingList {
 	private String meeting_age;
 	private Date meeting_date;
 	private int meeting_hit;
+	private int totalMember;
 	
 	
 	public String getNickname() {
@@ -76,13 +77,22 @@ public class MeetingList {
 	public void setMeeting_hit(int meeting_hit) {
 		this.meeting_hit = meeting_hit;
 	}
+	
+	public int getTotalMember() {
+		return totalMember;
+	}
+	public void setTotalMember(int totalMember) {
+		this.totalMember = totalMember;
+	}
 	@Override
 	public String toString() {
 		return "MeetingList [nickname=" + nickname + ", meeting_leader=" + meeting_leader + ", meeting_title="
 				+ meeting_title + ", meeting_address=" + meeting_address + ", meeting_subject=" + meeting_subject
 				+ ", meeting_limit=" + meeting_limit + ", meeting_no=" + meeting_no + ", meeting_age=" + meeting_age
-				+ ", meeting_date=" + meeting_date + ", meeting_hit=" + meeting_hit + "]";
+				+ ", meeting_date=" + meeting_date + ", meeting_hit=" + meeting_hit + ", totalMember=" + totalMember
+				+ "]";
 	}
+	
 	
 	
 }

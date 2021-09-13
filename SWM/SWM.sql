@@ -13,68 +13,58 @@ CREATE TABLE MEMBER (
     PHONE1 VARCHAR2(20) NOT NULL , 
     PHONE2 VARCHAR2(20) NOT NULL , 
     PHONE3 VARCHAR2(20) NOT NULL , 
-    STATUS CHAR DEFAULT 'N' CHECK(STATUS IN('Y','N')) 
+    STATUS CHAR DEFAULT 'N' CHECK(STATUS IN('Y','N')),
+    SESSIONKEY VARCHAR2(80 BYTE) DEFAULT 'NONE' NOT NULL ENABLE, 
+    SESSIONLIMIT DATE 
 );
-SELECT * FROM MEETING;
-COMMIT;
--- MEMBER 
--- USERNO 회원 번호
--- USERID 회원 아이디
--- USERNAME 회원 이름
--- NICKNAME 회원 닉네임
--- PASSWORD 회원 비밀번호
--- JUMIN 회원 주민번호
--- PHONE 회원 폰번호
--- STATUS 회원 탈퇴 상태
+
+SELECT * FROM MEMBER;
 
 
 --회원번호 시퀀스
 CREATE SEQUENCE SEQ_MEM; 
 
-
 -- 스터디카페 디비
 CREATE TABLE STUDYCAFE (
     STUDYCAFE_NO NUMBER PRIMARY KEY , 
-    STUDYCAFE_NAME VARCHAR2(30) NOT NULL ,
-    SYUDYCAFE_ADDRESS VARCHAR2(20) NOT NULL,
-    STUDYCAFE_PHONE  VARCHAR2(30) NOT NULL ,
-    STUDYCAFE_RUNTIME DATE NOT NULL ,
-    STUDYCAFE_ROOMNO NUMBER ,
-    STUDYCAFE_IMAGE VARCHAR2(2000) 
+    STUDYCAFE_NAME VARCHAR2(100) NOT NULL ,
+    STUDYCAFE_ADDRESS VARCHAR2(100) NOT NULL,
+    STUDYCAFE_PHONE  VARCHAR2(50) NOT NULL ,
+    STUDYCAFE_OPEN VARCHAR2(30) ,
+    STUDYCAFE_END VARCHAR2(30) ,
+    STUDYCAFE_CONTENT VARCHAR2(2000) 
     ); 
-    
-
--- STUDYCAFE_NO 스터디카페 번호
--- STUDYCAFE_NAME 스터디카페 이름
--- SYUDYCAFE_ADDRESS 스터디카페 주소
--- STUDYCAFE_PHONE 스터디카페 폰번호
--- STUDYCAFE_RUNTIME 스터디 카페 운영시간
--- STUDYCAFE_ROOMNO 스터디카페 방번호
--- STUDYCAFE_IMAGE 스터디카페 이미지
 
 
 -- 스터디카페 번호 시퀀스
 CREATE SEQUENCE SEQ_STUDYCAFE;
 
-
--- 스터디카페 예약테이블
-CREATE TABLE STUDYCAFE_BOOK(
-    BOOK_NO NUMBER PRIMARY KEY ,
+-- 스터디 카페 파일 디비
+CREATE TABLE STUDYCAFE_FILE(
+    IDX NUMBER PRIMARY KEY,
     STUDYCAFE_NO NUMBER ,
-    BOOKER_NO NUMBER ,
-    STUDYCAFE_ROOMNO NUMBER , 
-    BOOK_DATE DATE ,
-    START_TIME DATE ,
-    END_TIME DATE
+    ORIGINAL_FILE_NAME VARCHAR2(260 BYTE) NOT NULL, 
+    STORED_FILE_NAME VARCHAR2(36 BYTE) NOT NULL, 
+    FILE_SIZE NUMBER , 
+    ROOM_NAME VARCHAR2(100)
 );
 
--- BOOK_NO 예약 번호 
--- STUDYCAFE_NO 스터디카페 번호
--- BOOKER_NO  예약자 회원 번호
--- STUDYCAFE_ROOMNO 스터디카페 방번호
--- BOOK_DATE 예약날짜
--- START_TIME 예약 시작 시간
--- END_TIME 예약 종료 시간
+-- 스터디 카페 파일 디비 시퀀스
+CREATE SEQUENCE STUDYCAFE_FILE_SEQ;
+
+-- 스터디카페 예약테이블
+  CREATE TABLE STUDYCAFE_BOOK
+   (   "BOOK_NO" NUMBER, 
+   "STUDYCAFE_NAME" VARCHAR2(100 BYTE), 
+   "STUDYCAFE_NO" NUMBER, 
+   "BOOKER_NO" NUMBER, 
+   "STUDYCAFE_ROOM" VARCHAR2(100 BYTE), 
+   "PERMIT_LIMIT" NUMBER, 
+   "BOOK_DATE" DATE, 
+   "START_TIME" VARCHAR2(10 BYTE), 
+   "END_TIME" VARCHAR2(10 BYTE), 
+   "PAY" NUMBER DEFAULT 0, 
+   "STATUS" VARCHAR2(300 BYTE) DEFAULT '결제');
 
 -- 예약 시퀀스
 CREATE SEQUENCE SEQ_BOOK_NO;
@@ -84,28 +74,18 @@ CREATE TABLE MEETING (
     MEETING_NO NUMBER PRIMARY KEY ,
     MEETING_LEADER NUMBER ,
     MEETING_AGE VARCHAR2(20) ,
-    MEETING_TITLE VARCHAR2(30) NOT NULL ,
+    MEETING_TITLE VARCHAR2(300) NOT NULL ,
     MEETING_CONTENT VARCHAR2(2000) NOT NULL ,
     MEETING_ADDRESS VARCHAR2(20) ,
     MEETING_SUBJECT VARCHAR2(20) ,
     MEETING_LIMIT NUMBER ,
     STATUS CHAR DEFAULT 'N' CHECK(STATUS IN('Y','N')),
-    MEETING_DATE DATE DEFAULT SYSDATE
+    MEETING_DATE DATE DEFAULT SYSDATE,
+    MEETING_HIT NUMBER 
 );
-
--- MEETING_NO 모임 게시글 번호
--- MEETING_LEADER 모임장 회원 번호
--- MEETING_AGE 모임 나이대
--- MEETING_TITLE 모임 게시글 제목
--- MEETING_CONTENT 모임 게시글 내용
--- MEETING_ADDRESS 모임 게시글 주소
--- MEETING_SUBJECT 모임 게시글 과목
--- MEETING_LIMIT 모임 게시글 모집인원
--- STATUS 모임 게시글 삭제 여부
 
 -- 모임 게시글 시퀀스
 CREATE SEQUENCE SEQ_MEETING;
-SELECT * FROM MEETING_BOARD;
 
 -- 모임 게시글 예약 디비
 CREATE TABLE MEETING_PERMIT(
@@ -114,28 +94,18 @@ CREATE TABLE MEETING_PERMIT(
     ABOUTME VARCHAR2(200) ,
     PERMIT CHAR(1) DEFAULT 'N' CHECK(PERMIT IN('Y','N')) 
 );
-COMMIT;
 
 -- 모임 내 게시글 
 CREATE TABLE MEETING_BOARD (
     MEETING_BOARD_NO NUMBER PRIMARY KEY ,
     MEETING_NO NUMBER ,
     MEETING_BOARD_WRITER NUMBER ,
-    MEETING_BOARD_TITLE VARCHAR2(30) NOT NULL ,
+    MEETING_BOARD_TITLE VARCHAR2(300) NOT NULL ,
     MEETING_BOARD_CONTENT VARCHAR2(2000) NOT NULL ,
     MEETING_BOARD_DATE DATE DEFAULT SYSDATE ,
     MEETING_BOARD_HIT NUMBER ,
     STATUS CHAR DEFAULT 'N' CHECK(STATUS IN('Y','N'))
 );
-
--- MEETING_BOARD_NO 모임 내 게시글 번호
--- MEETING_NO  모임 번호
--- MEETING_BOARD_WRITER  모임 내 게시글 작성자
--- MEETING_BOARD_TITLE  모임 내 게시 제목
--- MEETING_BOARD_CONTENT 모임 내 게시글 내용
--- MEETING_BOARD_DATE  모임 내 게시글 등록 날짜
--- MEETING_BOARD_HIT 모임 내 게시글 조회수
--- STATUS  모임 내 게시글 삭제 여부
 
 -- 모임 내 게시글 시퀀스
 CREATE SEQUENCE SEQ_MEETING_BOARD;
@@ -152,48 +122,30 @@ CREATE TABLE MEETING_BOARD_COMMENT(
     STATUS CHAR DEFAULT 'N' CHECK(STATUS IN('Y','N'))
 );
 
--- MEETING_BOARD_COMMENT_NO  모임 내 게시글 댓글 번호
--- MEETING_BOARD_NO 모임 게시글 번호
--- USERNO 댓글 쓴 회원 번호
--- MEETING_BOARD_COMMENT_CONTENT 모임 내 게시글 댓글 내용
--- MEETING_BOARD_COMMENT_DATE 모임 내 게시글 댓글 날짜
--- MEETING_BOARD_COMMENT_LEVEL 모임 내 게시글 댓글 레벨
--- MEETING_BOARD_COMMENT_REFNO 모임 내 게시글 참고 댓글 번호
--- STATUS 모임 내 게시글 댓글 삭제 여부
-
 -- 모임 내 게시판 댓글 시퀀스
 CREATE SEQUENCE SEQ_MEETING_BOARD_COMMENT;
 
 -- 모임 내 게시판 파일
 CREATE TABLE MEETING_BOARD_FILE ( 
-IDX NUMBER, 
-MEETING_BOARD_NO NUMBER NOT NULL, 
-ORIGINAL_FILE_NAME VARCHAR2(260 BYTE) NOT NULL, 
-STORED_FILE_NAME VARCHAR2(36 BYTE) NOT NULL, 
-FILE_SIZE NUMBER, 
-DEL_GB VARCHAR2(1 BYTE) DEFAULT 'N' NOT NULL, 
-PRIMARY KEY (IDX) );
+    IDX NUMBER, 
+    MEETING_BOARD_NO NUMBER NOT NULL, 
+    ORIGINAL_FILE_NAME VARCHAR2(260 BYTE) NOT NULL, 
+    STORED_FILE_NAME VARCHAR2(36 BYTE) NOT NULL, 
+    FILE_SIZE NUMBER, 
+    DEL_GB VARCHAR2(1 BYTE) DEFAULT 'N' NOT NULL, 
+    PRIMARY KEY (IDX) 
+    );
 
 -- 자유 게시판
 CREATE TABLE FREE_BOARD (
     FREE_NO NUMBER PRIMARY KEY ,
     USERNO NUMBER ,
-    FREE_TITLE VARCHAR2(30) NOT NULL ,
+    FREE_TITLE VARCHAR2(300) NOT NULL ,
     FREE_CONTENT VARCHAR2(3000) NOT NULL ,
     FREE_DATE DATE DEFAULT SYSDATE ,
-    FREE_FILE VARCHAR2(2000) ,
-    FREE_COUNT NUMBER ,
+    FREE_HIT NUMBER ,
     STATUS CHAR DEFAULT 'N' CHECK(STATUS IN('Y','N')) 
 );
-
--- FREE_NO 커뮤니티 게시글 번호
--- USERNO  회원 번호
--- FREE_TITLE 커뮤니티 게시글 제목
--- FREE_CONTENT  커뮤니티 게시글 내용
--- FREE_DATE  커뮤니티 게시글 등록 날짜
--- FREE_FILE  커뮤니티 게시글 파일
--- FREE_COUNT  커뮤니티 게시글 조회수
--- STATUS  커뮤니티 게시글 삭제 여부
 
 -- 자유 게시판 시퀀스
 CREATE SEQUENCE SEQ_FREE_BOARD;
@@ -210,23 +162,27 @@ CREATE TABLE FREE_COMMENT(
     STATUS CHAR DEFAULT 'N' CHECK(STATUS IN('Y','N')) 
 );
 
--- FREE_COMMENT_NO  자유 게시글 댓글 번호
--- FREE_NO 자유 게시글 번호
--- USERNO 자유 번호
--- FREE_COMMENT_CONTENT 자유 게시글 댓글 내용
--- FREE_COMMENT_DATE 자유 게시글 댓글 날짜
--- FREE_COMMENT_LEVEL 자유 게시글 댓글 레벨
--- FREE_COMMENT_REFNO 자유 게시글 참조할 댓글 번호
--- STATUS 자유 게시글 댓글 삭제 여부
 
 -- 커뮤니티 게시판 댓글 번호
 CREATE SEQUENCE SEQ_FREE_COMMENT;
+-- 자유게시판 파일 디비
+CREATE TABLE FREE_BOARD_FILE( 
+    IDX NUMBER, 
+    FREE_NO NUMBER NOT NULL, 
+    ORIGINAL_FILE_NAME VARCHAR2(260 BYTE) NOT NULL, 
+    STORED_FILE_NAME VARCHAR2(36 BYTE) NOT NULL, 
+    FILE_SIZE NUMBER, 
+    DEL_GB VARCHAR2(1 BYTE) DEFAULT 'N' NOT NULL, 
+    PRIMARY KEY (IDX) 
+);
+-- 자유게시글 파일디비 시퀀스
+CREATE SEQUENCE FREE_BOARD_FILE_SEQ;
 
 -- 1:1 문의 테이블
 CREATE TABLE ASK(
     ASK_NO NUMBER PRIMARY KEY ,
     USERNO NUMBER ,
-    ASK_TITLE VARCHAR2(30) ,
+    ASK_TITLE VARCHAR2(300) ,
     ASK_CONTENT VARCHAR2(300) ,
     ASK_DATE DATE DEFAULT SYSDATE
 );
@@ -242,6 +198,7 @@ CREATE TABLE ASK_COMMENT(
     ASK_COMMENT_CONTENT VARCHAR2(300) ,
     ASK_COMMENT_DATE DATE DEFAULT SYSDATE 
 );
+CREATE SEQUENCE seq_ask_comment;
 
 -- 괸리자 테이블
 CREATE TABLE ADMIN (
@@ -258,12 +215,65 @@ CREATE TABLE REPORT(
     REPORT_DATE DATE DEFAULT SYSDATE ,
     STATUS CHAR DEFAULT 'N' CHECK(STATUS IN('Y','N')) 
 );
-SELECT * FROM MEETING_PERMIT;
-
 
 -- 지역 테이블
 CREATE TABLE LOCATION(
     SI VARCHAR2(30) NOT NULL ,
     GU VARCHAR2(30) NOT NULL
 );
+insert into location values('서울','종로구');
+insert into location values('서울','중구');
+insert into location values('서울','용산구');
+insert into location values('서울','성동구');
+insert into location values('서울','광진구');
+insert into location values('서울','동대문구');
+insert into location values('서울','중랑구');
+insert into location values('서울','성북구');
+insert into location values('서울','강북구');
+insert into location values('서울','도봉구');
+insert into location values('서울','노원구');
+insert into location values('서울','은평구');
+insert into location values('서울','서대문구');
+insert into location values('서울','마포구');
+insert into location values('서울','양천구');
+insert into location values('서울','강서구');
+insert into location values('서울','구로구');
+insert into location values('서울','금천구');
+insert into location values('서울','영등포구');
+insert into location values('서울','동작구');
+insert into location values('서울','관악구');
+insert into location values('서울','서초구');
+insert into location values('서울','강남구');
+insert into location values('서울','송파구');
+insert into location values('서울','강동구');
+
+-- 결제 상태 테이블
+  CREATE TABLE PAY_STATUS
+   (	"BOOK_NO" NUMBER, 
+	"STATUS" VARCHAR2(100 BYTE)
+);
+
+-- 스터디카페 예약 시간디비
+  CREATE TABLE STUDYCAFE_BOOK_TIME
+   (	"STUDYCAFE_NO" NUMBER, 
+	"STUDYCAFE_ROOM" VARCHAR2(100 BYTE), 
+	"BOOK_DATE" DATE, 
+	"BOOK_TIME" VARCHAR2(300 BYTE)
+);
+
+
+-- 스터디카페 리뷰 디비
+  CREATE TABLE STUDYCAFE_REVIEW
+   (	"REVIEW_NO" NUMBER, 
+	"STUDYCAFE_NO" NUMBER, 
+	"REVIEW_CONTENT" VARCHAR2(500 BYTE), 
+	"REVIEW_GRADE" NUMBER, 
+	"USERNO" NUMBER, 
+	"REVIEW_DATE" DATE DEFAULT sysdate
+);
+
+
+CREATE SEQUENCE SEQ_studycafe_review_no;
+
+
     

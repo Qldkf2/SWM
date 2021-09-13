@@ -81,13 +81,13 @@
 							<span class="nickname">스윗미 스터디카페  ${cafe.studycafe_name}</span>
 						</p>
 						<figure class="thumbnail">
-							<img src="${pageContext.request.contextPath}/resources/images/studycafe/main.jpg" style="width: 200px; height: 250px;"/>
+							<img src="${pageContext.request.contextPath}/resources/images/studycafe/sca.png" style="width: 200px; height: 250px;"/>
 					
 						</figure>
 						<div class="content">
 							<h3>스윗미 스터디카페</h3>
 							<p class="text"> ${cafe.studycafe_name}</p>
-							<a href="/studycafe/studycafeDetail?studycafe_no=${cafe.studycafe_no}" class="button" style="margin-left: 15px;margin-right: 15px;">
+							<a href="/studycafe/studycafeDetail?studycafe_no=${cafe.studycafe_no}" class="button" style="margin-left: 7px;margin-right: 15px;">
 							자세히 보기</a>
 						</div>
 					</div>

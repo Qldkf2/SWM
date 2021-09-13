@@ -64,55 +64,9 @@ window.onload = function() {
 	  	});
 };	
 
-</script>
-<script>
-
-/* 모임 신청 수락 ajax */
- 
-function meetingPermitYes(userNo){
-	var meeting_no = $('#meeting_no').val();
-	$.ajax({
-		url :"/meeting/meetingPermitYes" ,
-		type : "POST" ,
-		data :"meeting_no="+meeting_no+"&userNo="+userNo,
-		success :function() {
-			console.log("성공");
-			location.reload();
-			$('.modal-container').show();
-				
-		}  ,error:function(request,status,error){
-		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
-		});
-	}
-	
-/* 모임 신청 거절 ajax */
-	function meetingPermitNo(userNo){
-		$.ajax({
-			url :"/meeting/meetingPermitNo" ,
-			type : "POST" ,
-			data :"meeting_no="+meeting_no+"&userNo="+userNo,
-			success :function() {
-				console.log("성공");
-				location.reload();
-				
-			}  ,error:function(request,status,error){
-			   alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
-
-		});
-	}
-/* 모임 가입 유뮤 체크 스크립트 */
-function permitCheck(){
-	var userNo = ${member.userNo};
-	var permitCheck = $('#permitCheck').val();
-			if(permitCheck == 'N'){
-				alert("모임에 가입되지 않은 사용자입니다 ");
-			location.href="/meeting/meetingDetail?meeting_no="+${article.meeting_no};
-		} else{
-			location.href="/meeting/meetingBoard?meeting_no="+${article.meeting_no};
-		}
-}
 
 </script>
+
 </head>
 <body>
 
@@ -122,12 +76,19 @@ function permitCheck(){
 	<div data-v-7c8cb348="" class="container">
 
 		<article data-v-7c8cb348="">
+		<c:choose>
+			<c:when test="${totalMember == article.meeting_limit }">
+			<p data-v-7c8cb348="" class="completed highlight">모집마감</p>
+			</c:when>
+			<c:otherwise>
 			<p data-v-7c8cb348="" class="completed highlight">모집중</p>
+			</c:otherwise>
+		</c:choose>
 			<input type="hidden" id="meeting_no" value="${article.meeting_no}">
 			<h1 data-v-7c8cb348="">${article.meeting_title}</h1>
 			<p data-v-7c8cb348="" class="info">
 				<span data-v-7c8cb348="">${article.meeting_date}</span> <span
-					data-v-7c8cb348="" class="viewcount">5</span>
+					data-v-7c8cb348="" class="viewcount">${article.meeting_hit }</span>
 			</p>
 			<c:choose>
 				<c:when test="${member.userNo == article.meeting_leader }">
@@ -159,12 +120,13 @@ function permitCheck(){
 			<div data-v-7c8cb348="" class="about">
 				<h3 data-v-7c8cb348="">분야</h3>
 				<p data-v-7c8cb348="" class="indent">${article.meeting_subject}
+
 				</p>
 				<h3 data-v-7c8cb348="">지역</h3>
 				<p data-v-7c8cb348="" class="indent">${article.meeting_address}
 				</p>
 				<h3 data-v-7c8cb348="">정원</h3>
-				<p data-v-7c8cb348="" class="indent">${article.meeting_limit}명</p>
+				<p data-v-7c8cb348="" class="indent">(${totalMember}/${article.meeting_limit})명</p>
 				<hr style="background: #d6d6d6; margin-top: 15px; height: 1px;">
 
 				<p data-v-7c8cb348="" data-v-7c8cb348="" class="text">
@@ -190,7 +152,14 @@ function permitCheck(){
 				<div data-v-7c8cb348="" class="container">
 					<a data-v-7c8cb348="" href="/meeting" class="floating comment">목록으로</a>
 					<!---->
+					<c:choose>
+					<c:when test="${totalMember == article.meeting_limit }">
+					<a data-v-7c8cb348="" class="floating comment" id="modal5" onclick="magam()">가입신청</a>
+					</c:when>
+					<c:otherwise>
 					<a data-v-7c8cb348="" class="floating comment" id="modal">가입신청</a>
+					</c:otherwise>
+					</c:choose>
 					<!---->
 				</div>
 			</c:otherwise>
@@ -241,11 +210,11 @@ function permitCheck(){
 								<tr>
 									<td id="userNo${status.index}" style="display: none"
 										name="userNo${status.index}">${mpList.userNo }</td>
-									<td>${mpList.nickName}</td>
+									<td id="nickName${status.index}">${mpList.nickName}</td>
 									<td class="intro-td">${mpList.aboutMe}</td>
 									<td>
 										<button type="button" id="permitYes" class="basic-btn add"
-											onclick="meetingPermitYes(${mpList.userNo})">수락</button>
+											onclick="meetingPermitYes(${mpList.userNo},'${mpList.nickName}')">수락</button>
 										<button type="button" id="permitNo" class="basic-btn del"
 											onclick="meetingPermitNo(${mpList.userNo})">거절</button>
 									</td>
@@ -265,4 +234,65 @@ function permitCheck(){
 
 
 </body>
+<script>
+
+/* 모임 신청 수락 ajax */
+const meeting_leader = '${article.nickname}';
+const meeting_member = '${member.nickName}';
+var meeting_no = ${article.meeting_no};
+function meetingPermitYes(userNo,nickName){
+	
+	$.ajax({
+		url :"/meeting/meetingPermitYes" ,
+		type : "POST" ,
+		data :"meeting_no="+meeting_no+"&userNo="+userNo,
+		success :function() {
+			if(socket) {
+				//websocket에 보내기!!(apply,모임가입자, 모임장, 모임번호)
+				const socketMsg ="apply,"+ nickName +"," + meeting_leader+"," +meeting_no;
+				console.log("ssssssssmsg>>",socketMsg); 
+				socket.send(socketMsg);
+			}
+			console.log("성공");
+			location.reload();
+			$('.modal-container').show();
+			
+
+				
+		}  ,error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+		});
+	}
+/* 모임 신청 거절 ajax */
+function meetingPermitNo(userNo){
+	$.ajax({
+		url :"/meeting/meetingPermitNo" ,
+		type : "POST" ,
+		data :"meeting_no="+meeting_no+"&userNo="+userNo,
+		success :function() {
+			console.log("성공");
+			location.reload();
+			
+		}  ,error:function(request,status,error){
+		   alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+
+	});
+}
+
+/* 모임 가입 유뮤 체크 스크립트 */
+function permitCheck(){
+	var userNo = ${member.userNo};
+	var permitCheck = $('#permitCheck').val();
+			if(permitCheck == 'N'){
+				alert("모임에 가입되지 않은 사용자입니다 ");
+			location.href="/meeting/meetingDetail?meeting_no="+${article.meeting_no};
+		} else{
+			location.href="/meeting/meetingBoard?meeting_no="+${article.meeting_no};
+		}
+}
+function magam(){
+	alert("마감되었습니당 !");
+}
+
+</script>
 </html>

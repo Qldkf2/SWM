@@ -1,5 +1,7 @@
 package com.ez.swm.book.vo;
 
+import java.sql.Date;
+
 public class UserBookVo {
 	
 	private String userName;
@@ -9,11 +11,27 @@ public class UserBookVo {
 	private String studycafe_name;
 	private int studycafe_no;
 	private int booker_no;
-	private int studycafe_roomno;
+	private String studycafe_room;	
 	private String permit_limit;
-	private String book_date;
+	private Date book_date;
 	private String start_time;
 	private String end_time;
+
+	private int pay;
+	private String status;
+	
+	public int getPay() {
+		return pay;
+	}
+	public void setPay(int pay) {
+		this.pay = pay;
+	}
+	public String getStudycafe_room() {
+		return studycafe_room;
+	}
+	public void setStudycafe_room(String studycafe_room) {
+		this.studycafe_room = studycafe_room;
+	}
 	
 	public String getUserName() {
 		return userName;
@@ -57,23 +75,17 @@ public class UserBookVo {
 	public void setBooker_no(int booker_no) {
 		this.booker_no = booker_no;
 	}
-	public int getStudycafe_roomno() {
-		return studycafe_roomno;
-	}
-	public void setStudycafe_roomno(int studycafe_roomno) {
-		this.studycafe_roomno = studycafe_roomno;
-	}
-	
+
 	public String getPermit_limit() {
 		return permit_limit;
 	}
 	public void setPermit_limit(String permit_limit) {
 		this.permit_limit = permit_limit;
 	}
-	public String getBook_date() {
+	public Date getBook_date() {
 		return book_date;
 	}
-	public void setBook_date(String book_date) {
+	public void setBook_date(Date book_date) {
 		this.book_date = book_date;
 	}
 	public String getStart_time() {
@@ -92,8 +104,14 @@ public class UserBookVo {
 	public String toString() {
 		return "UserBookVo [userName=" + userName + ", nickName=" + nickName + ", book_no=" + book_no + ", userNo="
 				+ userNo + ", studycafe_name=" + studycafe_name + ", studycafe_no=" + studycafe_no + ", booker_no="
-				+ booker_no + ", studycafe_roomno=" + studycafe_roomno + ", permit_limit=" + permit_limit
-				+ ", book_date=" + book_date + ", start_time=" + start_time + ", end_time=" + end_time + "]";
+				+ booker_no + ", studycafe_room=" + studycafe_room + ", permit_limit=" + permit_limit + ", book_date="
+				+ book_date + ", start_time=" + start_time + ", end_time=" + end_time + ", pay=" + pay + "]";
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	

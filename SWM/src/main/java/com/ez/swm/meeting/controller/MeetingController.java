@@ -129,9 +129,11 @@ public class MeetingController {
 				MeetingPermitYes mp = new MeetingPermitYes();
 				mp.setMeeting_no(meeting_no);
 				mp.setUserNo(userNo);
-				String permitCheck = meetingService.permitCheck(mp);
+				int totalMember = meetingService.totalMember(meeting_no);
+				List permitCheck = meetingService.permitCheck(mp);
 				System.out.println("N아 왔냐 :" + permitCheck);
 				mv.addObject("permitCheck",permitCheck);
+				mv.addObject("totalMember",totalMember);
 			}
 			
 			MeetingDetail meetingDetail = meetingService.getMeetingArticle(meeting_no);
@@ -198,6 +200,7 @@ public class MeetingController {
 			if(result > 0) {
 				msg="가입 신청이 완료되었습니다";	
 			}
+			
 			
 			mav.addObject("msg", msg);
 			mav.addObject("loc", loc);
@@ -500,7 +503,12 @@ public class MeetingController {
 			return mv;
 		}
 		
-
+		// 모임 들어갔을 때 조회수 증가하기
+		@RequestMapping(value="/meeting/meetingHit")
+		@ResponseBody
+		public void meetingHit(@RequestParam("meeting_no") int meeting_no) {
+			meetingService.meetingHit(meeting_no);
+		}
 				
 	}
 	

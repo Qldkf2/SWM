@@ -184,7 +184,7 @@ public class MeetingService {
 		
 	}
 	
-	public String permitCheck(MeetingPermitYes mp) {
+	public List<Object> permitCheck(MeetingPermitYes mp) {
 		return meetingDao.permitCheck(mp);
 	}
 	
@@ -339,6 +339,15 @@ public class MeetingService {
 			valueMap.put("location",location);
 			return meetingDao.locationList(valueMap);
 			
+			
+		}
+		// 미팅에서 현재 인원 구하기
+		public int totalMember(int meeting_no) {
+			return meetingDao.totalMember(meeting_no);
+		}
+
+		public void meetingHit(int meeting_no) {
+			meetingDao.meetingHit(meeting_no);
 			
 		}
 	

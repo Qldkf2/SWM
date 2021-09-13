@@ -13,5 +13,23 @@
 <util:properties location="classpath:config/jdbc.properties" id="jdbc"/>
 
 <import resource="jdbc-config.xml"/>
+	<!-- Gmail 이메일 인증 설정 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+    	<property name="port" value="587" />
+    	<property name="username" value="Qldkf2@gmail.com" /> <!-- 사용할 아이디 (자신꺼) -->
+    	<property name="password" value="rlaxodnr1!" /> <!-- 사용할 비번 -->
+      
+        <property name="javaMailProperties">
+         	<props>
+               	<prop key="mail.transport.protocol">smtp</prop>
+               	<prop key="mail.smtp.auth">true</prop>
+               	<prop key="mail.smtp.starttls.enable">true</prop>
+               	<prop key="mail.debug">true</prop>
+         	</props>
+      	</property>
+	</bean>
+	
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean> 
 
 </beans>

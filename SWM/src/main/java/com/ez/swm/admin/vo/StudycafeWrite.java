@@ -1,5 +1,6 @@
 package com.ez.swm.admin.vo;
 
+import java.util.Arrays;
 
 public class StudycafeWrite {
 	private int studycafe_no;
@@ -9,6 +10,7 @@ public class StudycafeWrite {
 	private String studycafe_open;
 	private String studycafe_end;
 	private String studycafe_content;
+	private String[] room_name;
 	
 	public int getStudycafe_no() {
 		return studycafe_no;
@@ -52,12 +54,18 @@ public class StudycafeWrite {
 	public void setStudycafe_content(String studycafe_content) {
 		this.studycafe_content = studycafe_content;
 	}
+	public String[] getRoom_name() {
+		return room_name;
+	}
+	public void setRoom_name(String[] room_name) {
+		this.room_name = room_name;
+	}
 	@Override
 	public String toString() {
 		return "StudycafeWrite [studycafe_no=" + studycafe_no + ", studycafe_name=" + studycafe_name
 				+ ", studycafe_address=" + studycafe_address + ", studycafe_phone=" + studycafe_phone
 				+ ", studycafe_open=" + studycafe_open + ", studycafe_end=" + studycafe_end + ", studycafe_content="
-				+ studycafe_content + "]";
+				+ studycafe_content + ", room_name=" + Arrays.toString(room_name) + "]";
 	}
 	
 	

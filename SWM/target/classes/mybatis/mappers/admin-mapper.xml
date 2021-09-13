@@ -88,17 +88,7 @@
 		ORDER BY USERNO DESC
 	</select>
 	
-	<!-- 스터디카페 리스트 -->
-	<select id="adminstudycafelist" resultType="com.ez.swm.admin.vo.AdminVo">
-		select
-			studycafe_no,
-			studycafe_name, 
-			studycafe_phone,
-			studycafe_open,
-			studycafe_end
-		from 
-			studycafe
-	</select>
+
 	
 	<!-- 스터디카페 상세페이지 -->
 	<select id="studycafedetail" parameterType="int" resultType="com.ez.swm.admin.vo.AdminVo">

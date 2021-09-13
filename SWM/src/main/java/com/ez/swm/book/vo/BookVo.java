@@ -8,10 +8,24 @@ public class BookVo {
 	private int studycafe_no;
 	private int booker_no;
 	private String studycafe_room;
-	private int permit_limit;
+		private int permit_limit;
 	private String book_date;
 	private String start_time;
 	private String end_time;
+	private int pay;
+	
+	public int getPay() {
+		return pay;
+	}
+	public void setPay(int pay) {
+		this.pay = pay;
+	}
+	public String getStudycafe_room() {
+		return studycafe_room;
+	}
+	public void setStudycafe_room(String studycafe_roomno) {
+		this.studycafe_room = studycafe_roomno;
+	}
 	public int getBook_no() {
 		return book_no;
 	}
@@ -36,12 +50,7 @@ public class BookVo {
 	public void setBooker_no(int booker_no) {
 		this.booker_no = booker_no;
 	}
-	public String getStudycafe_room() {
-		return studycafe_room;
-	}
-	public void setStudycafe_room(String studycafe_room) {
-		this.studycafe_room = studycafe_room;
-	}
+
 	public int getPermit_limit() {
 		return permit_limit;
 	}
