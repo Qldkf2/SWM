@@ -1,0 +1,281 @@
+@charset "UTF-8";
+#check {
+    display: inline-flex;
+    float: left;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+#container div.wrap {
+    margin: 0 auto;
+    max-width: 380px;
+    font-size: 0;
+    text-align: center;
+}
+body {
+    font-family: "맑은 고딕", sans-serif;
+    letter-spacing: -0.5px;
+    background-color: #f2f2f2;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+}
+element.style {
+    width: 120px;
+}
+span.input_button {
+     display: inline-block; 
+     position: relative; 
+}
+.mb10 {
+    margin-bottom: 10px !important;
+    margin-top: 5px !important;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+#container div.wrap {
+    margin: 0 auto;
+    max-width: 380px;
+    font-size: 0;
+    text-align: center;
+}
+body {
+    font-family: "맑은 고딕", sans-serif;
+    letter-spacing: -0.5px;
+    background-color: #f2f2f2;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+}
+element.style {
+}
+span.input_button input[type=radio], span.input_button input[type=checkbox] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    z-index: 1;
+    opacity: 0;
+}
+input[type='checkbox'], input[type='radio'] {
+    box-sizing: border-box;
+    padding: 0;
+}
+input[type=radio], input[type=checkbox] {
+    padding: 0;
+}
+button, input, optgroup, select, textarea {
+    font: inherit;
+    margin: 0;
+    color: inherit;
+}
+input {
+    line-height: normal;
+}
+a, img, input, button, select, textarea {
+    vertical-align: middle;
+}
+input, textarea {
+    outline: none;
+}
+input, textarea {
+    outline: none;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+user agent stylesheet
+input[type="checkbox" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 3px 3px 3px 4px;
+    padding: initial;
+    border: initial;
+}
+user agent stylesheet
+input {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+#container div.wrap {
+    margin: 0 auto;
+    max-width: 380px;
+    font-size: 0;
+    text-align: center;
+}
+body {
+    font-family: "맑은 고딕", sans-serif;
+    letter-spacing: -0.5px;
+    background-color: #f2f2f2;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+}
+element.style {
+}
+span.input_button input[type=radio]+label, span.input_button input[type=checkbox]+label {
+    display: block;
+    color: #000;
+    font-size: 13px;
+    font-family: "ProximaNova-Regular","yg740";
+    line-height: 25px;
+    position: relative;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: normal;
+    font-style: normal;
+}
+user agent stylesheet
+label {
+    cursor: default;
+}
+#container div.wrap {
+    margin: 0 auto;
+    max-width: 380px;
+    font-size: 0;
+    text-align: center;
+}
+body {
+    font-family: "맑은 고딕", sans-serif;
+    letter-spacing: -0.5px;
+    background-color: #f2f2f2;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+}
+span.input_button input[type=radio]+label:before, span.input_button input[type=checkbox]+label:before {
+    background: url(//static.wconcept.co.kr/web/images/common/spr-input.png) 0 0 no-repeat;
+    content: '';
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+span.input_button input[type=radio]:checked+label:before, span.input_button input[type=checkbox]:checked+label:before {
+    background-position: -30px 0;
+}
